@@ -2395,6 +2395,278 @@ window.THULIR_DATA = {
         }
       ]
     },
+
+    // ============================================================ MODULE 10: MOTORS & DRIVES
+    {
+      id: "motors-drives",
+      code: "MOD·10",
+      icon: "⚙️",
+      color: "#5bff7a",
+      title: "Motors & Drives",
+      subtitle: "Turning electrical control into mechanical motion — and diagnosing when it stops.",
+      cards: [
+        {
+          id: "motors-overview",
+          title: "The Five Skills of Motors & Drives",
+          tag: "Overview",
+          blocks: [
+            { type: "intro", text: "Have you ever wondered how a printer moves its print head to the exact same spot, every single time? That's precise motor control at work — by the end of this module, you'll know exactly how it's done." },
+            { type: "table", title: "From a spinning shaft to the circuit that controls it", headers: ["Skill", "What It Covers", "Key Idea"], rows: [
+              ["DC Motors", "The simplest way to spin something", "Brushed"],
+              ["Stepper Motors", "Precise, repeatable increments", "Step angle"],
+              ["Servo Motors", "Position control with feedback", "PWM signal"],
+              ["Motor Drivers", "Switching current the logic can't", "H-bridge"],
+              ["Speed Control", "PWM instead of a simple on/off", "Duty cycle"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the table, what key idea is listed for DC Motors?", choices: ["Brushed", "Step angle", "PWM signal", "H-bridge"], answer: 0, explain: "The table lists 'Brushed' as the key idea for DC Motors — the simplest way to spin something.", why: ["", "Step angle is the key idea for Stepper Motors, not DC Motors", "PWM signal is the key idea for Servo Motors, not DC Motors", "H-bridge is the key idea for Motor Drivers, not DC Motors"] },
+              { q: "Per the table, what does the Stepper Motors skill cover?", choices: ["Precise, repeatable increments", "The simplest way to spin something", "Position control with feedback", "Switching current the logic can't"], answer: 0, explain: "The table describes Stepper Motors as precise, repeatable increments, with 'Step angle' as the key idea.", why: ["", "That describes DC Motors, not Stepper Motors", "That describes Servo Motors, not Stepper Motors", "That describes Motor Drivers, not Stepper Motors"] },
+              { q: "Per the table, what key idea is listed for Servo Motors?", choices: ["PWM signal", "Brushed", "Step angle", "Duty cycle"], answer: 0, explain: "The table lists 'PWM signal' as the key idea for Servo Motors — position control with feedback.", why: ["", "Brushed is the key idea for DC Motors, not Servo Motors", "Step angle is the key idea for Stepper Motors, not Servo Motors", "Duty cycle is the key idea for Speed Control, not Servo Motors"] },
+              { q: "Per the table, what does the Motor Drivers skill cover?", choices: ["Switching current the logic can't", "Precise, repeatable increments", "Position control with feedback", "PWM instead of a simple on/off"], answer: 0, explain: "The table describes Motor Drivers as switching current the logic can't, with 'H-bridge' as the key idea.", why: ["", "That describes Stepper Motors, not Motor Drivers", "That describes Servo Motors, not Motor Drivers", "That describes Speed Control, not Motor Drivers"] },
+              { q: "Per the table, what key idea is listed for Speed Control?", choices: ["Duty cycle", "H-bridge", "Step angle", "Brushed"], answer: 0, explain: "The table lists 'Duty cycle' as the key idea for Speed Control — PWM instead of a simple on/off.", why: ["", "H-bridge is the key idea for Motor Drivers, not Speed Control", "Step angle is the key idea for Stepper Motors, not Speed Control", "Brushed is the key idea for DC Motors, not Speed Control"] }
+            ] }
+          ]
+        },
+        {
+          id: "motors-dc-fundamentals",
+          title: "What Is a DC Motor?",
+          tag: "DC Motors",
+          blocks: [
+            { type: "definition",
+              plain: "A DC motor spins continuously when voltage is applied — reverse the voltage, and it spins the other way.",
+              picture: "Like a water wheel that turns as long as water keeps flowing — remove the flow, and it stops.",
+              facts: "Brushed motors are simple and cheap; brushless motors last longer but need a driver to commutate them." },
+            { type: "numbered", title: "Types of Motors", items: [
+              { title: "1. Brushed DC", desc: "Simple, cheap, spins continuously — brushes wear out over time" },
+              { title: "2. Brushless DC (BLDC)", desc: "Longer-lasting, needs electronic commutation from a driver" },
+              { title: "3. Stepper", desc: "Moves in precise, repeatable increments instead of spinning freely" },
+              { title: "4. Servo", desc: "Holds a specific position, using internal feedback to correct itself" }
+            ]},
+            { type: "numbered", title: "Specifications That Matter", items: [
+              { title: "Rated voltage", desc: "The voltage the motor is designed to run at continuously" },
+              { title: "Stall current", desc: "The current it draws when stopped but still powered — often very high" },
+              { title: "RPM", desc: "How fast it spins at rated voltage, under no load" },
+              { title: "Torque", desc: "How much rotational force it can deliver before stalling" }
+            ]},
+            { type: "check", questions: [
+              { q: "What happens to a DC motor's spin direction if you reverse the applied voltage?", choices: ["It reverses direction", "It spins faster in the same direction", "It stops permanently", "Nothing changes at all"], answer: 0, explain: "The definition states reversing the voltage reverses the spin direction.", why: ["", "Reversing voltage changes direction, not speed", "The motor reverses, it doesn't stop permanently", "The definition explicitly says reversing voltage does change something — direction"] },
+              { q: "Per the types of motors list, what distinguishes brushless DC (BLDC) from brushed DC?", choices: ["BLDC lasts longer but needs electronic commutation from a driver", "BLDC has no moving parts at all", "BLDC only works with stepper drivers", "BLDC cannot spin continuously"], answer: 0, explain: "The list states BLDC is longer-lasting but needs electronic commutation from a driver, unlike simple brushed DC.", why: ["", "BLDC still has a rotating shaft — it isn't free of moving parts", "BLDC uses its own electronic commutation, not a stepper driver specifically", "BLDC spins continuously, just like brushed DC — the list contrasts it with steppers, which move in increments"] },
+              { q: "Per the types of motors list, what makes a stepper motor different from a brushed or brushless DC motor?", choices: ["It moves in precise, repeatable increments instead of spinning freely", "It cannot be electronically controlled at all", "It always uses brushes to commutate", "It has no rated voltage specification"], answer: 0, explain: "The list states a stepper moves in precise, repeatable increments, unlike a DC motor's free continuous spin.", why: ["", "Steppers are explicitly electronically controlled via a pulse sequence", "Brushes are a DC-motor feature; steppers work differently", "Rated voltage is one of the four specs that matter for motors generally, including steppers"] },
+              { q: "Per the specifications list, why is stall current described as 'the number that lets out the smoke'?", choices: ["It's the current drawn when stopped but still powered — often very high, risking damage if ignored", "It's always lower than the motor's normal running current", "It has no relationship to motor damage at all", "It only applies to servo motors, never DC motors"], answer: 0, explain: "The specs list describes stall current as often very high, and 'lets out the smoke' is a wry way of saying ignoring it risks real damage.", why: ["", "Stall current is typically higher than running current, not lower — that's exactly the risk", "The 'lets out the smoke' phrasing directly signals its damage potential", "Stall current is listed as a general motor spec, not one limited to servos"] },
+              { q: "Per the specifications list, what does torque measure?", choices: ["How much rotational force a motor can deliver before stalling", "How fast the motor spins at rated voltage under no load", "The voltage the motor is designed to run at continuously", "The current it draws when stopped but still powered"], answer: 0, explain: "The specs list defines torque as how much rotational force the motor can deliver before stalling.", why: ["", "That's the RPM spec, not torque", "That's the rated voltage spec, not torque", "That's the stall current spec, not torque"] }
+            ] }
+          ]
+        },
+        {
+          id: "motors-dc-faults",
+          title: "Common Motor Faults",
+          tag: "DC Motor Faults",
+          blocks: [
+            { type: "tip", text: "Healthy motors spin freely with no unusual noise or vibration, draw expected current under no load, and hold a consistent speed across repeated tests." },
+            { type: "warning", title: "Motor fault signs", items: [
+              "Worn brushes — sparking, or intermittent operation",
+              "Grinding or rough bearings under rotation",
+              "Shorted winding — draws far more current than rated"
+            ]},
+            { type: "definition",
+              plain: "A conveyor motor runs smoothly at the right speed, but consistently spins the wrong way.",
+              picture: "Like a light switch wired upside-down — flip it and the outcome is exactly backwards, but the switch itself works fine.",
+              facts: "Checking the driver's output polarity, then the motor's own wiring against the schematic, revealed the motor's two leads had been swapped during a previous repair — nothing was actually faulty." },
+            { type: "numbered", title: "Diagnosing the reversed motor", items: [
+              { title: "What you do", desc: "Check the driver's output polarity, then check the motor's own wiring against the schematic" },
+              { title: "What it tells you", desc: "The motor's two leads had been swapped during a previous repair — nothing was actually faulty" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the fault signs, what does a shorted winding typically cause?", choices: ["The motor draws far more current than rated", "The motor spins faster than its rated RPM", "The motor becomes completely silent", "The motor's voltage rating increases"], answer: 0, explain: "The fault signs list a shorted winding as drawing far more current than rated.", why: ["", "A shorted winding is a fault, not a way to exceed rated RPM safely", "A shorted winding is an electrical fault, not something that silences the motor", "A winding fault doesn't change the motor's voltage rating"] },
+              { q: "Per the fault signs, what do worn brushes typically cause?", choices: ["Sparking, or intermittent operation", "A permanently reversed spin direction", "An increase in the motor's torque rating", "No observable symptom at all"], answer: 0, explain: "The fault signs list worn brushes as causing sparking or intermittent operation.", why: ["", "Reversed direction is a wiring issue, covered in this card's own scenario, not a brush-wear symptom", "Worn brushes don't increase torque rating — they're a wear-related fault", "The fault signs explicitly describe an observable symptom"] },
+              { q: "In the reversed-conveyor-motor scenario, what was actually wrong with the motor itself?", choices: ["Nothing — the motor's two leads had simply been swapped during a previous repair", "The motor's winding had shorted", "The motor's bearings had worn out", "The motor was rated for the wrong voltage"], answer: 0, explain: "The scenario concludes nothing was actually faulty — the motor's two leads had been swapped during a previous repair.", why: ["", "A shorted winding isn't the cause identified in this scenario", "Worn bearings aren't the cause identified in this scenario", "Voltage rating mismatch isn't the cause identified in this scenario"] },
+              { q: "Per the reversed-motor scenario's insight, what does 'wrong direction' often mean in a motor fault?", choices: ["It's often wiring, not a fault at all", "It always means the motor has failed internally", "It means the driver IC must be replaced", "It's impossible to diagnose without disassembling the motor"], answer: 0, explain: "The scenario's insight line states wrong direction is often wiring, not a fault at all — exactly what the swapped leads turned out to be.", why: ["", "The scenario explicitly shows the motor itself was fine, not internally failed", "The scenario didn't require replacing the driver — it required correcting the wiring", "The scenario was diagnosed by checking polarity and wiring, without disassembling the motor"] },
+              { q: "Per the reversed-motor scenario, what was checked first, before the motor's own wiring?", choices: ["The driver's output polarity", "The motor's bearing condition", "The motor's stall current", "The motor's RPM rating"], answer: 0, explain: "The scenario states the driver's output polarity was checked first, then the motor's own wiring against the schematic.", why: ["", "Bearing condition isn't part of this particular scenario's diagnostic steps", "Stall current isn't part of this particular scenario's diagnostic steps", "RPM rating isn't part of this particular scenario's diagnostic steps"] }
+            ] }
+          ]
+        },
+        {
+          id: "motors-precision",
+          title: "Stepper & Servo Motors",
+          tag: "Precision Motion",
+          blocks: [
+            { type: "definition",
+              plain: "A stepper motor rotates in fixed steps, not continuously — each pulse from the driver moves it by one precise angle.",
+              picture: "Like a clock's second hand ticking forward, instead of sweeping smoothly around the face.",
+              facts: "Because each step is known, a stepper can track exact position without any feedback sensor at all." },
+            { type: "numbered", title: "How Steppers Move in Precise Increments", items: [
+              { title: "1. Coils energised in sequence", desc: "The driver switches coil pairs on and off in a set pattern" },
+              { title: "2. Step angle", desc: "A fixed angle per step — commonly 1.8°, giving 200 steps per revolution" },
+              { title: "3. Holding torque", desc: "Even stationary, an energised stepper resists being turned by hand" },
+              { title: "4. Missed steps", desc: "Too much load or speed can cause a step to be lost — position is no longer trusted" }
+            ]},
+            { type: "definition",
+              plain: "A servo motor moves to and holds a commanded position, using internal feedback to correct any error.",
+              picture: "Like someone holding a pointer steady on a target, nudging it back whenever it drifts off.",
+              facts: "Unlike a stepper, a servo actively fights to hold its position — even against outside force." },
+            { type: "numbered", title: "Reading a Servo's Control Signal", items: [
+              { title: "1. PWM pulse width", desc: "The width of the pulse, not its frequency, sets the commanded position" },
+              { title: "2. Feedback potentiometer", desc: "An internal sensor reports the shaft's actual current position" },
+              { title: "3. Control loop", desc: "The servo constantly compares commanded and actual position, correcting the gap" },
+              { title: "4. Typical range", desc: "Most hobby servos expect a pulse roughly between 1ms and 2ms" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the definition, why can a stepper motor track exact position without any feedback sensor?", choices: ["Because each step is a known, fixed angle, so counting the steps sent tracks position", "Because it never moves unless a sensor confirms the move first", "Because it has an internal potentiometer like a servo", "Because it only ever moves in one direction"], answer: 0, explain: "The facts line states because each step is known, a stepper can track exact position just by counting the steps sent — no feedback sensor needed.", why: ["", "A stepper moves on each pulse; it doesn't wait for sensor confirmation, since it has no feedback sensor", "An internal feedback potentiometer is a servo feature, not a stepper feature", "Nothing in this card restricts a stepper to one direction only"] },
+              { q: "Per the 'How Steppers Move' list, what does a missed step mean for the controller's position tracking?", choices: ["The controller's count is now a guess — position is no longer trusted", "Nothing changes — the stepper self-corrects automatically", "The motor immediately stops permanently", "The step angle changes to compensate"], answer: 0, explain: "The list's insight line states a missed step means the controller's count is now a guess — a stepper has no feedback to detect or correct this.", why: ["", "A stepper has no feedback sensor to self-correct a missed step, unlike a servo", "A missed step doesn't stop the motor — it just loses position tracking accuracy", "The step angle is a fixed mechanical property; it doesn't change to compensate for a missed step"] },
+              { q: "Per the definition, how is a servo motor different from a stepper in how it handles position?", choices: ["A servo actively fights to hold its position, even against outside force, using feedback", "A servo has no way to know its own position at all", "A servo moves in fixed steps just like a stepper", "A servo cannot hold a stationary position at all"], answer: 0, explain: "The facts line contrasts a servo actively fighting to hold position using feedback, against a stepper which just assumes it's still in place.", why: ["", "A servo's whole design is built around knowing its position via feedback", "Fixed-step movement describes a stepper, not a servo, per this same card", "A servo's core purpose is holding a commanded position"] },
+              { q: "Per the 'Reading a Servo's Control Signal' list, what actually sets a servo's commanded position?", choices: ["The width of the PWM pulse, not its frequency", "The frequency of the PWM signal", "The voltage amplitude of the pulse", "The color-coding of the servo's wires"], answer: 0, explain: "The list explicitly states the width of the pulse, not its frequency, sets the commanded position.", why: ["", "The list explicitly says frequency is NOT what sets position — pulse width is", "Pulse width, not voltage amplitude, is what encodes the servo command", "Wire color-coding is a wiring convention, not part of the actual control signal"] },
+              { q: "Per the 'Reading a Servo's Control Signal' list, what is the feedback potentiometer's role?", choices: ["An internal sensor that reports the shaft's actual current position", "It sets the commanded target position", "It supplies the servo's main operating voltage", "It generates the PWM control signal"], answer: 0, explain: "The list describes the feedback potentiometer as an internal sensor reporting the shaft's actual current position, feeding the control loop.", why: ["", "The commanded position comes from the PWM pulse width, not the potentiometer", "The potentiometer is a position sensor, not a power supply component", "The controller generates the PWM signal; the potentiometer reports position back"] }
+            ] }
+          ]
+        },
+        {
+          id: "motors-drivers",
+          title: "Motor Drivers & the H-Bridge",
+          tag: "Drivers",
+          blocks: [
+            { type: "definition",
+              plain: "A motor driver takes a small control signal and switches the much larger current a motor actually needs.",
+              picture: "Like a valve operated by a light touch, controlling a flow far stronger than that touch alone.",
+              facts: "Never connect a motor straight to a logic pin — the driver exists specifically to protect it." },
+            { type: "numbered", title: "The H-Bridge Explained", items: [
+              { title: "1. Four switches", desc: "Arranged so current can flow through the motor in either direction" },
+              { title: "2. Forward / reverse", desc: "Switching diagonal pairs reverses current, and the motor's direction" },
+              { title: "3. Braking", desc: "Closing both switches on one side shorts the motor, slowing it quickly" },
+              { title: "4. Common driver ICs", desc: "Purpose-built chips package the whole H-bridge, ready to drive directly" }
+            ]},
+            { type: "tip", text: "A healthy driver shows output voltage matching the input command, stays cool under normal load, and lets the motor respond immediately to direction changes." },
+            { type: "warning", title: "Driver fault signs", items: [
+              "Driver runs hot with no load connected at all",
+              "One direction works, the other doesn't",
+              "Output stuck high or low regardless of the input"
+            ]},
+            { type: "definition",
+              plain: "A small robot drives forward normally but does absolutely nothing when commanded to reverse.",
+              picture: "Like a car with only one working headlight — half the system works fine, and the other half is simply dark.",
+              facts: "Checking the driver's output on both halves of the H-bridge while commanding each direction revealed one half of the H-bridge had failed — a classic driver IC fault, not a motor problem at all." },
+            { type: "numbered", title: "Diagnosing the one-way robot", items: [
+              { title: "What you do", desc: "Check the driver's output on both halves of the H-bridge while commanding each direction" },
+              { title: "What it tells you", desc: "One half of the H-bridge had failed — a classic driver IC fault, not a motor problem at all" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the definition, why should a motor never be connected straight to a logic pin?", choices: ["The driver exists specifically to protect the logic from the motor's real current", "Logic pins are physically incompatible with any motor wiring", "Motors only work with AC power, never a DC logic signal", "It's purely a cosmetic wiring convention"], answer: 0, explain: "The facts line explicitly states the driver protects the logic from the motor's real current — connecting directly risks damaging the logic pin.", why: ["", "The issue is current handling, not a physical incompatibility of the wiring itself", "Nothing in this card restricts motors to AC only", "The facts line frames this as a real protective necessity, not cosmetics"] },
+              { q: "Per the H-bridge explanation, how does switching diagonal switch pairs affect the motor?", choices: ["It reverses current through the motor, reversing its direction", "It disconnects the motor entirely", "It increases the motor's supply voltage", "It has no effect on the motor at all"], answer: 0, explain: "The list states switching diagonal pairs reverses current, and the motor's direction, through the H-bridge.", why: ["", "Disconnection isn't described by diagonal-pair switching — braking (closing one side) is a separate, different action", "The H-bridge switches current direction, it doesn't change supply voltage", "The list explicitly ties diagonal switching to reversing direction — it has a clear effect"] },
+              { q: "Per the H-bridge explanation, how does an H-bridge brake a motor quickly?", choices: ["Closing both switches on one side shorts the motor, slowing it quickly", "Opening all four switches simultaneously", "Reversing the supply polarity permanently", "Increasing the PWM duty cycle to 100%"], answer: 0, explain: "The list states closing both switches on one side shorts the motor, providing quick braking.", why: ["", "Opening all switches would coast the motor, not actively brake it", "Reversing polarity would drive the motor backward, not brake it", "Increasing duty cycle to 100% would drive the motor at full speed, not brake it"] },
+              { q: "Per the driver fault signs, what does 'one direction works, the other doesn't' typically indicate?", choices: ["A blown half-bridge", "A healthy driver operating normally", "A motor with worn brushes", "A missing flyback diode"], answer: 0, explain: "The fault signs' insight line explicitly states a driver that only works one way has a blown half-bridge.", why: ["", "This is explicitly listed as a fault sign, not healthy behavior", "Brush wear is a motor-specific fault from an earlier card, not this driver-specific symptom", "A missing flyback diode is a protection issue covered on a different card, not this specific symptom"] },
+              { q: "In the one-way robot scenario, what did checking both halves of the H-bridge reveal?", choices: ["One half of the H-bridge had failed — a classic driver IC fault, not a motor problem at all", "The motor's winding had failed", "The robot's battery was undercharged", "The wiring between the driver and motor had been reversed"], answer: 0, explain: "The scenario concludes one half of the H-bridge had failed — a driver fault, explicitly not a motor problem.", why: ["", "The scenario explicitly rules out a motor problem", "Battery charge isn't the fault identified in this scenario", "Reversed wiring is the fault from the earlier conveyor-motor scenario, not this one"] }
+            ] }
+          ]
+        },
+        {
+          id: "motors-control",
+          title: "PWM Speed Control & Protection",
+          tag: "Control & Protection",
+          blocks: [
+            { type: "definition",
+              plain: "PWM switches full voltage on and off rapidly — the ratio of on-time to off-time controls the motor's effective speed.",
+              picture: "Like tapping a car's accelerator rapidly instead of pressing it down partway — the average effect is the same.",
+              facts: "PWM is more efficient than a simple voltage-dropping resistor, since little energy is wasted as heat." },
+            { type: "numbered", title: "Protecting Motor Circuits", items: [
+              { title: "1. Flyback diode", desc: "Protects the driver from the voltage spike a motor generates when switched off" },
+              { title: "2. Current limiting", desc: "Prevents stall current from destroying the driver or wiring" },
+              { title: "3. Heat-sink the driver IC", desc: "Motor drivers dissipate real power — inadequate cooling shortens their life" },
+              { title: "4. Isolate logic from motor supply", desc: "Keeps motor noise and voltage spikes away from sensitive control circuitry" }
+            ]},
+            { type: "numbered", title: "Testing Motors & Drivers on the Bench", items: [
+              { title: "1. No-load current", desc: "Confirms the motor spins freely without excessive draw" },
+              { title: "2. Stall current", desc: "Briefly holding the shaft confirms current stays within rated limits" },
+              { title: "3. Driver output voltage", desc: "Confirms the driver is actually delivering what it's commanded to" },
+              { title: "4. Direction test", desc: "Confirms both directions work equally, isolating a one-sided driver fault" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the definition, what does PWM actually control in a spinning motor?", choices: ["The ratio of on-time to off-time, controlling the motor's effective average speed", "The exact voltage level applied continuously", "The motor's physical rotor size", "The number of switches inside the driver"], answer: 0, explain: "The definition states PWM controls speed via the ratio of on-time to off-time — the motor's effective speed is an average of full-on and full-off.", why: ["", "PWM switches full voltage on and off — it isn't a continuous partial voltage", "PWM has nothing to do with a motor's physical rotor size", "The number of driver switches is fixed by the H-bridge design, unrelated to PWM's speed-control mechanism"] },
+              { q: "Per the facts line, why is PWM more efficient than a voltage-dropping resistor for speed control?", choices: ["Little energy is wasted as heat, since switching fast beats dissipating energy", "PWM eliminates the need for a motor driver entirely", "A resistor is always more efficient than PWM", "PWM only works at a single fixed speed"], answer: 0, explain: "The facts line states PWM is more efficient since little energy is wasted as heat, compared to a resistor's approach of dissipating excess voltage.", why: ["", "PWM still requires a driver to actually switch the motor current", "The facts line explicitly says the opposite — PWM is the more efficient option", "PWM's whole purpose is variable speed control via adjustable duty cycle"] },
+              { q: "Per the protecting-motor-circuits list, what does a flyback diode protect against?", choices: ["The voltage spike a motor generates when switched off", "Excessive heat from the driver IC", "Motor noise reaching the logic supply", "Stall current destroying the wiring"], answer: 0, explain: "The list states a flyback diode protects the driver from the voltage spike a motor generates when switched off.", why: ["", "That's the heat-sinking item's purpose, not the flyback diode's", "That's the isolation item's purpose, not the flyback diode's", "That's the current-limiting item's purpose, not the flyback diode's"] },
+              { q: "Per the protecting-motor-circuits list, what does isolating logic from the motor supply accomplish?", choices: ["Keeps motor noise and voltage spikes away from sensitive control circuitry", "Prevents the motor from ever drawing stall current", "Eliminates the need for a flyback diode", "Increases the motor's rated torque"], answer: 0, explain: "The list states isolating logic from the motor supply keeps motor noise and voltage spikes away from sensitive control circuitry.", why: ["", "That's current limiting's purpose, not isolation's", "Isolation and the flyback diode are separate, complementary protections, not substitutes for each other", "Isolation is an electrical protection measure, unrelated to a motor's rated torque"] },
+              { q: "Per the bench-testing list, why does a direction test specifically isolate a one-sided driver fault?", choices: ["It confirms both directions work equally, revealing a driver that only works one way", "It measures the motor's no-load current only", "It only tests the motor, never the driver", "It replaces the need for checking driver output voltage"], answer: 0, explain: "The list states the direction test confirms both directions work equally, isolating a one-sided driver fault — exactly the fault found in the one-way robot scenario.", why: ["", "No-load current is a separate, different test on this same list", "The direction test specifically exercises the driver's H-bridge, not just the motor alone", "Driver output voltage is checked as its own separate step on this list, not replaced by the direction test"] }
+            ] }
+          ]
+        },
+        {
+          id: "motors-pcb-practical",
+          title: "PCB Identification & Practical Exercise",
+          tag: "Practical",
+          blocks: [
+            { type: "numbered", title: "Spotting Motor Drive Circuits on a Real Board", items: [
+              { title: "1. Larger IC with heat tabs", desc: "Motor driver ICs are built to shed heat, and it shows in the package" },
+              { title: "2. Thick copper traces", desc: "Motor current needs wider tracks than the signal traces nearby" },
+              { title: "3. Nearby flyback diodes", desc: "Placed close to the motor connector, protecting the driver" },
+              { title: "4. Screw terminals or connectors", desc: "Motors are rarely soldered directly — expect a removable connection" }
+            ]},
+            { type: "numbered", title: "Practical Exercise: Test a Motor and Driver Circuit", items: [
+              { title: "1. Measure no-load current", desc: "The motor's draw with nothing connected" },
+              { title: "2. Briefly test stall current", desc: "Within its rated limit" },
+              { title: "3. Confirm driver output voltage", desc: "In each direction" },
+              { title: "4. Confirm both directions", desc: "Actually turn the motor" },
+              { title: "5. Check for a flyback diode", desc: "Across the motor terminals" },
+              { title: "6. Record all readings", desc: "Against the motor's datasheet" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the PCB identification list, why do motor driver ICs often stand out with heat tabs?", choices: ["They're built to shed heat, and it shows in the package", "Heat tabs are purely decorative branding", "Every IC on a board has identical heat tabs", "Heat tabs indicate a failed component"], answer: 0, explain: "The list states motor driver ICs are built to shed heat, and it shows in the package with larger heat tabs.", why: ["", "Heat tabs serve a real thermal function, not decoration", "The list specifically calls this out as a distinguishing feature of motor driver ICs, not universal to every IC", "A heat tab is a design feature, not itself a sign of failure"] },
+              { q: "Per the PCB identification list, why are thick copper traces a clue to spotting motor circuits?", choices: ["Motor current needs wider tracks than the signal traces nearby", "Thick traces are only used for aesthetic board design", "Thick traces indicate a firmware fault", "All traces on a board are the same thickness by design"], answer: 0, explain: "The list states motor current needs wider tracks than nearby signal traces, making thick copper a visual clue.", why: ["", "Trace width is functional, related to current capacity, not aesthetics", "Trace thickness is a PCB design/current property, unrelated to firmware", "The whole point of this clue is that trace thickness VARIES across the board"] },
+              { q: "Per the practical exercise, what should be checked across the motor terminals?", choices: ["A flyback diode", "The motor's rated torque only", "The driver's part number", "The PCB's copper trace thickness"], answer: 0, explain: "Step 5 of the practical exercise specifically calls for checking for a flyback diode across the motor terminals.", why: ["", "Torque rating isn't the specific check named in step 5", "Part number lookup isn't the specific check named in step 5", "Trace thickness is a PCB-identification clue from a different list, not this specific practical-exercise step"] },
+              { q: "Per the practical exercise, what's the very first measurement taken?", choices: ["No-load current", "Stall current", "Driver output voltage", "Flyback diode presence"], answer: 0, explain: "Step 1 of the practical exercise is measuring the motor's no-load current draw.", why: ["", "Stall current is step 2, after no-load current", "Driver output voltage is step 3, after no-load and stall current", "Flyback diode check is step 5, near the end of the sequence"] },
+              { q: "Per the practical exercise, why should both directions be confirmed, not just one?", choices: ["The exercise explicitly warns never to assume the second direction works", "Only one direction ever needs testing on a healthy driver", "Testing both directions risks damaging the motor", "Direction testing is optional and rarely necessary"], answer: 0, explain: "The exercise's insight line explicitly states: test both directions — never assume the second one works.", why: ["", "The exercise explicitly requires testing BOTH directions, not just one", "Nothing in this exercise suggests direction testing risks damage", "The exercise lists this as a required step, not an optional one"] }
+            ] }
+          ]
+        },
+        {
+          id: "motors-repair-reference",
+          title: "Repair Exercise & Quick Reference",
+          tag: "Repair & Reference",
+          blocks: [
+            { type: "definition",
+              plain: "A motor spins freely when tested alone, but never turns when connected to its driver board.",
+              picture: "Like a healthy engine bolted to a car with no fuel line connected — the engine isn't the problem.",
+              facts: "The driver's output was never actually checked — the fault was assumed to be the motor, without testing the driver directly." },
+            { type: "numbered", title: "What went wrong, and how to prevent it", items: [
+              { title: "What went wrong", desc: "The driver's output was never actually checked — the fault was assumed to be the motor" },
+              { title: "How to prevent it", desc: "Test the driver's output directly before ever condemning the motor connected to it" }
+            ]},
+            { type: "table", title: "One line per motor type — how it moves, and how to control it", headers: ["Type", "Movement", "Control Signal", "Feedback"], rows: [
+              ["Brushed DC", "Continuous rotation", "Voltage / PWM", "None (usually)"],
+              ["Brushless DC", "Continuous rotation", "Commutated by driver", "Optional (Hall sensors)"],
+              ["Stepper", "Fixed-angle steps", "Pulse sequence", "None (open loop)"],
+              ["Servo", "Held position", "PWM pulse width", "Internal potentiometer"]
+            ]},
+            { type: "check", questions: [
+              { q: "In the stalled-motor repair exercise, what was the actual root cause of the fault?", choices: ["The driver's output was never actually checked — the fault was wrongly assumed to be the motor", "The motor's bearings had seized", "The motor's winding had shorted", "The flyback diode was missing"], answer: 0, explain: "The scenario states the driver's output was never actually checked — the motor was wrongly blamed without testing the driver directly.", why: ["", "Seized bearings is the fault from the earlier fan-like motor scenario in a different module, not this one", "A shorted winding isn't the cause identified in this scenario", "A missing flyback diode isn't the cause identified in this scenario"] },
+              { q: "Per the repair exercise's lesson, why does a good motor on a bad driver still not turn?", choices: ["The driver never delivers the current or signal the motor needs to move, even if the motor itself is fine", "A good motor can always turn regardless of what's driving it", "The motor automatically bypasses a faulty driver", "This scenario proves the motor was actually the fault"], answer: 0, explain: "The lesson explicitly states a good motor on a bad driver still won't turn — the driver is the necessary link between control and motion.", why: ["", "The whole scenario demonstrates the opposite — the motor spun fine ALONE, but not through the driver", "Nothing in this card describes a motor bypassing a faulty driver", "The scenario explicitly concludes the motor tested fine and the driver was the actual fault"] },
+              { q: "Per the quick reference table, what type of feedback does a stepper motor use?", choices: ["None (open loop)", "Internal potentiometer", "Optional (Hall sensors)", "Continuous voltage feedback"], answer: 0, explain: "The table lists the stepper's feedback as 'None (open loop)' — it tracks position purely by counting steps sent.", why: ["", "That's the servo's feedback type, not the stepper's", "That's the brushless DC's feedback type, not the stepper's", "The table doesn't list this as any motor type's feedback mechanism"] },
+              { q: "Per the quick reference table, what control signal does a servo use?", choices: ["PWM pulse width", "Voltage / PWM", "Commutated by driver", "Pulse sequence"], answer: 0, explain: "The table lists the servo's control signal as PWM pulse width — the pulse's width, not frequency, sets its commanded position.", why: ["", "That's the brushed DC's control signal, not the servo's", "That's the brushless DC's control signal, not the servo's", "That's the stepper's control signal, not the servo's"] },
+              { q: "Per the quick reference table, how does a brushless DC (BLDC) motor move?", choices: ["Continuous rotation, commutated by a driver", "Fixed-angle steps via a pulse sequence", "Held position via PWM pulse width", "Continuous rotation via simple voltage/PWM only, with no driver"], answer: 0, explain: "The table lists BLDC's movement as continuous rotation, with commutation handled by a driver.", why: ["", "That describes the stepper's movement, not BLDC's", "That describes the servo's movement, not BLDC's", "The table specifically notes BLDC is 'Commutated by driver', unlike this option's claim of no driver"] }
+            ] }
+          ]
+        },
+        {
+          id: "motors-wrapup",
+          title: "Module Wrap-Up",
+          tag: "You Can Now…",
+          blocks: [
+            { type: "checklist", items: [
+              "Identify DC, stepper, and servo motors and how each moves",
+              "Explain why a motor driver sits between logic and motor",
+              "Read an H-bridge's role in direction and speed control",
+              "Test a motor and driver separately to isolate a fault",
+              "Recognise the protection every motor circuit should have"
+            ]},
+            { type: "golden", text: "Test the motor and the driver separately — a fault in one looks identical to a fault in the other." },
+            { type: "check", questions: [
+              { q: "What is the golden rule of this module?", choices: ["Test the motor and the driver separately — a fault in one looks identical to a fault in the other", "Always assume a stalled motor means a failed motor", "Drivers never need heat-sinking", "A motor spinning freely on the bench proves the whole circuit is healthy"], answer: 0, explain: "The golden rule explicitly states testing motor and driver separately, since a fault in one can look identical to a fault in the other.", why: ["", "The stalled-motor scenario shows a healthy motor was wrongly assumed faulty — the driver was the real cause", "The protection list explicitly names heat-sinking the driver IC as necessary", "The stalled-motor scenario shows a motor spinning fine alone still didn't turn through a bad driver — the whole circuit wasn't proven healthy"] },
+              { q: "Per the checklist, what motor types should you be able to identify and describe how each moves?", choices: ["DC, stepper, and servo motors", "Only DC motors", "Only stepper motors", "Only servo motors"], answer: 0, explain: "The checklist names identifying DC, stepper, and servo motors and how each moves as a core skill.", why: ["", "The checklist explicitly names all three motor families, not just DC", "The checklist explicitly names all three motor families, not just stepper", "The checklist explicitly names all three motor families, not just servo"] },
+              { q: "Per the checklist, what should you be able to explain about motor drivers?", choices: ["Why a motor driver sits between logic and motor", "Why drivers are never necessary for small motors", "Why motors always run at a fixed, unchangeable speed", "Why steppers require a feedback sensor to move at all"], answer: 0, explain: "The checklist names explaining why a motor driver sits between logic and motor as a core skill.", why: ["", "This module explicitly teaches that a driver protects logic from motor current, not that it's unnecessary", "PWM speed control is explicitly taught as a way to vary motor speed", "This module explicitly teaches steppers move via pulse counting with no feedback sensor needed"] },
+              { q: "Per the checklist, what role of the H-bridge should you be able to read?", choices: ["Its role in direction and speed control", "Its role in generating a sensor's calibration offset", "Its role in industrial ladder logic", "Its role in RS-485 termination"], answer: 0, explain: "The checklist names reading the H-bridge's role in direction and speed control as a core skill.", why: ["", "Sensor calibration belongs to a different module (Sensors & Actuators), not this one's H-bridge skill", "Ladder logic belongs to the PLC & Automation module, not this one", "RS-485 termination belongs to the Industrial Communication module, not this one"] },
+              { q: "Per the checklist, how should a motor and its driver be tested when isolating a fault?", choices: ["Separately", "Only ever together, never apart", "Only the motor needs testing, never the driver", "Only the driver needs testing, never the motor"], answer: 0, explain: "The checklist names testing a motor and driver separately to isolate a fault as a core skill.", why: ["", "The stalled-motor scenario is exactly why testing only together can miss the real fault", "The stalled-motor scenario shows the driver, not just the motor, needed direct testing", "The one-way-robot scenario shows the motor also needed separate confirmation of health"] }
+            ] }
+          ]
+        }
+      ]
+    },
   ],
 
   // ================================================================ QUESTIONS
