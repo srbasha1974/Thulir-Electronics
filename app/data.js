@@ -2128,6 +2128,273 @@ window.THULIR_DATA = {
         }
       ]
     },
+
+    // ============================================================ MODULE 09: SENSORS & ACTUATORS
+    {
+      id: "sensors-actuators",
+      code: "MOD·09",
+      icon: "📡",
+      color: "#b05bff",
+      title: "Sensors & Actuators",
+      subtitle: "The parts that let a circuit feel the world — and act on it.",
+      cards: [
+        {
+          id: "sensors-overview",
+          title: "The Five Skills of Sensors & Actuators",
+          tag: "Overview",
+          blocks: [
+            { type: "intro", text: "Have you ever wondered how a phone knows which way is up, or a washing machine knows the tub is full? Both are sensors quietly doing their job — by the end of this module, you'll know exactly how." },
+            { type: "table", title: "How a circuit senses the world, and how it acts on what it finds", headers: ["Skill", "What It Covers", "Key Idea"], rows: [
+              ["Sensors", "Turning the physical into electrical", "Input"],
+              ["Actuators", "Turning electrical into motion or force", "Output"],
+              ["Signal Conditioning", "Cleaning up a weak signal", "Amplify"],
+              ["Interfacing", "Connecting sensors to a controller", "ADC"],
+              ["Testing", "Confirming both ends actually work", "Bench check"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the table, what does the Sensors skill cover?", choices: ["Turning the physical into electrical", "Turning electrical into motion or force", "Cleaning up a weak signal", "Connecting sensors to a controller"], answer: 0, explain: "The table describes Sensors as turning the physical into electrical, with 'Input' as the key idea.", why: ["", "That describes Actuators, not Sensors", "That describes Signal Conditioning, not Sensors", "That describes Interfacing, not Sensors"] },
+              { q: "Per the table, what key idea is listed for Actuators?", choices: ["Output", "Input", "Amplify", "ADC"], answer: 0, explain: "The table lists 'Output' as the key idea for Actuators — turning electrical into motion or force.", why: ["", "Input is the key idea for Sensors, not Actuators", "Amplify is the key idea for Signal Conditioning, not Actuators", "ADC is the key idea for Interfacing, not Actuators"] },
+              { q: "Per the table, what does Signal Conditioning cover?", choices: ["Cleaning up a weak signal", "Turning the physical into electrical", "Connecting sensors to a controller", "Confirming both ends actually work"], answer: 0, explain: "The table describes Signal Conditioning as cleaning up a weak signal, with 'Amplify' as the key idea.", why: ["", "That describes Sensors, not Signal Conditioning", "That describes Interfacing, not Signal Conditioning", "That describes Testing, not Signal Conditioning"] },
+              { q: "Per the table, what key idea is listed for Interfacing?", choices: ["ADC", "Output", "Amplify", "Bench check"], answer: 0, explain: "The table lists 'ADC' as the key idea for Interfacing — connecting sensors to a controller.", why: ["", "Output is the key idea for Actuators, not Interfacing", "Amplify is the key idea for Signal Conditioning, not Interfacing", "Bench check is the key idea for Testing, not Interfacing"] },
+              { q: "Per the table, what does the Testing skill cover?", choices: ["Confirming both ends actually work", "Turning electrical into motion or force", "Cleaning up a weak signal", "Turning the physical into electrical"], answer: 0, explain: "The table describes Testing as confirming both ends actually work, with 'Bench check' as the key idea.", why: ["", "That describes Actuators, not Testing", "That describes Signal Conditioning, not Testing", "That describes Sensors, not Testing"] }
+            ] }
+          ]
+        },
+        {
+          id: "sensors-fundamentals",
+          title: "What Is a Sensor?",
+          tag: "Fundamentals",
+          blocks: [
+            { type: "definition",
+              plain: "A sensor converts a physical quantity — heat, light, motion — into an electrical signal a circuit can read.",
+              picture: "Like a translator turning a language a circuit can't understand into one it can — voltage or resistance.",
+              facts: "Every sensor has a range and an accuracy — asking it to measure outside that range gives a meaningless reading." },
+            { type: "numbered", title: "Types of Sensors", items: [
+              { title: "1. Temperature", desc: "Thermistors and temperature ICs — resistance or voltage changes with heat" },
+              { title: "2. Light", desc: "LDRs and photodiodes — resistance or current changes with brightness" },
+              { title: "3. Motion & proximity", desc: "PIR, ultrasonic, and Hall-effect sensors detect movement or nearby objects" },
+              { title: "4. Pressure & force", desc: "Converts physical pressure into a proportional electrical signal" }
+            ]},
+            { type: "numbered", title: "Specifications That Matter", items: [
+              { title: "Sensitivity", desc: "How much output changes for a given change in the physical quantity" },
+              { title: "Range", desc: "The minimum and maximum it can measure accurately" },
+              { title: "Response time", desc: "How quickly it reacts to a sudden change" },
+              { title: "Accuracy", desc: "How close its reading is to the true value" }
+            ]},
+            { type: "check", questions: [
+              { q: "What does a sensor fundamentally do, per the definition?", choices: ["Converts a physical quantity into an electrical signal a circuit can read", "Converts an electrical signal into physical motion", "Amplifies a signal already in electrical form", "Stores energy for later release"], answer: 0, explain: "The definition states a sensor converts a physical quantity — heat, light, motion — into an electrical signal.", why: ["", "That describes an actuator, the opposite direction of conversion", "That describes signal conditioning, not a sensor's core job", "That describes a capacitor or battery, not a sensor"] },
+              { q: "Per the types of sensors list, what do PIR, ultrasonic, and Hall-effect sensors detect?", choices: ["Movement or nearby objects", "Temperature changes", "Light brightness", "Physical pressure"], answer: 0, explain: "The list describes motion & proximity sensors — PIR, ultrasonic, and Hall-effect — as detecting movement or nearby objects.", why: ["", "That describes the Temperature category, not motion & proximity", "That describes the Light category, not motion & proximity", "That describes the Pressure & force category, not motion & proximity"] },
+              { q: "Per the specifications list, what does 'sensitivity' measure?", choices: ["How much output changes for a given change in the physical quantity", "The minimum and maximum it can measure accurately", "How quickly it reacts to a sudden change", "How close its reading is to the true value"], answer: 0, explain: "The specs list defines sensitivity as how much output changes for a given change in the physical quantity being measured.", why: ["", "That's the Range spec, not sensitivity", "That's the Response time spec, not sensitivity", "That's the Accuracy spec, not sensitivity"] },
+              { q: "Per the facts line, what happens if a sensor is asked to measure outside its rated range?", choices: ["It gives a meaningless reading", "It automatically expands its own range", "It shuts down safely with no output", "It becomes more accurate than normal"], answer: 0, explain: "The facts line explicitly states asking a sensor to measure outside its range gives a meaningless reading.", why: ["", "A sensor's range is a fixed physical limit, not something it can expand on its own", "The facts line describes a meaningless reading, not a safe shutdown", "Accuracy degrades, it doesn't improve, outside a sensor's rated range"] },
+              { q: "Per the specifications list, what does 'response time' measure?", choices: ["How quickly a sensor reacts to a sudden change", "How close its reading is to the true value", "The minimum and maximum it can measure", "How much output changes per unit of input change"], answer: 0, explain: "The specs list defines response time as how quickly a sensor reacts to a sudden change in the physical quantity.", why: ["", "That's the Accuracy spec, not response time", "That's the Range spec, not response time", "That's the Sensitivity spec, not response time"] }
+            ] }
+          ]
+        },
+        {
+          id: "sensors-signal-types",
+          title: "Analog vs Digital & Reading Sensor Output",
+          tag: "Signal Types",
+          blocks: [
+            { type: "table", title: "Analog vs digital sensors", headers: ["Aspect", "Analog Sensors", "Digital Sensors"], rows: [
+              ["Output behavior", "Varies smoothly, like a voltage or resistance", "Switches between clear states, or sends data"],
+              ["How to read it", "Read directly with a multimeter or an ADC", "Often needs a specific protocol to read properly"],
+              ["Common examples", "Thermistors, LDRs, potentiometers", "PIR motion, digital temperature ICs"]
+            ]},
+            { type: "numbered", title: "Reading a Sensor's Output", items: [
+              { title: "1. Voltage output", desc: "A signal that rises or falls smoothly with the reading" },
+              { title: "2. Resistance change", desc: "Measured directly with a multimeter in resistance mode" },
+              { title: "3. Digital pulse", desc: "On/off switching, often timed to represent a value" },
+              { title: "4. Serial data", desc: "A digital protocol carrying a precise numeric reading" }
+            ]},
+            { type: "definition",
+              plain: "A thermostat always reads several degrees warmer than the room actually is, every single time.",
+              picture: "Like a bathroom scale that's always five pounds high — consistently wrong, not randomly wrong.",
+              facts: "Comparing the sensor's resistance against its datasheet chart at a known, measured room temperature showed the thermistor had drifted with age — a consistent offset, not a random fault." },
+            { type: "numbered", title: "Diagnosing the wrong reading", items: [
+              { title: "What you do", desc: "Compare the sensor's resistance against its datasheet chart at a known, measured room temperature" },
+              { title: "What it tells you", desc: "The thermistor had drifted with age — a consistent offset, not a random or intermittent fault" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the comparison table, how should an analog sensor's output typically be read?", choices: ["Directly with a multimeter or an ADC", "Only with a specific communication protocol", "Only by counting digital pulses", "It cannot be read with standard bench tools"], answer: 0, explain: "The table states analog sensors are read directly with a multimeter or an ADC, since their output varies smoothly.", why: ["", "That describes reading digital sensors, per the table's other column", "Pulse counting is a digital-sensor reading method, not analog", "The table explicitly says analog sensors CAN be read with standard tools"] },
+              { q: "Per the comparison table, what's a key difference in how digital sensors must often be read?", choices: ["They often need a specific protocol to read properly", "They always output a smoothly varying voltage", "They can only be tested with an ESR meter", "They never switch between distinct states"], answer: 0, explain: "The table states digital sensors often need a specific protocol to read properly, unlike analog's direct voltage/resistance reading.", why: ["", "That describes analog sensor output, the opposite column of the table", "An ESR meter is used for capacitor testing, unrelated to reading digital sensors", "The table explicitly says digital sensors switch between clear states"] },
+              { q: "Per the 'Reading a Sensor's Output' list, what does 'resistance change' output require to measure?", choices: ["Measured directly with a multimeter in resistance mode", "A dedicated signal generator", "An oscilloscope set to AC coupling", "A serial communication protocol"], answer: 0, explain: "The list states resistance change is measured directly with a multimeter in resistance mode.", why: ["", "A signal generator injects signals, it doesn't measure resistance", "AC-coupled oscilloscope measurement is used for ripple, not sensor resistance", "Serial protocol decoding describes reading serial data output, a different item on this list"] },
+              { q: "Per the 'Reading a Sensor's Output' list, what is 'serial data' output?", choices: ["A digital protocol carrying a precise numeric reading", "A signal that rises or falls smoothly with the reading", "On/off switching timed to represent a value", "A resistance measured directly with a multimeter"], answer: 0, explain: "The list describes serial data as a digital protocol carrying a precise numeric reading.", why: ["", "That describes voltage output, a different item on this list", "That describes digital pulse output, a different item on this list", "That describes resistance change output, a different item on this list"] },
+              { q: "In the thermostat scenario, what did comparing the thermistor's resistance to its datasheet chart reveal?", choices: ["The thermistor had drifted with age — a consistent offset, not a random or intermittent fault", "The thermistor had failed completely, reading infinite resistance", "The thermostat's display was wired backwards", "The room's actual temperature was fluctuating wildly"], answer: 0, explain: "The scenario concludes the thermistor had drifted with age, producing a consistent offset rather than a random or intermittent fault.", why: ["", "The scenario describes a consistent offset, not a complete open-circuit failure", "Display wiring isn't the fault identified in this scenario", "The scenario is about a consistently wrong reading, not fluctuating room temperature"] }
+            ] }
+          ]
+        },
+        {
+          id: "sensors-actuators-basics",
+          title: "What Is an Actuator?",
+          tag: "Actuators",
+          blocks: [
+            { type: "definition",
+              plain: "An actuator converts an electrical signal into physical action — movement, sound, heat, or light.",
+              picture: "Like a pair of hands carrying out an instruction the circuit has already decided on.",
+              facts: "Actuators usually draw far more current than the logic driving them — they almost always need a switch or driver in between." },
+            { type: "numbered", title: "Types of Actuators", items: [
+              { title: "1. Motor", desc: "Converts current into rotation — fans, drives, and positioning" },
+              { title: "2. Relay", desc: "An electrically-controlled switch for higher-power circuits" },
+              { title: "3. Solenoid", desc: "Converts current into a short, linear mechanical push or pull" },
+              { title: "4. Buzzer / speaker", desc: "Converts an electrical signal into sound" }
+            ]},
+            { type: "numbered", title: "Driving an Actuator", items: [
+              { title: "1. Direct drive", desc: "Only for tiny loads the controller pin can safely supply itself" },
+              { title: "2. Transistor switch", desc: "A single transistor switches higher current from a small control signal" },
+              { title: "3. Relay / driver IC", desc: "Isolates and switches larger loads safely from delicate logic" },
+              { title: "4. PWM control", desc: "Rapid switching controls speed or brightness, not just on/off" }
+            ]},
+            { type: "check", questions: [
+              { q: "What does an actuator fundamentally do, per the definition?", choices: ["Converts an electrical signal into physical action", "Converts a physical quantity into an electrical signal", "Amplifies a weak signal before it's read", "Stores charge for later release"], answer: 0, explain: "The definition states an actuator converts an electrical signal into physical action — movement, sound, heat, or light.", why: ["", "That describes a sensor, the opposite direction of conversion", "That describes signal conditioning, not an actuator's core job", "That describes a capacitor, not an actuator"] },
+              { q: "Per the facts line, why do actuators almost always need a switch or driver in between?", choices: ["They usually draw far more current than the logic driving them", "They cannot be controlled by any circuit at all", "They only work on AC power, never DC", "Drivers are required purely for cosmetic board layout reasons"], answer: 0, explain: "The facts line explains actuators draw far more current than the controlling logic, requiring a switch or driver in between.", why: ["", "Actuators are explicitly controlled by circuits — that's their whole purpose", "Nothing in this card restricts actuators to AC only", "The driver exists for a real electrical reason — current handling — not cosmetics"] },
+              { q: "Per the types of actuators list, what does a solenoid do?", choices: ["Converts current into a short, linear mechanical push or pull", "Converts current into rotation", "Acts as an electrically-controlled switch for higher-power circuits", "Converts an electrical signal into sound"], answer: 0, explain: "The list describes a solenoid as converting current into a short, linear mechanical push or pull.", why: ["", "That describes a motor, not a solenoid", "That describes a relay, not a solenoid", "That describes a buzzer/speaker, not a solenoid"] },
+              { q: "Per the driving-an-actuator list, when is direct drive from a controller pin acceptable?", choices: ["Only for tiny loads the controller pin can safely supply itself", "For any load, regardless of current draw", "Only when using PWM control", "Never — direct drive is always unsafe"], answer: 0, explain: "The list explicitly limits direct drive to tiny loads the controller pin can safely supply on its own.", why: ["", "The list explicitly limits this to tiny loads, not any load", "PWM control is a separate driving method, not a precondition for direct drive being acceptable", "The list does describe direct drive as viable in the specific tiny-load case"] },
+              { q: "Per the driving-an-actuator list, what does PWM control accomplish beyond simple on/off?", choices: ["Rapid switching controls speed or brightness, not just on/off", "It permanently disables the actuator's on/off function", "It only works with relay-driven loads", "It eliminates the need for a driver stage entirely"], answer: 0, explain: "The list states PWM control uses rapid switching to control speed or brightness, going beyond a simple on/off action.", why: ["", "PWM control is an additional capability, not a way to disable on/off behavior", "PWM control isn't restricted to relay-driven loads specifically", "PWM is itself one of the driving methods listed — it doesn't remove the need for a driver stage"] }
+            ] }
+          ]
+        },
+        {
+          id: "sensors-actuator-faults",
+          title: "Common Actuator Faults",
+          tag: "Actuator Faults",
+          blocks: [
+            { type: "tip", text: "Healthy actuators show a motor that spins freely and draws expected current, a relay that clicks cleanly and switches its load, and a buzzer that produces a clear, steady tone." },
+            { type: "warning", title: "Actuator fault signs", items: [
+              "Motor hums but doesn't turn — mechanical or winding fault",
+              "Relay chatters or won't click at all",
+              "Actuator draws far more current than its rating"
+            ]},
+            { type: "definition",
+              plain: "A cooling fan hums when powered but the blade never turns, even nudged by hand.",
+              picture: "Like an engine that turns over but won't start — power is clearly reaching it, but something is physically stuck.",
+              facts: "Checking the drive transistor's output voltage, then the motor's winding resistance directly, showed the transistor was driving it correctly — a seized bearing was the real, purely mechanical fault." },
+            { type: "numbered", title: "Diagnosing the fan that wouldn't spin", items: [
+              { title: "What you do", desc: "Check the drive transistor's output voltage, then check the motor's winding resistance directly" },
+              { title: "What it tells you", desc: "The transistor was driving it correctly — a seized bearing was the real, purely mechanical fault" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the healthy signs, what should a healthy relay do?", choices: ["Click cleanly and switch its load", "Chatter continuously without switching", "Draw far more current than its rating", "Hum without ever engaging"], answer: 0, explain: "The healthy signs describe a relay clicking cleanly and switching its load correctly.", why: ["", "Chattering is listed as a fault sign, not a healthy one", "Excess current draw is listed as a fault sign, not a healthy one", "Humming without engaging describes a faulty motor, not a healthy relay"] },
+              { q: "Per the fault signs, what does a motor that hums but doesn't turn typically indicate?", choices: ["A mechanical or winding fault", "A perfectly healthy motor under heavy load", "A relay chattering issue", "A missing pull-up resistor"], answer: 0, explain: "The fault signs list a motor humming but not turning as a mechanical or winding fault.", why: ["", "This is explicitly listed as a fault sign, not healthy behavior", "Relay chattering is a separate, distinct fault sign on this same list", "Pull-up resistors relate to digital sensor inputs, not motor faults"] },
+              { q: "Per the fault signs, what does a humming, stationary motor still do electrically?", choices: ["It's still drawing full current", "It draws zero current since it isn't moving", "It automatically shuts off to protect itself", "It reverses direction on its own"], answer: 0, explain: "The insight line explicitly states a humming, stationary motor is still drawing full current — the electrical draw doesn't stop just because it's not turning.", why: ["", "The insight line explicitly says it's still drawing FULL current, not zero", "Nothing in this card describes an automatic protective shutoff", "Nothing in this scenario describes the motor reversing direction"] },
+              { q: "In the fan-that-wouldn't-spin scenario, what did checking the motor's winding resistance directly reveal?", choices: ["The drive transistor was working correctly — a seized bearing was the real, purely mechanical fault", "The drive transistor had failed", "The motor's winding was shorted", "The fan had no power reaching it at all"], answer: 0, explain: "The scenario concludes the transistor was driving it correctly, and a seized bearing — a mechanical fault — was the actual cause.", why: ["", "The scenario explicitly confirms the transistor WAS driving it correctly", "The scenario identifies a seized bearing, not a shorted winding, as the fault", "The scenario states the fan hums when powered, meaning power was clearly reaching it"] },
+              { q: "Why did checking the drive transistor's output voltage come before checking the motor directly in this scenario?", choices: ["To confirm whether the electrical drive signal was correct before concluding the fault was purely mechanical", "Because the transistor is always the more likely cause of any motor fault", "Because checking the motor directly would have destroyed it", "Because the transistor and motor cannot be tested in the same session"], answer: 0, explain: "Confirming the drive voltage was correct first narrowed the fault away from the electrical drive stage, pointing toward the purely mechanical seized-bearing cause.", why: ["", "This scenario specifically shows the transistor was fine — it isn't framed as always the more likely cause", "Nothing in the scenario suggests direct motor testing is destructive", "Nothing in this card suggests these two checks can't be done in the same diagnostic session"] }
+            ] }
+          ]
+        },
+        {
+          id: "sensors-interfacing",
+          title: "Interfacing, Calibration & Reading Datasheets",
+          tag: "Interfacing",
+          blocks: [
+            { type: "definition",
+              plain: "Signal conditioning amplifies, filters, or scales a raw sensor signal into something a controller can read reliably.",
+              picture: "Like turning up a quiet whisper and cutting the background noise before anyone tries to listen to it.",
+              facts: "A perfectly good sensor can still give a useless reading if its signal never gets conditioned properly." },
+            { type: "numbered", title: "Common Interfacing Techniques", items: [
+              { title: "1. Voltage divider", desc: "Turns a resistive sensor into a readable voltage" },
+              { title: "2. Op-amp", desc: "Amplifies a small signal up to a usable level" },
+              { title: "3. ADC", desc: "Converts an analog voltage into a digital number the MCU can use" },
+              { title: "4. Pull-up / pull-down resistor", desc: "Keeps a digital input steady when nothing is actively driving it" }
+            ]},
+            { type: "definition",
+              plain: "Calibration compares a sensor's reading against a known-correct reference and corrects any offset.",
+              picture: "Like setting a clock against the correct time — the clock still runs, it was just reading wrong.",
+              facts: "Sensors drift with age, temperature, and use — recalibration is maintenance, not a sign of failure." },
+            { type: "numbered", title: "Reading Sensor Markings & Datasheets", items: [
+              { title: "1. Part number", desc: "Printed on the sensor body — your starting point for the datasheet" },
+              { title: "2. Rated range", desc: "Confirms the physical range the sensor is actually built for" },
+              { title: "3. Output type", desc: "Datasheet confirms analog, digital, or serial before you connect a meter" },
+              { title: "4. Pinout", desc: "Confirms which pin is power, ground, and signal before power is applied" }
+            ]},
+            { type: "numbered", title: "Testing Sensors & Actuators on the Bench", items: [
+              { title: "1. Multimeter check", desc: "Confirms resistance or voltage output against the datasheet's expected range" },
+              { title: "2. Known-reference comparison", desc: "Compare the reading against a trusted, working sensor of the same type" },
+              { title: "3. Substitution test", desc: "Swap in a known-good part to confirm or rule out the original" },
+              { title: "4. Oscilloscope for pulses", desc: "Confirms timing and shape on digital or PWM-driven signals" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the definition, what can signal conditioning do to a raw sensor signal?", choices: ["Amplify, filter, or scale it into something a controller can read reliably", "Physically move the sensor closer to the controller", "Permanently change the sensor's rated range", "Convert electrical energy into mechanical motion"], answer: 0, explain: "The definition lists amplifying, filtering, or scaling as what signal conditioning does to a raw sensor signal.", why: ["", "Signal conditioning changes the signal, not the sensor's physical location", "Signal conditioning doesn't change a sensor's underlying rated range", "That describes an actuator's job, not signal conditioning"] },
+              { q: "Per the interfacing techniques list, what does a missing pull-up resistor commonly cause?", choices: ["It often looks exactly like a dead sensor", "It permanently damages the sensor", "It has no observable effect at all", "It only affects analog sensors, never digital ones"], answer: 0, explain: "The list's insight line states a missing pull-up often looks exactly like a dead sensor — a floating input reads as an unchanging, meaningless value.", why: ["", "A missing pull-up is a wiring/support issue, not something that damages the sensor itself", "The list explicitly states this DOES have an observable, misleading effect", "Pull-ups are specifically relevant to digital inputs, not analog ones"] },
+              { q: "Per the definition, is sensor drift a sign the sensor is failing?", choices: ["No — recalibration is maintenance, not a sign of failure", "Yes — drift always means the sensor must be replaced", "Drift only happens to digital sensors, never analog ones", "Drift is impossible in properly manufactured sensors"], answer: 0, explain: "The facts line explicitly states sensors drift with age, temperature, and use — recalibration is maintenance, not a sign of failure.", why: ["", "The facts line explicitly frames drift as normal and correctable, not a replacement trigger", "Nothing in this card restricts drift to digital sensors specifically", "The facts line explicitly says drift IS expected, even in properly working sensors"] },
+              { q: "Per the reading-datasheets list, what should be confirmed before you ever connect a meter to a sensor?", choices: ["Output type — whether it's analog, digital, or serial", "The exact retail price of the sensor", "The sensor's manufacturing date code", "The color of the sensor's housing"], answer: 0, explain: "The list states the datasheet confirms output type — analog, digital, or serial — before you connect a meter.", why: ["", "Retail price isn't relevant to how you'd test the sensor electrically", "Manufacturing date isn't part of this datasheet-reading checklist", "Housing color has no bearing on how the sensor should be tested"] },
+              { q: "Per the bench-testing list, what does a substitution test accomplish quickly?", choices: ["It settles an argument in seconds by swapping in a known-good part", "It permanently recalibrates the original sensor", "It replaces the need for a datasheet entirely", "It only works on actuators, never sensors"], answer: 0, explain: "The list's insight line states a substitution test settles an argument in seconds — swap in a known-good part to confirm or rule out the original.", why: ["", "Substitution testing confirms or rules out a fault — it doesn't recalibrate anything", "The datasheet still matters for confirming expected values — substitution doesn't replace it", "The bench-testing list explicitly applies substitution testing to both sensors and actuators"] }
+            ] }
+          ]
+        },
+        {
+          id: "sensors-practical-repair",
+          title: "Practical & Repair Exercises",
+          tag: "Practical",
+          blocks: [
+            { type: "numbered", title: "Practical Exercise: Test a Sensor and Drive an Actuator", items: [
+              { title: "1. Identify a sensor's part number", desc: "And look up its datasheet" },
+              { title: "2. Measure its output", desc: "And compare against the rated range" },
+              { title: "3. Identify how the matching actuator is driven", desc: "" },
+              { title: "4. Confirm the drive signal", desc: "With a multimeter or oscilloscope" },
+              { title: "5. Substitute a known-good sensor", desc: "To confirm your diagnosis" },
+              { title: "6. Record all readings", desc: "Against the datasheet's expected values" }
+            ]},
+            { type: "definition",
+              plain: "A digital sensor reads a constant, unchanging value no matter what physical condition it's exposed to.",
+              picture: "Like a doorbell button that's wired but never actually connects to the chime — pressing it changes nothing, though nothing looks broken.",
+              facts: "A missing pull-up resistor left the input floating — the sensor itself was working perfectly, just unsupported by its circuit." },
+            { type: "numbered", title: "What went wrong, and how to prevent it", items: [
+              { title: "What went wrong", desc: "A missing pull-up resistor left the input floating — the sensor itself was working perfectly" },
+              { title: "How to prevent it", desc: "Check the supporting circuit — pull-ups, power, and ground — before condemning the sensor itself" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the practical exercise, what should be done immediately after identifying a sensor's part number?", choices: ["Look up its datasheet", "Substitute a known-good sensor", "Confirm the drive signal with an oscilloscope", "Record all readings"], answer: 0, explain: "Step 1 pairs identifying the part number with looking up its datasheet.", why: ["", "Substitution is step 5, much later in the sequence", "Confirming the drive signal is step 4, later in the sequence", "Recording readings is step 6, the final step"] },
+              { q: "Per the practical exercise, what's the final step of the exercise?", choices: ["Record all readings against the datasheet's expected values", "Identify a sensor's part number", "Measure its output", "Identify how the matching actuator is driven"], answer: 0, explain: "Step 6, the final step, is recording all readings against the datasheet's expected values.", why: ["", "That's step 1, the first step, not the final one", "That's step 2, early in the sequence, not the final step", "That's step 3, in the middle of the sequence, not the final step"] },
+              { q: "In the non-responsive-sensor repair exercise, what turned out to be the actual fault?", choices: ["A missing pull-up resistor left the input floating — the sensor itself was working perfectly", "The sensor had physically failed and needed replacement", "The wrong sensor type was installed", "The datasheet was for the wrong part number"], answer: 0, explain: "The scenario concludes a missing pull-up resistor left the input floating — the sensor itself was working perfectly, just unsupported.", why: ["", "The scenario explicitly states the sensor itself was working perfectly", "A wrong sensor type isn't the fault identified in this scenario", "A mismatched datasheet isn't the fault identified in this scenario"] },
+              { q: "Per the repair exercise's lesson, what should be checked before condemning a sensor as dead?", choices: ["The supporting circuit — pull-ups, power, and ground", "Only the sensor's own part number", "Only the actuator connected to it", "Nothing — a constant reading always means the sensor has failed"], answer: 0, explain: "The lesson explicitly states to check the supporting circuit — pull-ups, power, and ground — before condemning the sensor itself.", why: ["", "The part number alone doesn't reveal a missing pull-up resistor fault", "This scenario is about the sensor's own input circuit, not a connected actuator", "The scenario's whole point is that a constant reading can be an unsupported sensor, not a dead one"] },
+              { q: "Per the practical exercise, what confirms the drive signal to a matching actuator?", choices: ["A multimeter or oscilloscope", "The sensor's own datasheet alone", "Substituting a known-good sensor", "Recording the sensor's part number"], answer: 0, explain: "Step 4 specifically calls for confirming the drive signal with a multimeter or oscilloscope.", why: ["", "The sensor's datasheet describes the sensor, not the actuator's drive signal", "Substitution (step 5) applies to the sensor, and comes after this drive-signal check", "Recording the part number is step 1, unrelated to confirming a drive signal"] }
+            ] }
+          ]
+        },
+        {
+          id: "sensors-reference",
+          title: "Quick Reference: Common Sensors & Actuators",
+          tag: "Reference",
+          blocks: [
+            { type: "table", title: "One line per part — what it does, and how to test it", headers: ["Part", "Senses / Does", "Type", "Test With"], rows: [
+              ["Thermistor", "Temperature", "Analog (resistance)", "Multimeter"],
+              ["LDR", "Light level", "Analog (resistance)", "Multimeter"],
+              ["PIR sensor", "Motion", "Digital pulse", "Oscilloscope / meter"],
+              ["Relay", "Switches a load", "Actuator", "Continuity + click test"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the reference table, what does a thermistor sense, and what type is it?", choices: ["Temperature — analog (resistance)", "Light level — analog (resistance)", "Motion — digital pulse", "Switches a load — actuator"], answer: 0, explain: "The table lists the thermistor as sensing temperature, categorized as analog (resistance).", why: ["", "That's the LDR's entry, not the thermistor's", "That's the PIR sensor's entry, not the thermistor's", "That's the relay's entry, not the thermistor's"] },
+              { q: "Per the reference table, what type is an LDR, and what does it sense?", choices: ["Light level — analog (resistance)", "Temperature — analog (resistance)", "Motion — digital pulse", "Switches a load — actuator"], answer: 0, explain: "The table lists the LDR as sensing light level, categorized as analog (resistance).", why: ["", "That's the thermistor's entry, not the LDR's", "That's the PIR sensor's entry, not the LDR's", "That's the relay's entry, not the LDR's"] },
+              { q: "Per the reference table, how should a PIR sensor be tested?", choices: ["Oscilloscope / meter", "Multimeter", "Continuity + click test", "It cannot be tested on the bench"], answer: 0, explain: "The table lists 'Oscilloscope / meter' as the test method for a PIR sensor, matching its digital pulse output.", why: ["", "That's the test method for the thermistor and LDR, not the PIR sensor", "That's the test method for a relay, not the PIR sensor", "The table explicitly gives a bench test method for the PIR sensor"] },
+              { q: "Per the reference table, what type is a relay categorized as?", choices: ["Actuator", "Analog (resistance)", "Digital pulse", "Signal conditioner"], answer: 0, explain: "The table categorizes the relay as an actuator, since it switches a load rather than sensing something.", why: ["", "Analog (resistance) describes the thermistor and LDR, not the relay", "Digital pulse describes the PIR sensor, not the relay", "Signal conditioner isn't a category used in this reference table"] },
+              { q: "Per the reference table, how should a relay be tested?", choices: ["Continuity + click test", "Multimeter alone", "Oscilloscope / meter", "It cannot be tested with hand tools"], answer: 0, explain: "The table lists 'Continuity + click test' as the way to test a relay.", why: ["", "Multimeter alone is listed for the thermistor and LDR, not specifically for the relay's full test", "Oscilloscope / meter is listed for the PIR sensor, not the relay", "The table explicitly gives a hand-tool-based test method for the relay"] }
+            ] }
+          ]
+        },
+        {
+          id: "sensors-wrapup",
+          title: "Module Wrap-Up",
+          tag: "You Can Now…",
+          blocks: [
+            { type: "checklist", items: [
+              "Identify common sensor types and read their output correctly",
+              "Explain why actuators almost always need a driver stage",
+              "Recognise the signs of a healthy vs faulty actuator",
+              "Use signal conditioning and interfacing to explain a bad reading",
+              "Test and substitute sensors and actuators on the bench"
+            ]},
+            { type: "golden", text: "A sensor is a translator — a wrong reading is often the messenger, not the message." },
+            { type: "check", questions: [
+              { q: "What is the golden rule of this module?", choices: ["A sensor is a translator — a wrong reading is often the messenger, not the message", "Every wrong sensor reading means the sensor has failed", "Actuators never need a driver stage between them and logic", "Calibration is only needed after a sensor completely fails"], answer: 0, explain: "The golden rule frames a sensor as a translator, meaning a wrong reading is often about what's around the sensor, not the sensor itself.", why: ["", "The thermostat and non-responsive-sensor scenarios both show wrong readings caused by something other than sensor failure", "The actuators card explicitly states actuators almost always need a driver stage", "The calibration card explicitly frames drift and recalibration as normal maintenance, not tied to failure"] },
+              { q: "Per the checklist, what should you be able to do with common sensor types?", choices: ["Identify them and read their output correctly", "Manufacture replacement sensors from raw materials", "Redesign their internal circuitry", "Convert every sensor into a digital-only type"], answer: 0, explain: "The checklist names identifying common sensor types and reading their output correctly as a core skill.", why: ["", "Manufacturing sensors is far outside this module's repair-focused scope", "Redesigning internal sensor circuitry isn't a skill taught in this module", "Converting sensor types isn't a skill taught in this module"] },
+              { q: "Per the checklist, what should you be able to explain about actuators?", choices: ["Why actuators almost always need a driver stage", "Why actuators never draw more current than logic pins", "Why actuators are always digital, never analog", "Why actuators cannot be tested on the bench"], answer: 0, explain: "The checklist names explaining why actuators almost always need a driver stage as a core skill.", why: ["", "This module explicitly teaches the opposite — actuators usually draw MORE current than logic pins", "Actuator type (digital/analog) isn't framed this way anywhere in this module", "The practical exercise explicitly includes testing an actuator on the bench"] },
+              { q: "Per the checklist, what should you be able to recognise about actuators?", choices: ["The signs of a healthy vs faulty actuator", "The exact manufacturer of any actuator", "The retail price of a replacement actuator", "The country of origin for any actuator part"], answer: 0, explain: "The checklist names recognising the signs of a healthy vs faulty actuator as a core skill.", why: ["", "Manufacturer identification isn't part of this checklist's skill set", "Pricing isn't part of this checklist's skill set", "Country of origin isn't part of this checklist's skill set"] },
+              { q: "Per the checklist, what should you be able to use signal conditioning and interfacing to do?", choices: ["Explain a bad reading", "Permanently fix any sensor without testing it", "Replace the need for a datasheet entirely", "Bypass calibration requirements forever"], answer: 0, explain: "The checklist names using signal conditioning and interfacing to explain a bad reading as a core skill.", why: ["", "This module explicitly teaches testing and substitution as ways to confirm a diagnosis, not skipping testing", "The datasheet reading skill remains explicitly part of this module's checklist", "Calibration remains a separate, still-necessary skill covered in this module"] }
+            ] }
+          ]
+        }
+      ]
+    },
   ],
 
   // ================================================================ QUESTIONS
