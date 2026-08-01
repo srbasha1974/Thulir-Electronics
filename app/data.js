@@ -3241,6 +3241,268 @@ window.THULIR_DATA = {
         }
       ]
     },
+
+    // ============================================================ MODULE 13: INDUSTRIAL COMMUNICATION
+    {
+      id: "industrial-communication",
+      code: "MOD·13",
+      icon: "📶",
+      color: "#ffe45b",
+      title: "Industrial Communication",
+      subtitle: "How separate devices on a factory floor actually talk to each other.",
+      cards: [
+        {
+          id: "comms-overview",
+          title: "The Five Skills of Industrial Communication",
+          tag: "Overview",
+          blocks: [
+            { type: "intro", text: "Have you ever wondered how one PLC talks to a dozen different sensors over just two wires? That's a shared communication network at work — by the end of this module, you'll know how it's built." },
+            { type: "table", title: "How a PLC, a sensor, and an HMI all end up on speaking terms", headers: ["Skill", "What It Covers", "Key Idea"], rows: [
+              ["Serial Basics", "The foundation under most protocols", "Baud rate"],
+              ["RS-485", "One pair of wires, many devices", "Daisy chain"],
+              ["Modbus", "The common language between devices", "Address"],
+              ["Industrial Ethernet", "Faster, networked communication", "Protocols"],
+              ["Troubleshooting", "Isolating physical vs protocol faults", "Systematic"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the table, what key idea is listed for Serial Basics?", choices: ["Baud rate", "Daisy chain", "Address", "Protocols"], answer: 0, explain: "The table lists 'Baud rate' as the key idea for Serial Basics — the foundation under most protocols.", why: ["", "Daisy chain is the key idea for RS-485, not Serial Basics", "Address is the key idea for Modbus, not Serial Basics", "Protocols is the key idea for Industrial Ethernet, not Serial Basics"] },
+              { q: "Per the table, what does the RS-485 skill cover?", choices: ["One pair of wires, many devices", "The foundation under most protocols", "The common language between devices", "Faster, networked communication"], answer: 0, explain: "The table describes RS-485 as one pair of wires, many devices, with 'Daisy chain' as the key idea.", why: ["", "That describes Serial Basics, not RS-485", "That describes Modbus, not RS-485", "That describes Industrial Ethernet, not RS-485"] },
+              { q: "Per the table, what key idea is listed for Modbus?", choices: ["Address", "Baud rate", "Daisy chain", "Systematic"], answer: 0, explain: "The table lists 'Address' as the key idea for Modbus — the common language between devices.", why: ["", "Baud rate is the key idea for Serial Basics, not Modbus", "Daisy chain is the key idea for RS-485, not Modbus", "Systematic is the key idea for Troubleshooting, not Modbus"] },
+              { q: "Per the table, what does the Industrial Ethernet skill cover?", choices: ["Faster, networked communication", "One pair of wires, many devices", "The common language between devices", "Isolating physical vs protocol faults"], answer: 0, explain: "The table describes Industrial Ethernet as faster, networked communication, with 'Protocols' as the key idea.", why: ["", "That describes RS-485, not Industrial Ethernet", "That describes Modbus, not Industrial Ethernet", "That describes Troubleshooting, not Industrial Ethernet"] },
+              { q: "Per the table, what does the Troubleshooting skill cover?", choices: ["Isolating physical vs protocol faults", "The foundation under most protocols", "One pair of wires, many devices", "Faster, networked communication"], answer: 0, explain: "The table describes Troubleshooting as isolating physical vs protocol faults, with 'Systematic' as the key idea.", why: ["", "That describes Serial Basics, not Troubleshooting", "That describes RS-485, not Troubleshooting", "That describes Industrial Ethernet, not Troubleshooting"] }
+            ] }
+          ]
+        },
+        {
+          id: "comms-fundamentals",
+          title: "Serial Communication Fundamentals",
+          tag: "Fundamentals",
+          blocks: [
+            { type: "definition",
+              plain: "Serial communication sends data one bit after another over a single pair of wires, instead of many wires at once.",
+              picture: "Like reading a message aloud, one word at a time, instead of shouting every word simultaneously.",
+              facts: "Both ends must agree on speed and format beforehand — get that wrong, and the message becomes noise." },
+            { type: "numbered", title: "Specifications That Matter", items: [
+              { title: "Baud rate", desc: "How many bits per second the link is actually running at" },
+              { title: "Maximum cable length", desc: "Longer runs need lower speeds to stay reliable" },
+              { title: "Maximum devices", desc: "How many nodes a single network segment can safely support" },
+              { title: "Noise immunity", desc: "How resistant the signal is to electrical interference nearby" }
+            ]},
+            { type: "table", title: "RS-232 vs RS-485", headers: ["Aspect", "RS-232", "RS-485"], rows: [
+              ["Topology", "Point-to-point — only two devices at a time", "Multi-drop — many devices share one pair"],
+              ["Range & noise", "Shorter cable runs, lower noise immunity", "Longer runs, far better noise immunity"],
+              ["Common use", "Common on older single-device links", "The everyday standard across a factory floor"]
+            ]},
+            { type: "check", questions: [
+              { q: "What does serial communication fundamentally do, per the definition?", choices: ["Sends data one bit after another over a single pair of wires", "Sends every bit simultaneously over many separate wires", "Only works over a wireless connection", "Only transmits data in one direction, never receiving"], answer: 0, explain: "The definition states serial communication sends data one bit after another over a single pair of wires, unlike sending many bits at once over many wires.", why: ["", "That describes parallel communication, the opposite of serial", "Nothing in this card restricts serial communication to wireless links", "This card doesn't restrict serial communication to one direction only"] },
+              { q: "Per the facts line, what happens if both ends don't agree on speed and format beforehand?", choices: ["The message becomes noise", "The link automatically negotiates the correct settings", "Nothing changes — settings are irrelevant to serial communication", "The devices physically disconnect from each other"], answer: 0, explain: "The facts line explicitly states getting speed and format wrong turns the message into noise.", why: ["", "This card doesn't describe an auto-negotiation feature for basic serial links", "The facts line explicitly says settings DO matter — mismatches cause noise", "A settings mismatch causes garbled data, not a physical disconnection"] },
+              { q: "Per the specifications list, what does 'maximum devices' specify?", choices: ["How many nodes a single network segment can safely support", "How many bits per second the link runs at", "How resistant the signal is to interference", "The maximum voltage the link can carry"], answer: 0, explain: "The specs list defines maximum devices as how many nodes a single network segment can safely support.", why: ["", "That's the baud rate spec, not maximum devices", "That's the noise immunity spec, not maximum devices", "Voltage rating isn't one of the four specs listed on this card"] },
+              { q: "Per the comparison table, what topology does RS-232 use?", choices: ["Point-to-point — only two devices at a time", "Multi-drop — many devices share one pair", "A star topology through a central switch", "A ring topology with no central point"], answer: 0, explain: "The table lists RS-232's topology as point-to-point, only two devices at a time.", why: ["", "That describes RS-485's topology, not RS-232's", "Star topology isn't described for RS-232 or RS-485 in this table", "Ring topology isn't described for RS-232 or RS-485 in this table"] },
+              { q: "Per the comparison table, why is RS-485 the everyday standard across a factory floor?", choices: ["It supports multi-drop with many devices sharing one pair, longer runs, and far better noise immunity", "It's the only serial standard that exists", "It only supports exactly two devices, like RS-232", "It has worse noise immunity than RS-232"], answer: 0, explain: "The table shows RS-485's multi-drop topology, longer range, and better noise immunity as why it fits a factory floor better than RS-232.", why: ["", "The table explicitly compares two distinct standards — RS-485 isn't the only one", "The table explicitly gives RS-485 multi-drop support for many devices, unlike RS-232's two-device limit", "The table explicitly states RS-485 has FAR BETTER noise immunity than RS-232, not worse"] }
+            ] }
+          ]
+        },
+        {
+          id: "comms-framing",
+          title: "Baud Rate, Framing & a Gibberish Device",
+          tag: "Framing",
+          blocks: [
+            { type: "numbered", title: "Reading Baud Rate & Framing", items: [
+              { title: "1. Baud rate", desc: "Bits per second — both devices must be set identically" },
+              { title: "2. Start & stop bits", desc: "Mark where each data byte begins and ends" },
+              { title: "3. Parity", desc: "A simple check bit used to catch basic transmission errors" },
+              { title: "4. Data bits", desc: "How many bits make up each transmitted byte, usually 8" }
+            ]},
+            { type: "definition",
+              plain: "A newly installed sensor sends only garbled, unreadable characters to the display it's wired to.",
+              picture: "Like two people trying to talk, one speaking fast and one speaking slow — words blur together into noise.",
+              facts: "Checking baud rate and parity settings on both the sensor and the receiving device found the sensor was set to 19200 baud; the display expected 9600 — matching them fixed it instantly." },
+            { type: "numbered", title: "Diagnosing the gibberish device", items: [
+              { title: "What you do", desc: "Check the baud rate and parity settings on both the sensor and the receiving device" },
+              { title: "What it tells you", desc: "The sensor was set to 19200 baud; the display expected 9600 — matching them fixed it instantly" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the framing list, what do start and stop bits do?", choices: ["Mark where each data byte begins and ends", "Set the overall bits-per-second rate", "Catch basic transmission errors", "Determine how many data bits make up each byte"], answer: 0, explain: "The list states start and stop bits mark where each data byte begins and ends.", why: ["", "That's the baud rate item, not start/stop bits", "That's the parity item, not start/stop bits", "That's the data bits item, not start/stop bits"] },
+              { q: "Per the framing list, what does parity do?", choices: ["A simple check bit used to catch basic transmission errors", "Marks where each data byte begins", "Sets the bits-per-second rate", "Determines the cable's maximum length"], answer: 0, explain: "The list states parity is a simple check bit used to catch basic transmission errors.", why: ["", "That's the start/stop bits item, not parity", "That's the baud rate item, not parity", "Cable length isn't one of the four framing items on this list"] },
+              { q: "Per the insight line, what does one mismatched setting do to otherwise clear data?", choices: ["Turns it into garbage", "Has no effect on readability at all", "Automatically gets corrected by the receiving device", "Only affects the parity bit, leaving the rest readable"], answer: 0, explain: "The insight line explicitly states one mismatched setting turns clear data into garbage.", why: ["", "The insight line explicitly says there IS a real effect", "This card doesn't describe an auto-correction feature for mismatched settings", "The insight describes the whole message becoming garbage, not just the parity bit"] },
+              { q: "In the gibberish-device scenario, what was the actual cause of the garbled characters?", choices: ["The sensor was set to 19200 baud while the display expected 9600", "The RS-485 cable was physically damaged", "A termination resistor was missing", "The sensor's Modbus address conflicted with another device"], answer: 0, explain: "The scenario concludes the sensor was set to 19200 baud while the display expected 9600 — a baud rate mismatch.", why: ["", "Physical cable damage isn't the cause identified in this specific scenario", "Missing termination is a different card's topic (RS-485 wiring), not this scenario's cause", "Address conflicts are a different scenario's topic (the silent Modbus device), not this one"] },
+              { q: "Per the scenario's insight, what does gibberish on a comm line usually mean?", choices: ["A settings mismatch, almost always", "A permanently destroyed device", "A problem that can never be fixed without hardware replacement", "Normal, expected behavior for any new installation"], answer: 0, explain: "The insight line states gibberish on a comm line is almost always a settings mismatch — exactly what matching the baud rates confirmed and fixed.", why: ["", "The scenario shows the device was fine — just misconfigured, not destroyed", "The scenario explicitly shows matching the settings fixed it instantly, without hardware replacement", "The insight explicitly frames this as a fixable settings issue, not expected/normal garbling"] }
+            ] }
+          ]
+        },
+        {
+          id: "comms-rs485-modbus",
+          title: "Wiring RS-485 & Understanding Modbus",
+          tag: "RS-485 & Modbus",
+          blocks: [
+            { type: "numbered", title: "Wiring an RS-485 Network", items: [
+              { title: "1. Twisted pair cable", desc: "Cancels out picked-up noise along the run" },
+              { title: "2. Daisy chain topology", desc: "Devices connect in a line, not as branching spurs" },
+              { title: "3. Termination resistors", desc: "Fitted at each far end to prevent signal reflections" },
+              { title: "4. Common ground reference", desc: "All devices need a shared ground to read the signal correctly" }
+            ]},
+            { type: "definition",
+              plain: "Modbus is a widely-used protocol that lets a master device request data from many slave devices by address.",
+              picture: "Like a teacher calling roll — one voice, and each device answers only when its own name is called.",
+              facts: "It's simple and open, which is exactly why it's still everywhere on factory floors decades after release." },
+            { type: "numbered", title: "Reading Modbus Addressing", items: [
+              { title: "1. Master / slave roles", desc: "The master initiates every request; slaves only ever respond" },
+              { title: "2. Device address", desc: "A unique number identifying each slave on the network" },
+              { title: "3. Function code", desc: "Tells the slave what kind of action is being requested" },
+              { title: "4. Register", desc: "The specific memory location being read from or written to" }
+            ]},
+            { type: "definition",
+              plain: "A newly added sensor never responds, while every other device on the same network works fine.",
+              picture: "Like calling a name that two people in the room share — both stay quiet, unsure who's actually being addressed.",
+              facts: "Checking every device's configured Modbus address against the others on the same network showed the new sensor shared an address with an existing device — both were quietly ignoring requests." },
+            { type: "numbered", title: "Diagnosing the silent new device", items: [
+              { title: "What you do", desc: "Check every device's configured Modbus address against the others on the same network" },
+              { title: "What it tells you", desc: "The new sensor shared an address with an existing device — both were quietly ignoring requests" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the wiring-RS-485 list, why is a missing termination resistor a problem?", choices: ["It causes faults that come and go, since signal reflections aren't prevented", "It has no effect on the network at all", "It only matters for RS-232, never RS-485", "It permanently destroys every device on the network"], answer: 0, explain: "The list's insight line states a missing termination resistor causes faults that come and go — intermittent, hard-to-pin-down issues from signal reflections.", why: ["", "The insight line explicitly says there IS a real effect", "Termination resistors are specifically an RS-485 multi-drop concept, not RS-232's point-to-point link", "The card describes intermittent faults, not permanent device destruction"] },
+              { q: "Per the wiring-RS-485 list, why does daisy chain topology matter, not branching spurs?", choices: ["Devices connect in a line, which the list specifies as the correct topology for a reliable network", "Branching spurs are always electrically identical to a daisy chain", "Topology has no effect on RS-485 reliability", "Daisy chaining is only relevant for RS-232, not RS-485"], answer: 0, explain: "The list specifically prescribes daisy chain topology — devices connecting in a line — as correct for RS-485, not branching spurs.", why: ["", "The list specifically distinguishes daisy chain from branching spurs as different topologies", "The list explicitly cares about topology as part of a reliable RS-485 network", "Daisy chain topology is specifically an RS-485 wiring practice covered on this card"] },
+              { q: "Per the definition, what is Modbus's basic communication pattern?", choices: ["A master device requests data from many slave devices by address", "Every device broadcasts continuously with no addressing at all", "Only two devices can ever communicate at once, like RS-232", "Slave devices initiate every request to the master"], answer: 0, explain: "The definition states Modbus lets a master request data from many slaves by address — like a teacher calling roll.", why: ["", "Modbus specifically uses addressing, not unaddressed broadcasting", "Modbus's multi-slave addressing is part of why it fits RS-485's multi-drop topology, not RS-232's two-device limit", "The list explicitly states the master initiates every request; slaves only ever respond"] },
+              { q: "Per the reading-Modbus-addressing list, what does the function code tell a slave?", choices: ["What kind of action is being requested", "The unique number identifying that slave", "The specific memory location being accessed", "Whether the device is a master or a slave"], answer: 0, explain: "The list states the function code tells the slave what kind of action is being requested.", why: ["", "That's the device address, not the function code", "That's the register, not the function code", "Master/slave role isn't what the function code communicates"] },
+              { q: "In the silent-new-device scenario, what did checking every device's configured address reveal?", choices: ["The new sensor shared an address with an existing device — both were quietly ignoring requests", "The new sensor's baud rate was mismatched", "A termination resistor was missing from the network", "The new sensor was wired with reversed data lines"], answer: 0, explain: "The scenario concludes the new sensor shared an address with an existing device, causing both to quietly ignore requests.", why: ["", "Baud rate mismatch is the cause from the earlier gibberish-device scenario, not this one", "Missing termination isn't the cause identified in this specific scenario", "Reversed data lines is the cause from a different scenario later in this module, not this one"] }
+            ] }
+          ]
+        },
+        {
+          id: "comms-ethernet",
+          title: "Industrial Ethernet",
+          tag: "Ethernet",
+          blocks: [
+            { type: "definition",
+              plain: "Industrial Ethernet uses standard Ethernet hardware, ruggedised and running protocols built for real-time control.",
+              picture: "Like office Ethernet, but built to survive vibration, dust, and temperature swings, and to respond on time.",
+              facts: "It's faster and carries far more data than RS-485, but at the cost of more complex setup and hardware." },
+            { type: "numbered", title: "Common Industrial Ethernet Protocols", items: [
+              { title: "1. EtherNet/IP", desc: "Common in Allen-Bradley and many North American PLC systems" },
+              { title: "2. Profinet", desc: "Widely used across Siemens and other European-built equipment" },
+              { title: "3. Modbus TCP", desc: "Modbus's addressing carried over standard Ethernet" },
+              { title: "4. EtherCAT", desc: "Built for very fast, tightly synchronised motion control" }
+            ]},
+            { type: "table", title: "Industrial vs office networking", headers: ["Aspect", "Office Networking", "Industrial Networking"], rows: [
+              ["Delay tolerance", "Tolerates occasional delay without real consequence", "Timing delays can directly affect a physical process"],
+              ["Hardware", "Standard cabling and connectors are usually fine", "Ruggedised cabling and connectors, built for the environment"],
+              ["Downtime impact", "Downtime is inconvenient, rarely dangerous", "Downtime can halt production or create a safety risk"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the facts line, what's the tradeoff of Industrial Ethernet compared to RS-485?", choices: ["Faster and carries far more data, but more complex setup and hardware", "Slower and carries less data, but simpler to set up", "Identical performance and complexity to RS-485", "It eliminates the need for any protocol at all"], answer: 0, explain: "The facts line states Industrial Ethernet is faster and carries far more data than RS-485, at the cost of more complex setup and hardware.", why: ["", "The facts line explicitly says faster and more data, not slower and less", "The facts line explicitly notes this comes at a complexity cost, not identical simplicity", "Industrial Ethernet still runs specific protocols, as the next list on this card names"] },
+              { q: "Per the common protocols list, which protocol is Modbus's addressing carried over standard Ethernet?", choices: ["Modbus TCP", "EtherNet/IP", "Profinet", "EtherCAT"], answer: 0, explain: "The list describes Modbus TCP as Modbus's addressing carried over standard Ethernet.", why: ["", "EtherNet/IP is common in Allen-Bradley systems, described separately", "Profinet is described as widely used in Siemens-based systems, not this description", "EtherCAT is described as built for fast, synchronised motion control, not this description"] },
+              { q: "Per the common protocols list, which protocol is built for very fast, tightly synchronised motion control?", choices: ["EtherCAT", "Modbus TCP", "EtherNet/IP", "Profinet"], answer: 0, explain: "The list describes EtherCAT as built for very fast, tightly synchronised motion control.", why: ["", "Modbus TCP is described as Modbus's addressing over Ethernet, not this description", "EtherNet/IP is described as common in Allen-Bradley systems, not this description", "Profinet is described as common in Siemens-based systems, not this description"] },
+              { q: "Per the comparison table, why does a dropped packet mean something different on a factory floor than in an office?", choices: ["Timing delays can directly affect a physical process, unlike office networking's tolerance for occasional delay", "Factory networks never experience dropped packets at all", "Office networks are always more reliable than industrial ones", "Dropped packets have identical consequences in both settings"], answer: 0, explain: "The table shows industrial networking's timing delays can directly affect a physical process, unlike office networking where delay is merely inconvenient.", why: ["", "The table doesn't claim factory networks are immune to dropped packets — it discusses the consequence difference", "The table isn't ranking overall reliability — it's contrasting consequence severity", "The table's whole point is these consequences ARE different between the two settings"] },
+              { q: "Per the comparison table, what's the consequence difference in downtime between office and industrial networking?", choices: ["Office downtime is inconvenient, rarely dangerous; industrial downtime can halt production or create a safety risk", "Both settings treat downtime identically, as a minor inconvenience", "Industrial downtime is always less consequential than office downtime", "Downtime is impossible in a properly designed industrial network"], answer: 0, explain: "The table explicitly contrasts office downtime as inconvenient and rarely dangerous against industrial downtime's potential to halt production or create a safety risk.", why: ["", "The table explicitly distinguishes the two, not treating them identically", "The table explicitly states industrial downtime is MORE consequential, not less", "The table doesn't claim downtime is impossible — it discusses its consequences when it happens"] }
+            ] }
+          ]
+        },
+        {
+          id: "comms-troubleshooting",
+          title: "Systematic Communication Troubleshooting",
+          tag: "Troubleshooting",
+          blocks: [
+            { type: "tip", text: "Healthy links show status LEDs with steady, expected activity, devices responding consistently to every request, and cables and connectors with no visible damage." },
+            { type: "warning", title: "Communication fault signs", items: [
+              "Intermittent, random dropouts under normal conditions",
+              "One device consistently fails to respond at all",
+              "Garbled or completely unreadable data received"
+            ]},
+            { type: "numbered", title: "Systematic Communication Troubleshooting", items: [
+              { title: "1. Check the physical layer", desc: "Confirm cabling, connectors, and continuity before anything else" },
+              { title: "2. Check termination", desc: "Confirm resistors are fitted only at the two far ends" },
+              { title: "3. Check addressing", desc: "Confirm no two devices share the same network address" },
+              { title: "4. Check protocol settings", desc: "Confirm baud rate, parity, and protocol match on every device" }
+            ]},
+            { type: "numbered", title: "Reading Communication Status LEDs", items: [
+              { title: "1. Power / status LED", desc: "Confirms the device itself is powered and running" },
+              { title: "2. Link / activity LED", desc: "Confirms a physical connection and active data traffic" },
+              { title: "3. Error / fault LED", desc: "Often flashes a pattern that identifies the specific fault type" },
+              { title: "4. Compare to the manual", desc: "LED patterns are documented — don't guess what a blink means" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the fault signs, what does one device consistently failing to respond typically point to?", choices: ["This is listed as a fault sign — worth investigating, such as an address conflict or wiring issue", "This is always normal for the newest device on a network", "It means the entire network has failed", "It can only mean a baud rate mismatch, never anything else"], answer: 0, explain: "The fault signs explicitly list one device consistently failing to respond as a fault sign worth investigating.", why: ["", "This is explicitly listed as a fault sign, not normal behavior for a new device", "Other devices are explicitly noted as working fine — this isn't a whole-network failure", "This module's own scenarios show multiple different causes (address conflict, baud mismatch) can produce this symptom"] },
+              { q: "Per the systematic troubleshooting list, what should be checked first, before anything else?", choices: ["The physical layer — cabling, connectors, and continuity", "Protocol settings", "Addressing", "Termination"], answer: 0, explain: "Step 1 explicitly states to check the physical layer before anything else — cabling, connectors, and continuity.", why: ["", "Protocol settings are checked fourth, per step 4, not first", "Addressing is checked third, per step 3, not first", "Termination is checked second, per step 2, not first"] },
+              { q: "Per the systematic troubleshooting list, why does the physical layer get checked before protocol settings?", choices: ["Software settings can't fix a bad cable", "Protocol settings are always more likely to be the cause", "Physical layer issues never actually occur in practice", "The order doesn't actually matter"], answer: 0, explain: "The list's insight line explicitly states physical layer first — software settings can't fix a bad cable.", why: ["", "The list explicitly prioritizes the physical layer first, not protocol settings", "The gibberish-device and silent-node scenarios show both physical and settings issues occur", "The list gives a specific, deliberate order — it does matter"] },
+              { q: "Per the reading-status-LEDs list, what does the link/activity LED confirm?", choices: ["A physical connection and active data traffic", "That the device is powered and running only", "The specific fault type by its blink pattern", "The device's configured Modbus address"], answer: 0, explain: "The list states the link/activity LED confirms a physical connection and active data traffic.", why: ["", "That's the power/status LED's job, not the link/activity LED's", "That's the error/fault LED's job, not the link/activity LED's", "LED patterns don't display a device's configured address"] },
+              { q: "Per the reading-status-LEDs list, why should you compare a blinking LED pattern to the manual rather than guess?", choices: ["LED patterns are documented, and guessing risks misreading what a blink actually means", "Manuals never actually document LED patterns", "Every device uses an identical, universal blink pattern", "LED patterns have no diagnostic meaning at all"], answer: 0, explain: "The list explicitly states LED patterns are documented — don't guess what a blink means, since the insight line frames a blinking fault LED as the device already diagnosing itself.", why: ["", "The list explicitly says patterns ARE documented in the manual", "The list implies patterns can vary and need manual confirmation, not a universal standard", "The insight line explicitly frames LED patterns as diagnostically meaningful"] }
+            ] }
+          ]
+        },
+        {
+          id: "comms-practical-repair",
+          title: "Practical & Repair Exercises",
+          tag: "Practical",
+          blocks: [
+            { type: "numbered", title: "Practical Exercise: Diagnose an RS-485 Network", items: [
+              { title: "1. Confirm termination resistors", desc: "Fitted only at both ends" },
+              { title: "2. Confirm every device's baud rate and parity", desc: "Match" },
+              { title: "3. Confirm no two devices", desc: "Share the same address" },
+              { title: "4. Check cabling continuity", desc: "Along the full run" },
+              { title: "5. Confirm each device's status LED", desc: "Shows normal activity" },
+              { title: "6. Record which device, if any", desc: "Fails to respond" }
+            ]},
+            { type: "definition",
+              plain: "Every device responds correctly except one, which has been silent since a recent panel rewire.",
+              picture: "Like plugging headphones in backwards — the connection looks complete, but nothing gets through correctly.",
+              facts: "The rewire had swapped the device's A and B data lines on the terminal block — always confirming polarity on RS-485 wiring after any rewire would have prevented this." },
+            { type: "numbered", title: "What went wrong, and how to prevent it", items: [
+              { title: "What went wrong", desc: "The rewire had swapped the device's A and B data lines on the terminal block" },
+              { title: "How to prevent it", desc: "Always confirm polarity on RS-485 wiring after any rewire, before suspecting the device" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the practical exercise, what's the correct order for the first two checks?", choices: ["Confirm termination resistors, then confirm baud rate and parity match", "Confirm baud rate and parity match, then confirm termination resistors", "Check cabling continuity, then confirm termination resistors", "Record the failing device, then confirm addressing"], answer: 0, explain: "Step 1 is confirming termination resistors, and step 2 is confirming baud rate and parity match.", why: ["", "This reverses the exercise's actual step 1 and step 2 order", "Cabling continuity is step 4, well after termination (step 1)", "Recording the failing device is step 6, the last step, not first"] },
+              { q: "Per the practical exercise, what's the final step?", choices: ["Record which device, if any, fails to respond", "Confirm termination resistors are fitted only at both ends", "Check cabling continuity along the full run", "Confirm no two devices share the same address"], answer: 0, explain: "Step 6, the final step, is recording which device, if any, fails to respond.", why: ["", "That's step 1, the first step, not the last", "That's step 4, in the middle of the sequence, not the last step", "That's step 3, earlier in the sequence, not the last step"] },
+              { q: "In the silent-node repair exercise, what did the recent panel rewire actually do wrong?", choices: ["It swapped the device's A and B data lines on the terminal block", "It set the wrong baud rate on the device", "It assigned a duplicate Modbus address", "It removed the termination resistor from that device"], answer: 0, explain: "The scenario concludes the rewire swapped the device's A and B data lines on the terminal block.", why: ["", "Baud rate mismatch is the cause from an earlier scenario (the gibberish device), not this one", "Duplicate addressing is the cause from an earlier scenario (the silent new device), not this one", "Missing termination isn't the cause identified in this specific scenario"] },
+              { q: "Per the repair exercise's lesson, what should always be confirmed on RS-485 wiring after any rewire?", choices: ["Polarity, before suspecting the device", "The device's firmware version", "The device's physical enclosure rating", "The network's total device count"], answer: 0, explain: "The lesson explicitly states to always confirm polarity on RS-485 wiring after any rewire, before suspecting the device.", why: ["", "Firmware version isn't the check named in this specific lesson", "Enclosure rating isn't the check named in this specific lesson", "Device count isn't the check named in this specific lesson"] },
+              { q: "Per the scenario's insight, what do swapped data lines look like from a diagnostic standpoint?", choices: ["Exactly like a dead device", "Obviously different from any other kind of fault", "A baud rate mismatch, always", "A problem that only affects Ethernet networks"], answer: 0, explain: "The insight line explicitly states swapped data lines look exactly like a dead device — which is why the device was suspected before the wiring.", why: ["", "The insight line's whole point is that this fault is easily confused with other faults, not obviously distinct", "This scenario is specifically about RS-485 wiring polarity, not a baud rate issue", "This scenario is about RS-485 wiring, not Ethernet networks"] }
+            ] }
+          ]
+        },
+        {
+          id: "comms-reference",
+          title: "Quick Reference: Common Industrial Protocols",
+          tag: "Reference",
+          blocks: [
+            { type: "table", title: "One line per protocol — what it runs on, and where it's common", headers: ["Protocol", "Physical Layer", "Topology", "Common In"], rows: [
+              ["Modbus RTU", "RS-485", "Multi-drop", "General industrial devices"],
+              ["Modbus TCP", "Ethernet", "Star (switched)", "Modern PLCs and HMIs"],
+              ["EtherNet/IP", "Ethernet", "Star (switched)", "Allen-Bradley systems"],
+              ["Profinet", "Ethernet", "Star or ring", "Siemens-based systems"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the reference table, what physical layer and topology does Modbus RTU use?", choices: ["RS-485, multi-drop", "Ethernet, star (switched)", "Ethernet, star or ring", "RS-232, point-to-point"], answer: 0, explain: "The table lists Modbus RTU's physical layer as RS-485 with a multi-drop topology.", why: ["", "That's Modbus TCP's and EtherNet/IP's physical layer/topology, not Modbus RTU's", "That's Profinet's physical layer/topology, not Modbus RTU's", "RS-232 isn't listed as any protocol's physical layer in this table"] },
+              { q: "Per the reference table, what is Modbus TCP commonly used in?", choices: ["Modern PLCs and HMIs", "General industrial devices", "Allen-Bradley systems", "Siemens-based systems"], answer: 0, explain: "The table lists Modbus TCP as common in modern PLCs and HMIs.", why: ["", "That's Modbus RTU's common use, not Modbus TCP's", "That's EtherNet/IP's common use, not Modbus TCP's", "That's Profinet's common use, not Modbus TCP's"] },
+              { q: "Per the reference table, what is EtherNet/IP commonly used in?", choices: ["Allen-Bradley systems", "Siemens-based systems", "General industrial devices", "Modern PLCs and HMIs generically"], answer: 0, explain: "The table lists EtherNet/IP as common in Allen-Bradley systems.", why: ["", "That's Profinet's common use, not EtherNet/IP's", "That's Modbus RTU's common use, not EtherNet/IP's", "That's Modbus TCP's common use, not EtherNet/IP's"] },
+              { q: "Per the reference table, what topology can Profinet use?", choices: ["Star or ring", "Multi-drop only", "Star (switched) only", "Point-to-point only"], answer: 0, explain: "The table lists Profinet's topology as star or ring.", why: ["", "That's Modbus RTU's topology, not Profinet's", "That's Modbus TCP's and EtherNet/IP's topology, not Profinet's — they're star-only, Profinet offers star OR ring", "Point-to-point isn't listed as any protocol's topology in this table"] },
+              { q: "Per the reference table, which protocol uses RS-485 as its physical layer?", choices: ["Modbus RTU", "Modbus TCP", "EtherNet/IP", "Profinet"], answer: 0, explain: "The table lists Modbus RTU as the only protocol on this table using RS-485 as its physical layer — the other three all run on Ethernet.", why: ["", "Modbus TCP runs on Ethernet, per the table, not RS-485", "EtherNet/IP runs on Ethernet, per the table, not RS-485", "Profinet runs on Ethernet, per the table, not RS-485"] }
+            ] }
+          ]
+        },
+        {
+          id: "comms-wrapup",
+          title: "Module Wrap-Up",
+          tag: "You Can Now…",
+          blocks: [
+            { type: "checklist", items: [
+              "Explain the difference between RS-232 and RS-485",
+              "Wire an RS-485 network correctly, with proper termination",
+              "Read Modbus addressing and explain how a request is answered",
+              "Recognise common industrial Ethernet protocols by name",
+              "Troubleshoot a communication fault from the physical layer up"
+            ]},
+            { type: "golden", text: "Physical layer first, then addressing, then settings — in that order, every time." },
+            { type: "check", questions: [
+              { q: "What is the golden rule of this module?", choices: ["Physical layer first, then addressing, then settings — in that order, every time", "Always suspect protocol settings before checking the cable", "Termination resistors are optional on any RS-485 network", "Two devices can safely share the same Modbus address"], answer: 0, explain: "The golden rule explicitly orders physical layer, then addressing, then settings, every time.", why: ["", "The systematic troubleshooting list explicitly checks the physical layer before protocol settings", "The RS-485 wiring list explicitly requires termination resistors fitted at each far end", "The silent-new-device scenario shows a shared address causes both devices to go silent — it's a real fault, not safe"] },
+              { q: "Per the checklist, what should you be able to explain about serial standards?", choices: ["The difference between RS-232 and RS-485", "The difference between a stepper and a servo motor", "The difference between star and delta wiring", "The difference between a fuse and a breaker"], answer: 0, explain: "The checklist names explaining the difference between RS-232 and RS-485 as a core skill.", why: ["", "Stepper vs servo belongs to the Motors & Drives module, not this one", "Star vs delta belongs to the Industrial Wiring module, not this one", "Fuse vs breaker belongs to the Industrial Wiring module, not this one"] },
+              { q: "Per the checklist, what should you be able to wire correctly?", choices: ["An RS-485 network, with proper termination", "A three-phase motor's star/delta configuration", "A PLC's sourcing I/O module", "A flyback diode across a motor terminal"], answer: 0, explain: "The checklist names wiring an RS-485 network correctly, with proper termination, as a core skill.", why: ["", "Star/delta wiring belongs to the Industrial Wiring module, not this one", "Sourcing I/O belongs to the PLC & Automation module, not this one", "Flyback diode placement belongs to the Motors & Drives module, not this one"] },
+              { q: "Per the checklist, what should you be able to read and explain about Modbus?", choices: ["Modbus addressing, and how a request is answered", "A ladder rung's dependency on its contacts", "A transformer's VA rating", "A sensor's calibration offset"], answer: 0, explain: "The checklist names reading Modbus addressing and explaining how a request is answered as a core skill.", why: ["", "Ladder rung reading belongs to the PLC & Automation module, not this one", "Transformer VA rating belongs to the Power Electronics module, not this one", "Sensor calibration belongs to the Sensors & Actuators module, not this one"] },
+              { q: "Per the checklist, from what starting point should you troubleshoot a communication fault?", choices: ["The physical layer up", "The HMI screen down", "The Modbus register map only", "The protocol settings only, skipping the cable"], answer: 0, explain: "The checklist names troubleshooting a communication fault from the physical layer up as this module's final skill.", why: ["", "The systematic troubleshooting list works from the physical layer upward, not from the HMI downward", "The troubleshooting list starts with the physical layer, not the register map", "The golden rule explicitly puts the physical layer first, not skipped"] }
+            ] }
+          ]
+        }
+      ]
+    },
   ],
 
   // ================================================================ QUESTIONS
