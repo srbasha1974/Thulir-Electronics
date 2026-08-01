@@ -2953,6 +2953,294 @@ window.THULIR_DATA = {
         }
       ]
     },
+
+    // ============================================================ MODULE 12: PLC & AUTOMATION
+    {
+      id: "plc-automation",
+      code: "MOD·12",
+      icon: "🤖",
+      color: "#4fa8ff",
+      title: "PLC & Automation",
+      subtitle: "The brain that replaced a wall of relays — and how to keep it running.",
+      cards: [
+        {
+          id: "plc-overview",
+          title: "The Five Skills of PLC & Automation",
+          tag: "Overview",
+          blocks: [
+            { type: "intro", text: "Have you ever wondered how a factory line repeats the exact same sequence perfectly, thousands of times a day? That's a PLC quietly running the same logic, every single cycle — by the end of this module, you'll know how." },
+            { type: "table", title: "From a wall of relays to a single programmable brain", headers: ["Skill", "What It Covers", "Key Idea"], rows: [
+              ["The PLC", "A ruggedised computer for control", "Scan cycle"],
+              ["Ladder Logic", "Control logic drawn like relay circuits", "Rungs"],
+              ["I/O Modules", "How the PLC senses and switches", "Source / sink"],
+              ["HMI", "The operator's window into the process", "Touchscreen"],
+              ["Troubleshooting", "Isolating logic, I/O, or wiring", "Systematic"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the table, what key idea is listed for the PLC itself?", choices: ["Scan cycle", "Rungs", "Source / sink", "Touchscreen"], answer: 0, explain: "The table lists 'Scan cycle' as the key idea for the PLC — a ruggedised computer for control.", why: ["", "Rungs is the key idea for Ladder Logic, not the PLC", "Source / sink is the key idea for I/O Modules, not the PLC", "Touchscreen is the key idea for HMI, not the PLC"] },
+              { q: "Per the table, what does the Ladder Logic skill cover?", choices: ["Control logic drawn like relay circuits", "A ruggedised computer for control", "How the PLC senses and switches", "The operator's window into the process"], answer: 0, explain: "The table describes Ladder Logic as control logic drawn like relay circuits, with 'Rungs' as the key idea.", why: ["", "That describes the PLC itself, not Ladder Logic", "That describes I/O Modules, not Ladder Logic", "That describes HMI, not Ladder Logic"] },
+              { q: "Per the table, what key idea is listed for I/O Modules?", choices: ["Source / sink", "Scan cycle", "Rungs", "Systematic"], answer: 0, explain: "The table lists 'Source / sink' as the key idea for I/O Modules — how the PLC senses and switches.", why: ["", "Scan cycle is the key idea for the PLC itself, not I/O Modules", "Rungs is the key idea for Ladder Logic, not I/O Modules", "Systematic is the key idea for Troubleshooting, not I/O Modules"] },
+              { q: "Per the table, what does the HMI skill cover?", choices: ["The operator's window into the process", "Control logic drawn like relay circuits", "How the PLC senses and switches", "Isolating logic, I/O, or wiring"], answer: 0, explain: "The table describes HMI as the operator's window into the process, with 'Touchscreen' as the key idea.", why: ["", "That describes Ladder Logic, not HMI", "That describes I/O Modules, not HMI", "That describes Troubleshooting, not HMI"] },
+              { q: "Per the table, what does the Troubleshooting skill cover?", choices: ["Isolating logic, I/O, or wiring", "A ruggedised computer for control", "Control logic drawn like relay circuits", "The operator's window into the process"], answer: 0, explain: "The table describes Troubleshooting as isolating logic, I/O, or wiring, with 'Systematic' as the key idea.", why: ["", "That describes the PLC itself, not Troubleshooting", "That describes Ladder Logic, not Troubleshooting", "That describes HMI, not Troubleshooting"] }
+            ] }
+          ]
+        },
+        {
+          id: "plc-fundamentals",
+          title: "What Is a PLC?",
+          tag: "Fundamentals",
+          blocks: [
+            { type: "definition",
+              plain: "A PLC (Programmable Logic Controller) is an industrial computer that reads inputs, runs logic, and drives outputs.",
+              picture: "Like Module 11's wall of contactors and relays, replaced by one programmable brain doing the same job.",
+              facts: "It repeats its scan cycle continuously — reading inputs, running logic, updating outputs — many times a second." },
+            { type: "numbered", title: "Inside a PLC", items: [
+              { title: "1. CPU module", desc: "Runs the program logic and manages the whole scan cycle" },
+              { title: "2. Power supply module", desc: "Provides clean, regulated power to the whole PLC rack" },
+              { title: "3. Input modules", desc: "Read the state of sensors, switches, and field devices" },
+              { title: "4. Output modules", desc: "Drive relays, contactors, indicators, and other field devices" }
+            ]},
+            { type: "numbered", title: "Specifications That Matter", items: [
+              { title: "I/O count", desc: "How many field inputs and outputs the PLC can actually handle" },
+              { title: "Scan time", desc: "How quickly it completes one full read-logic-write cycle" },
+              { title: "Memory", desc: "How large a program and how much data it can hold" },
+              { title: "Communication protocols", desc: "Which networks it can talk to — Ethernet/IP, Modbus, and others" }
+            ]},
+            { type: "check", questions: [
+              { q: "What three things does a PLC do, per the definition?", choices: ["Reads inputs, runs logic, and drives outputs", "Only reads inputs, with no logic or output capability", "Only stores data, with no control function", "Only communicates over a network, with no I/O"], answer: 0, explain: "The definition states a PLC reads inputs, runs logic, and drives outputs — a complete industrial control cycle.", why: ["", "The definition explicitly includes logic and output-driving, not just input reading", "The definition explicitly describes a control function, not just data storage", "The definition explicitly names I/O handling as core to what a PLC does"] },
+              { q: "Per the facts line, how often does a PLC repeat its scan cycle?", choices: ["Continuously, many times a second", "Only once, at power-up", "Only when an operator manually triggers it", "Once per day, on a fixed schedule"], answer: 0, explain: "The facts line states the PLC repeats its scan cycle continuously, many times a second.", why: ["", "The facts line explicitly says continuously, not just once at power-up", "Nothing in this card describes a manual-trigger-only scan cycle", "The facts line explicitly says many times a second, not once a day"] },
+              { q: "Per the 'Inside a PLC' list, what does the CPU module do?", choices: ["Runs the program logic and manages the whole scan cycle", "Reads the state of sensors and field devices", "Drives relays and contactors", "Provides clean, regulated power to the rack"], answer: 0, explain: "The list states the CPU module runs the program logic and manages the whole scan cycle.", why: ["", "That's the input modules' job, not the CPU module's", "That's the output modules' job, not the CPU module's", "That's the power supply module's job, not the CPU module's"] },
+              { q: "Per the 'Inside a PLC' list, what do input modules do?", choices: ["Read the state of sensors, switches, and field devices", "Drive relays, contactors, and indicators", "Run the program logic", "Supply regulated power to the rack"], answer: 0, explain: "The list states input modules read the state of sensors, switches, and field devices.", why: ["", "That's the output modules' job, not the input modules'", "That's the CPU module's job, not the input modules'", "That's the power supply module's job, not the input modules'"] },
+              { q: "Per the specifications list, what does scan time determine?", choices: ["How quickly the PLC completes one full read-logic-write cycle", "How many field inputs and outputs it can handle", "How large a program it can hold", "Which communication protocols it supports"], answer: 0, explain: "The specs list states scan time is how quickly the PLC completes one full read-logic-write cycle — deciding how fast it reacts to the real world.", why: ["", "That's the I/O count spec, not scan time", "That's the memory spec, not scan time", "That's the communication protocols spec, not scan time"] }
+            ] }
+          ]
+        },
+        {
+          id: "plc-vs-relay",
+          title: "PLC vs Relay Logic",
+          tag: "PLC vs Relay",
+          blocks: [
+            { type: "table", title: "Same control job, two very different ways to build it", headers: ["Aspect", "Relay Logic (Module 11)", "PLC Logic"], rows: [
+              ["Changing the logic", "Fixed wiring — changing logic means rewiring", "Logic lives in software — changes without rewiring"],
+              ["Scale", "Easy to understand, one rung at a time", "One controller can replace a whole relay panel"],
+              ["Timing", "No scan cycle — reacts instantly, always", "Runs on a scan cycle, not instantly continuous"]
+            ]},
+            { type: "definition",
+              plain: "An automated line runs its sequence in reverse order, exactly backwards, every single cycle.",
+              picture: "Like reading a to-do list from the bottom up — every task still gets done, just in the wrong order.",
+              facts: "Checking the input wiring against the program's addressing before suspecting the logic itself revealed two sensor inputs had been wired to swapped terminals — the program had been correct all along." },
+            { type: "numbered", title: "Diagnosing the reversed sequence", items: [
+              { title: "What you do", desc: "Check the input wiring against the program's addressing before suspecting the logic itself" },
+              { title: "What it tells you", desc: "Two sensor inputs had been wired to swapped terminals — the program had been correct all along" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the comparison table, what's the key advantage of PLC logic over relay logic when the control sequence needs to change?", choices: ["Logic lives in software, so it can change without rewiring", "PLC logic reacts instantly, with no scan cycle at all", "PLC logic is always easier to understand, one rung at a time", "PLC logic requires no I/O wiring whatsoever"], answer: 0, explain: "The table states PLC logic lives in software, changing without the rewiring a fixed relay panel would require.", why: ["", "The table explicitly says PLC logic runs on a scan cycle, not instant continuous reaction — that's relay logic's advantage", "The table lists 'easy to understand, one rung at a time' under relay logic, not as a PLC-specific edge", "A PLC still requires field I/O wiring — the table never claims otherwise"] },
+              { q: "Per the comparison table, what's relay logic's advantage in timing?", choices: ["No scan cycle — it reacts instantly, always", "It can be reprogrammed without any rewiring", "It replaces a whole relay panel with one controller", "It supports far more I/O points than a PLC"], answer: 0, explain: "The table lists relay logic's timing advantage as reacting instantly, always, with no scan cycle delay.", why: ["", "That's PLC logic's advantage (software-based changes), not relay logic's", "That describes what a PLC can do, not relay logic", "I/O point count isn't the comparison made in this specific table row"] },
+              { q: "Per the insight line, what did moving logic into software actually change?", choices: ["It just moved the logic into software — the PLC didn't remove the underlying control logic itself", "It eliminated the need for any control logic at all", "It made wiring completely unnecessary", "It removed the concept of inputs and outputs entirely"], answer: 0, explain: "The insight line states the PLC didn't remove the logic — it just moved it into software, still performing the same fundamental control job.", why: ["", "Control logic is still very much present — it's just implemented differently", "Field wiring to I/O modules is still required, as covered elsewhere in this module", "PLCs still fundamentally read inputs and drive outputs"] },
+              { q: "In the reversed-sequence scenario, what was the actual cause of the line running backwards?", choices: ["Two sensor inputs had been wired to swapped terminals — the program had been correct all along", "The ladder program's logic was written in the wrong order", "The PLC's scan cycle was running too slowly", "The HMI was displaying the wrong sequence step"], answer: 0, explain: "The scenario concludes two sensor inputs were wired to swapped terminals, and the program itself had been correct all along.", why: ["", "The scenario explicitly concludes the program was correct — it wasn't a logic-writing error", "Scan cycle speed isn't the fault identified in this specific scenario", "The HMI display isn't the fault identified in this specific scenario"] },
+              { q: "Per the reversed-sequence scenario's lesson, what should be checked before blaming the program?", choices: ["The wiring against the addressing", "The PLC's memory capacity", "The communication protocol in use", "The HMI's touchscreen calibration"], answer: 0, explain: "The scenario's insight line explicitly states to check the wiring against the addressing before blaming the program.", why: ["", "Memory capacity isn't the check called for in this scenario", "Communication protocol isn't the check called for in this scenario", "HMI touchscreen calibration isn't the check called for in this scenario"] }
+            ] }
+          ]
+        },
+        {
+          id: "plc-ladder-logic",
+          title: "Reading Ladder Logic",
+          tag: "Ladder Logic",
+          blocks: [
+            { type: "numbered", title: "Reading Ladder Logic", items: [
+              { title: "1. Rungs execute top to bottom", desc: "Each scan, the PLC evaluates every rung in order" },
+              { title: "2. Normally open contact", desc: "Passes logic 'true' only when its condition is active" },
+              { title: "3. Normally closed contact", desc: "Passes logic 'true' only when its condition is inactive" },
+              { title: "4. The scan cycle repeats", desc: "Outputs update at the end of each full pass through the program" }
+            ]},
+            { type: "numbered", title: "Common Ladder Logic Elements", items: [
+              { title: "1. Timer", desc: "Delays an action, or times how long a condition has been true" },
+              { title: "2. Counter", desc: "Tracks how many times an event has occurred" },
+              { title: "3. Latch / unlatch", desc: "Holds an output on until a separate condition turns it off" },
+              { title: "4. Comparison block", desc: "Compares two values — greater than, equal to, and similar checks" }
+            ]},
+            { type: "definition",
+              plain: "A conveyor motor never starts, even though the start button is confirmed to be working correctly.",
+              picture: "Like a car that won't start even with a good key — something else in the ignition chain is blocking it.",
+              facts: "Opening the ladder program and checking every contact feeding the motor's output coil revealed an interlock contact from a separate safety sensor was open, blocking the rung from ever completing." },
+            { type: "numbered", title: "Tracing the fault through the rung", items: [
+              { title: "What you do", desc: "Open the ladder program and check every contact feeding the motor's output coil" },
+              { title: "What it tells you", desc: "An interlock contact from a separate safety sensor was open, blocking the rung from ever completing" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the reading-ladder-logic list, when does a normally open contact pass logic 'true'?", choices: ["Only when its condition is active", "Only when its condition is inactive", "Always, regardless of condition", "Never — it always passes 'false'"], answer: 0, explain: "The list states a normally open contact passes 'true' only when its condition is active.", why: ["", "That describes a normally closed contact, the opposite behavior", "The list ties this contact's state directly to its condition — it isn't always true", "The list explicitly says it CAN pass 'true', under the right condition"] },
+              { q: "Per the reading-ladder-logic list, when does a normally closed contact pass logic 'true'?", choices: ["Only when its condition is inactive", "Only when its condition is active", "Always, regardless of condition", "Never — it always passes 'false'"], answer: 0, explain: "The list states a normally closed contact passes 'true' only when its condition is inactive — the reverse of a normally open contact.", why: ["", "That describes a normally open contact, the opposite behavior", "The list ties this contact's state directly to its condition — it isn't always true", "The list explicitly says it CAN pass 'true', under the right condition"] },
+              { q: "Per the common ladder elements list, what does a latch/unlatch pair do?", choices: ["Holds an output on until a separate condition turns it off", "Compares two numeric values", "Tracks how many times an event has occurred", "Delays an action for a fixed time"], answer: 0, explain: "The list states latch/unlatch holds an output on until a separate condition turns it off.", why: ["", "That's the comparison block's job, not latch/unlatch's", "That's the counter's job, not latch/unlatch's", "That's the timer's job, not latch/unlatch's"] },
+              { q: "Per the common ladder elements list, what does a counter do?", choices: ["Tracks how many times an event has occurred", "Delays an action or times a condition's duration", "Compares two values for greater-than or equal-to", "Holds an output on until unlatched"], answer: 0, explain: "The list states a counter tracks how many times an event has occurred.", why: ["", "That's the timer's job, not the counter's", "That's the comparison block's job, not the counter's", "That's the latch/unlatch's job, not the counter's"] },
+              { q: "In the conveyor-motor scenario, what did checking every contact feeding the motor's output coil reveal?", choices: ["An interlock contact from a separate safety sensor was open, blocking the rung from ever completing", "The start button itself was faulty", "The motor's output coil had failed", "The PLC's scan cycle had stopped running"], answer: 0, explain: "The scenario concludes an interlock contact from a separate safety sensor was open, blocking the rung from ever completing — even though the start button worked fine.", why: ["", "The scenario explicitly confirms the start button was working correctly", "The output coil itself isn't identified as the fault — a blocking contact upstream was", "Nothing in this scenario suggests the scan cycle had stopped"] }
+            ] }
+          ]
+        },
+        {
+          id: "plc-programming-mistakes",
+          title: "Common Programming Mistakes",
+          tag: "Programming",
+          blocks: [
+            { type: "tip", text: "Good practice means commenting every rung with what it actually does, testing each new rung in isolation before combining logic, and keeping addressing consistent with the wiring diagram." },
+            { type: "warning", title: "Common ladder programming mistakes", items: [
+              "Forgetting a reset condition on a latch",
+              "Two rungs unintentionally fighting over one output",
+              "Addressing that doesn't match the physical wiring"
+            ]},
+            { type: "check", questions: [
+              { q: "Per the good practice guidance, why should each new rung be tested in isolation?", choices: ["Before combining logic, so a mistake is caught in just that rung, not lost in a larger program", "Because rungs can never be tested once combined with others", "Because isolated testing is required by law in every PLC installation", "Because it removes the need for any addressing consistency"], answer: 0, explain: "The guidance recommends testing each new rung in isolation before combining logic — catching mistakes early, in a smaller scope.", why: ["", "Nothing in this card says combined rungs can't be tested — isolation testing is simply the recommended first step", "No legal requirement is mentioned anywhere in this card", "Addressing consistency remains a separate, still-necessary good practice"] },
+              { q: "Per the good practice guidance, what should comments on a rung do?", choices: ["Describe what the rung actually does", "Only ever describe the PLC's model number", "Replace the need for testing entirely", "Only appear on rungs with a timer or counter"], answer: 0, explain: "The guidance states rungs should be commented with what they actually do — the insight line adds that an uncommented rung is a mystery for the next technician.", why: ["", "Model number documentation isn't the purpose of rung comments here", "Comments and testing are separate, complementary good practices, not substitutes", "The guidance applies to commenting rungs generally, not only ones with specific elements"] },
+              { q: "Per the common mistakes list, what happens if a latch is missing its reset condition?", choices: ["This is listed as a common programming mistake — the output would never turn off as intended", "Nothing — latches don't require a reset condition at all", "The PLC automatically supplies a default reset", "This only matters for counters, not latches"], answer: 0, explain: "The list explicitly names forgetting a reset condition on a latch as a common mistake, which would leave a latched output stuck on.", why: ["", "The list explicitly frames this as a real, common mistake worth avoiding", "Nothing in this card describes an automatic default reset being supplied", "This mistake is specifically about latches, per this list"] },
+              { q: "Per the common mistakes list, what happens when two rungs unintentionally fight over one output?", choices: ["This is listed as a common programming mistake, causing unpredictable output behavior", "This is always intentional and never a mistake", "The PLC automatically resolves the conflict correctly every time", "This can only happen with timer elements, never plain contacts"], answer: 0, explain: "The list explicitly names two rungs fighting over one output as a common programming mistake.", why: ["", "The list frames this specifically as a mistake, not intentional design", "The list explicitly presents this as an unresolved, real problem worth avoiding, not something the PLC fixes automatically", "This mistake can occur with any two rungs sharing an output coil, not just timer-based ones"] },
+              { q: "Per the common mistakes list, why does mismatched addressing cause real problems?", choices: ["It doesn't match the physical wiring, so the program can end up controlling or reading the wrong point entirely", "Addressing mismatches are purely cosmetic and have no functional effect", "Mismatched addressing only affects the HMI display, never the actual control logic", "The PLC automatically corrects any addressing mismatch on its own"], answer: 0, explain: "The list explicitly names addressing that doesn't match the physical wiring as a common mistake — exactly the type of error traced in the reversed-sequence scenario earlier in this module.", why: ["", "The list frames this as a real functional problem, not cosmetic", "This mismatch affects the actual control logic's connection to the physical world, not just a display", "Nothing in this card describes automatic correction of addressing mismatches"] }
+            ] }
+          ]
+        },
+        {
+          id: "plc-io",
+          title: "I/O Modules & Sourcing vs Sinking",
+          tag: "I/O",
+          blocks: [
+            { type: "definition",
+              plain: "Input modules convert field signals into data the CPU can read; output modules convert decisions back into signals.",
+              picture: "Like the PLC's eyes and hands — inputs let it sense, outputs let it act.",
+              facts: "A perfect program can still fail completely if the I/O wiring underneath it is wrong." },
+            { type: "table", title: "Sourcing vs sinking I/O", headers: ["Aspect", "Sourcing (PNP)", "Sinking (NPN)"], rows: [
+              ["Voltage supply", "The module supplies positive voltage to the device", "The device switches the connection to ground"],
+              ["Common use", "Common in many modern sensor designs", "Still very common on older field equipment"],
+              ["Current direction", "Current flows out of the PLC module", "Current flows into the PLC module"]
+            ]},
+            { type: "numbered", title: "Wiring a PLC Input or Output", items: [
+              { title: "1. Confirm sourcing or sinking", desc: "Match the field device's type to the module's wiring style" },
+              { title: "2. Confirm voltage level", desc: "Field devices commonly run at 24V DC — confirm before connecting" },
+              { title: "3. Land the wire correctly", desc: "Match the terminal number to the program's address exactly" },
+              { title: "4. Test before full power-up", desc: "Confirm one point works before trusting the whole system" }
+            ]},
+            { type: "tip", text: "Healthy I/O shows an input status LED matching the actual field device state, an output LED that lights exactly when the rung commands it, and field voltage measuring correctly at the terminal." },
+            { type: "warning", title: "I/O fault signs", items: [
+              "Input LED never changes, regardless of the field device",
+              "Output LED lights, but the field device never responds",
+              "Voltage present at the module, but not at the device"
+            ]},
+            { type: "check", questions: [
+              { q: "Per the facts line, why can a 'perfect' ladder program still fail completely?", choices: ["If the I/O wiring underneath it is wrong, the program's correct logic never reaches the real world correctly", "PLCs cannot run programs that have ever been tested in isolation", "Perfect programs never actually exist in practice", "Scan time always causes perfect programs to fail eventually"], answer: 0, explain: "The facts line states a perfect program can still fail completely if the I/O wiring underneath it is wrong — logic alone isn't enough.", why: ["", "Isolation testing is explicitly recommended good practice, not a disqualifier", "The facts line doesn't make a claim about whether perfect programs exist — it's about wiring dependency", "Scan time isn't the failure mode described in this facts line"] },
+              { q: "Per the sourcing vs sinking table, how does sourcing (PNP) supply voltage?", choices: ["The module supplies positive voltage to the device", "The device switches the connection to ground", "Current always flows into the PLC module", "It requires no common ground reference at all"], answer: 0, explain: "The table states sourcing (PNP) means the module supplies positive voltage to the device, with current flowing out of the module.", why: ["", "That describes sinking (NPN), not sourcing", "The table states current flows OUT of the module for sourcing, not into it", "This card doesn't claim sourcing eliminates the need for a common ground"] },
+              { q: "Per the sourcing vs sinking table, how does sinking (NPN) work?", choices: ["The device switches the connection to ground, with current flowing into the PLC module", "The module supplies positive voltage to the device", "It's exclusively used in brand-new sensor designs, never older equipment", "Current flows out of the PLC module toward the device"], answer: 0, explain: "The table states sinking (NPN) means the device switches the connection to ground, with current flowing into the PLC module.", why: ["", "That describes sourcing (PNP), not sinking", "The table specifically notes sinking is still very common on OLDER field equipment", "The table states current flows INTO the module for sinking, not out of it"] },
+              { q: "Per the wiring-a-PLC-I/O list, what voltage do field devices commonly run at?", choices: ["24V DC", "5V DC", "120V AC", "3.3V DC"], answer: 0, explain: "The list states field devices commonly run at 24V DC, and this should be confirmed before connecting.", why: ["", "5V DC isn't the voltage this list specifically names for field devices", "120V AC isn't the voltage this list specifically names for field devices", "3.3V DC isn't the voltage this list specifically names for field devices"] },
+              { q: "Per the I/O fault signs, what does it mean if the output LED lights but the field device never responds?", choices: ["This is listed as a fault sign — the signal path from the module to the device is broken somewhere", "This is normal, healthy operation", "It means the PLC's scan cycle has stopped entirely", "It means the field device is definitely destroyed beyond repair"], answer: 0, explain: "The fault signs explicitly list an output LED lighting with no field device response as a sign that the signal stops somewhere between the module and the device.", why: ["", "This is explicitly listed as a fault sign, not healthy behavior", "A stopped scan cycle would affect the whole PLC, not just one output's field response", "The device may simply be disconnected or miswired — this fault sign alone doesn't confirm destruction"] }
+            ] }
+          ]
+        },
+        {
+          id: "plc-hmi-sequences",
+          title: "HMI, Sequences & Systematic Troubleshooting",
+          tag: "HMI & Sequences",
+          blocks: [
+            { type: "definition",
+              plain: "An HMI (Human-Machine Interface) is a screen that displays process data and lets an operator control the system.",
+              picture: "Like a dashboard — showing what's happening inside, without needing to open the program itself.",
+              facts: "It displays PLC data — it doesn't run the control logic itself, and rarely causes a logic fault on its own." },
+            { type: "numbered", title: "Building an Automation Sequence", items: [
+              { title: "1. Define the steps", desc: "Break the process into clear, ordered stages" },
+              { title: "2. Add conditions", desc: "Each step only advances once its condition is truly met" },
+              { title: "3. Add timers where needed", desc: "Some steps need to run for a set duration, not just a condition" },
+              { title: "4. Add fault handling", desc: "Decide what the sequence does when something goes wrong" }
+            ]},
+            { type: "numbered", title: "Systematic PLC Troubleshooting", items: [
+              { title: "1. Check I/O status LEDs", desc: "Confirms whether the PLC even sees the correct field state" },
+              { title: "2. Check field wiring", desc: "Confirms the physical connection matches what the LED shows" },
+              { title: "3. Check the program logic", desc: "Confirms the rung is doing what you expect with that input" },
+              { title: "4. Check for fault codes", desc: "Many PLCs report their own diagnostic codes directly" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the definition, what does an HMI actually do?", choices: ["Displays process data and lets an operator control the system, without running the control logic itself", "Runs the PLC's ladder logic instead of the CPU module", "Physically switches field devices directly, bypassing the PLC", "Stores the PLC's entire program permanently"], answer: 0, explain: "The definition states an HMI displays process data and lets an operator control the system — it doesn't run the control logic itself.", why: ["", "The facts line explicitly says the HMI doesn't run the control logic — the CPU module does", "The HMI is a display/control interface, not a direct field-device switch bypassing the PLC", "Program storage is the CPU/memory's job, not the HMI's, per this card"] },
+              { q: "Per the facts line, why does an HMI rarely cause a control logic fault on its own?", choices: ["It displays PLC data — it doesn't run the control logic itself", "It has no connection to the PLC whatsoever", "It only works when the PLC is powered off", "HMIs are physically incapable of malfunctioning"], answer: 0, explain: "The facts line explains the HMI just displays PLC data without running the logic itself, so a fault there is unlikely to be a logic fault.", why: ["", "The HMI is explicitly connected to the PLC to display its data — it isn't disconnected", "Nothing in this card suggests the HMI only works with the PLC off", "The card doesn't claim HMIs never malfunction — it specifically addresses control-logic faults"] },
+              { q: "Per the building-an-automation-sequence list, what happens if fault handling is left out?", choices: ["A sequence without fault handling eventually gets stuck", "Nothing — fault handling is entirely optional and has no consequence", "The PLC automatically adds fault handling by default", "Only the HMI is affected, never the actual sequence"], answer: 0, explain: "The list's insight line states a sequence without fault handling eventually gets stuck — it's a necessary part of a robust sequence.", why: ["", "The insight line explicitly states there IS a real consequence", "Nothing in this card describes the PLC auto-adding fault handling", "The insight line describes the sequence itself getting stuck, not just the HMI"] },
+              { q: "Per the systematic PLC troubleshooting list, what should be checked first?", choices: ["I/O status LEDs", "The program logic", "Fault codes", "Field wiring"], answer: 0, explain: "Step 1 of systematic PLC troubleshooting is checking I/O status LEDs, working field-inward.", why: ["", "Program logic is checked third, per step 3, not first", "Fault codes are checked fourth, per step 4, not first", "Field wiring is checked second, per step 2, not first"] },
+              { q: "Per the systematic PLC troubleshooting list, what comes after checking I/O status LEDs?", choices: ["Field wiring", "The program logic", "Fault codes", "The HMI's touchscreen calibration"], answer: 0, explain: "Step 2, right after status LEDs, is checking field wiring — confirming the physical connection matches what the LED shows.", why: ["", "Program logic is step 3, after field wiring, not immediately after LEDs", "Fault codes are step 4, the last step, not immediately after LEDs", "HMI calibration isn't part of this troubleshooting sequence at all"] }
+            ] }
+          ]
+        },
+        {
+          id: "plc-panel-practical",
+          title: "Reading a Panel & Practical Exercise",
+          tag: "Practical",
+          blocks: [
+            { type: "numbered", title: "Reading a Real PLC Panel", items: [
+              { title: "1. Status LEDs", desc: "Power, run, and fault indicators, usually on the CPU module" },
+              { title: "2. Terminal labelling", desc: "Each I/O point numbered to match the program's addressing" },
+              { title: "3. Module slots", desc: "Input, output, and communication modules, each in a defined slot" },
+              { title: "4. Communication ports", desc: "Ethernet or serial ports linking the PLC to the HMI and network" }
+            ]},
+            { type: "numbered", title: "Practical Exercise: Trace an I/O Fault on a PLC", items: [
+              { title: "1. Identify the input module status LED", desc: "For a given point" },
+              { title: "2. Confirm field voltage", desc: "At the corresponding terminal" },
+              { title: "3. Trace the address", desc: "Into the ladder program" },
+              { title: "4. Identify every rung condition", desc: "Feeding the target output" },
+              { title: "5. Confirm the output LED", desc: "Matches the rung's expected state" },
+              { title: "6. Record where", desc: "The actual and expected states first diverge" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the reading-a-panel list, where are status LEDs usually found?", choices: ["On the CPU module", "Only on the HMI screen", "Only on the power supply module", "Scattered randomly across every module"], answer: 0, explain: "The list states status LEDs — power, run, and fault indicators — are usually on the CPU module.", why: ["", "The HMI is a separate display device, not where these PLC-rack status LEDs live", "The list specifically names the CPU module, not the power supply module, for these LEDs", "The list describes a consistent, predictable location, not random placement"] },
+              { q: "Per the reading-a-panel list, what does terminal labelling do?", choices: ["Numbers each I/O point to match the program's addressing", "Indicates the panel's manufacturing date", "Replaces the need for any status LEDs", "Only applies to communication ports, not I/O terminals"], answer: 0, explain: "The list states terminal labelling numbers each I/O point to match the program's addressing.", why: ["", "Manufacturing date isn't what terminal labelling conveys per this list", "Labelling and status LEDs are separate, complementary panel features", "The list specifically ties labelling to I/O points, not just communication ports"] },
+              { q: "Per the practical exercise, what should be traced right after confirming field voltage at the terminal?", choices: ["The address into the ladder program", "Every rung condition feeding the output", "The output LED's match to the rung", "Where actual and expected states diverge"], answer: 0, explain: "Step 3, right after confirming field voltage (step 2), is tracing the address into the ladder program.", why: ["", "That's step 4, after tracing the address", "That's step 5, later in the sequence", "That's step 6, the final recording step"] },
+              { q: "Per the practical exercise, what is the final recorded outcome of the exercise?", choices: ["Where the actual and expected states first diverge", "The input module's status LED color", "The PLC's total memory capacity", "The communication protocol in use"], answer: 0, explain: "Step 6, the final step, is recording where the actual and expected states first diverge — pinpointing exactly where the fault lives.", why: ["", "LED color isn't the specific recorded outcome of this exercise", "Memory capacity isn't part of this I/O fault-tracing exercise", "Communication protocol isn't part of this I/O fault-tracing exercise"] },
+              { q: "Per the practical exercise's insight, in what order should you work when tracing an I/O fault?", choices: ["Field to logic, not logic to field", "Logic to field, not field to logic", "Randomly, in whatever order is convenient", "Only ever from the HMI screen, never the physical panel"], answer: 0, explain: "The exercise's insight line explicitly states to work field to logic, not logic to field.", why: ["", "This reverses the exercise's explicitly stated order", "The exercise gives a specific, deliberate order, not a random one", "The exercise's steps work from physical field points inward, not from the HMI alone"] }
+            ] }
+          ]
+        },
+        {
+          id: "plc-repair-reference",
+          title: "Repair Exercise & Ladder Symbol Reference",
+          tag: "Repair & Reference",
+          blocks: [
+            { type: "definition",
+              plain: "An automated sequence always halts at step four, every single cycle, without exception.",
+              picture: "Like a kitchen timer set for an hour when the recipe only needed ten minutes — the step just never finishes on time.",
+              facts: "Checking timer and counter presets specifically when a sequence stalls at a consistent step revealed a timer's preset value was left at its default, far longer than the process ever needed." },
+            { type: "numbered", title: "What went wrong, and how to prevent it", items: [
+              { title: "What went wrong", desc: "A timer's preset value was left at its default, far longer than the process ever needed" },
+              { title: "How to prevent it", desc: "Check timer and counter presets specifically when a sequence stalls at a consistent step" }
+            ]},
+            { type: "table", title: "The symbols you'll read in almost every program", headers: ["Symbol", "Name", "Means", "Acts Like"], rows: [
+              ["—| |—", "Normally open", "True when condition is active", "A switch that closes"],
+              ["—|/|—", "Normally closed", "True when condition is inactive", "A switch that opens"],
+              ["( )", "Output coil", "Turns a physical output on", "A relay coil"],
+              ["(L) / (U)", "Latch / unlatch", "Holds an output until reset", "A self-holding relay"]
+            ]},
+            { type: "check", questions: [
+              { q: "In the stuck-sequence repair exercise, what was the actual cause of the sequence stalling at the same step every time?", choices: ["A timer's preset value was left at its default, far longer than the process ever needed", "A sensor input was wired backwards", "The PLC's CPU module had failed", "An output coil had burned out"], answer: 0, explain: "The scenario concludes a timer's preset value was left at its default — far longer than the process actually needed.", why: ["", "Wiring reversal is the cause from the earlier reversed-sequence scenario, not this one", "CPU failure isn't the cause identified in this specific scenario", "A burned-out coil isn't the cause identified in this specific scenario"] },
+              { q: "Per the repair exercise's lesson, when should timer and counter presets specifically be checked?", choices: ["When a sequence stalls at a consistent, repeatable step", "Only during the PLC's very first installation", "Never — presets are fixed and unchangeable once set", "Only when the HMI screen goes blank"], answer: 0, explain: "The lesson explicitly states to check timer and counter presets specifically when a sequence stalls at a consistent step.", why: ["", "The lesson applies any time this consistent-stall symptom appears, not only at first installation", "Presets can clearly be checked and adjusted, as this scenario demonstrates", "An HMI going blank isn't the symptom this specific lesson addresses"] },
+              { q: "Per the ladder symbol reference table, what does the symbol —| |— represent?", choices: ["Normally open — true when its condition is active", "Normally closed — true when its condition is inactive", "An output coil that turns a physical output on", "A latch that holds an output until reset"], answer: 0, explain: "The table lists —| |— as 'Normally open', true when its condition is active, acting like a switch that closes.", why: ["", "That's the —|/|— symbol, not —| |—", "That's the ( ) symbol, not —| |—", "That's the (L) / (U) symbol, not —| |—"] },
+              { q: "Per the ladder symbol reference table, what does the symbol ( ) represent, and what does it act like?", choices: ["Output coil — turns a physical output on, acting like a relay coil", "Normally open contact — acting like a switch that closes", "Normally closed contact — acting like a switch that opens", "Latch / unlatch — acting like a self-holding relay"], answer: 0, explain: "The table lists ( ) as 'Output coil', turning a physical output on, acting like a relay coil.", why: ["", "That's the —| |— symbol, not ( )", "That's the —|/|— symbol, not ( )", "That's the (L) / (U) symbol, not ( )"] },
+              { q: "Per the ladder symbol reference table, what does (L) / (U) represent?", choices: ["Latch / unlatch — holds an output until reset, acting like a self-holding relay", "Output coil — turns a physical output on", "Normally open — true when its condition is active", "Normally closed — true when its condition is inactive"], answer: 0, explain: "The table lists (L) / (U) as 'Latch / unlatch', holding an output until reset, acting like a self-holding relay.", why: ["", "That's the ( ) symbol, not (L) / (U)", "That's the —| |— symbol, not (L) / (U)", "That's the —|/|— symbol, not (L) / (U)"] }
+            ] }
+          ]
+        },
+        {
+          id: "plc-wrapup",
+          title: "Module Wrap-Up",
+          tag: "You Can Now…",
+          blocks: [
+            { type: "checklist", items: [
+              "Explain what a PLC does during each scan cycle",
+              "Read a ladder rung and identify what an output depends on",
+              "Tell sourcing and sinking I/O apart, and wire each correctly",
+              "Explain the HMI's role without confusing it with the PLC's logic",
+              "Troubleshoot systematically from field wiring through to program logic"
+            ]},
+            { type: "golden", text: "Field first, then wiring, then logic — the fault is rarely where you look first." },
+            { type: "check", questions: [
+              { q: "What is the golden rule of this module?", choices: ["Field first, then wiring, then logic — the fault is rarely where you look first", "Always suspect the ladder program before checking any field device", "The HMI is where most control logic faults actually live", "Sourcing and sinking I/O can always be mixed on the same circuit safely"], answer: 0, explain: "The golden rule explicitly orders field, then wiring, then logic — since the fault is rarely where you first look.", why: ["", "The systematic troubleshooting list explicitly checks field wiring before the program logic", "The HMI card explicitly states it rarely causes a logic fault on its own", "The sourcing/sinking table explicitly distinguishes the two as different wiring styles that must be matched correctly, not mixed carelessly"] },
+              { q: "Per the checklist, what should you be able to explain about the PLC's scan cycle?", choices: ["What a PLC does during each scan cycle", "How to calculate a transformer's turns ratio", "How to calibrate a drifting sensor", "How to terminate an RS-485 network"], answer: 0, explain: "The checklist names explaining what a PLC does during each scan cycle as a core skill.", why: ["", "Transformer turns ratio belongs to the Power Electronics module, not this one", "Sensor calibration belongs to the Sensors & Actuators module, not this one", "RS-485 termination belongs to the Industrial Communication module, not this one"] },
+              { q: "Per the checklist, what should you be able to identify from a ladder rung?", choices: ["What an output depends on", "A motor's stall current rating", "A wire's ampacity rating", "A capacitor's ESR value"], answer: 0, explain: "The checklist names reading a ladder rung and identifying what an output depends on as a core skill.", why: ["", "Stall current belongs to the Motors & Drives module, not this one", "Ampacity belongs to the Industrial Wiring module, not this one", "ESR belongs to the Test & Measurement module, not this one"] },
+              { q: "Per the checklist, what I/O wiring styles should you be able to tell apart and wire correctly?", choices: ["Sourcing and sinking", "Star and delta", "RS-232 and RS-485", "Half-wave and full-wave"], answer: 0, explain: "The checklist names telling sourcing and sinking I/O apart, and wiring each correctly, as a core skill.", why: ["", "Star and delta belong to the Industrial Wiring module, not this one", "RS-232 and RS-485 belong to the Industrial Communication module, not this one", "Half-wave and full-wave belong to the Power Electronics module, not this one"] },
+              { q: "Per the checklist, what should you be able to troubleshoot systematically?", choices: ["From field wiring through to program logic", "Only ever the HMI screen, never the field wiring", "Only ever the program logic, skipping field wiring entirely", "Only the PLC's power supply module"], answer: 0, explain: "The checklist names troubleshooting systematically from field wiring through to program logic as this module's final skill.", why: ["", "The systematic troubleshooting list explicitly starts with I/O status LEDs and field wiring, not just the HMI", "The golden rule explicitly places field and wiring checks before logic, not skipping them", "This module's troubleshooting scope explicitly spans field wiring through program logic, not just the power supply"] }
+            ] }
+          ]
+        }
+      ]
+    },
   ],
 
   // ================================================================ QUESTIONS
