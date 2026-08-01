@@ -2667,6 +2667,292 @@ window.THULIR_DATA = {
         }
       ]
     },
+
+    // ============================================================ MODULE 11: INDUSTRIAL WIRING
+    {
+      id: "industrial-wiring",
+      code: "MOD·11",
+      icon: "🔗",
+      color: "#ff5b8a",
+      title: "Industrial Wiring",
+      subtitle: "From a single component to a factory floor — the wiring that ties it all together.",
+      cards: [
+        {
+          id: "wiring-overview",
+          title: "The Five Skills of Industrial Wiring",
+          tag: "Overview",
+          blocks: [
+            { type: "intro", text: "Have you ever noticed factory equipment plugs use far more prongs than your phone charger? Those extra prongs carry three-phase power — by the end of this module, you'll know exactly why." },
+            { type: "table", title: "From a single wire to a whole control panel", headers: ["Skill", "What It Covers", "Key Idea"], rows: [
+              ["Three-Phase Power", "How factory equipment is actually fed", "L1 L2 L3"],
+              ["Wire & Protection", "Sizing and protecting every circuit", "Ampacity"],
+              ["Terminals", "Reliable, repeatable connections", "Torque spec"],
+              ["Control Circuits", "Contactors, starters, and ladder logic", "Ladder"],
+              ["Earthing", "The safety path every system needs", "Ground"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the table, what key idea is listed for Three-Phase Power?", choices: ["L1 L2 L3", "Ampacity", "Torque spec", "Ladder"], answer: 0, explain: "The table lists 'L1 L2 L3' as the key idea for Three-Phase Power — how factory equipment is actually fed.", why: ["", "Ampacity is the key idea for Wire & Protection, not Three-Phase Power", "Torque spec is the key idea for Terminals, not Three-Phase Power", "Ladder is the key idea for Control Circuits, not Three-Phase Power"] },
+              { q: "Per the table, what does the Wire & Protection skill cover?", choices: ["Sizing and protecting every circuit", "How factory equipment is actually fed", "Reliable, repeatable connections", "Contactors, starters, and ladder logic"], answer: 0, explain: "The table describes Wire & Protection as sizing and protecting every circuit, with 'Ampacity' as the key idea.", why: ["", "That describes Three-Phase Power, not Wire & Protection", "That describes Terminals, not Wire & Protection", "That describes Control Circuits, not Wire & Protection"] },
+              { q: "Per the table, what key idea is listed for Terminals?", choices: ["Torque spec", "L1 L2 L3", "Ampacity", "Ground"], answer: 0, explain: "The table lists 'Torque spec' as the key idea for Terminals — reliable, repeatable connections.", why: ["", "L1 L2 L3 is the key idea for Three-Phase Power, not Terminals", "Ampacity is the key idea for Wire & Protection, not Terminals", "Ground is the key idea for Earthing, not Terminals"] },
+              { q: "Per the table, what does the Control Circuits skill cover?", choices: ["Contactors, starters, and ladder logic", "Sizing and protecting every circuit", "Reliable, repeatable connections", "The safety path every system needs"], answer: 0, explain: "The table describes Control Circuits as contactors, starters, and ladder logic, with 'Ladder' as the key idea.", why: ["", "That describes Wire & Protection, not Control Circuits", "That describes Terminals, not Control Circuits", "That describes Earthing, not Control Circuits"] },
+              { q: "Per the table, what key idea is listed for Earthing?", choices: ["Ground", "Ladder", "Torque spec", "Ampacity"], answer: 0, explain: "The table lists 'Ground' as the key idea for Earthing — the safety path every system needs.", why: ["", "Ladder is the key idea for Control Circuits, not Earthing", "Torque spec is the key idea for Terminals, not Earthing", "Ampacity is the key idea for Wire & Protection, not Earthing"] }
+            ] }
+          ]
+        },
+        {
+          id: "wiring-three-phase",
+          title: "Three-Phase Power",
+          tag: "Power Basics",
+          blocks: [
+            { type: "definition",
+              plain: "Three-phase power delivers three AC supplies offset in timing, giving smoother power than a single phase.",
+              picture: "Like three people pedaling a tandem bike in a staggered rhythm — power never fully dips to zero.",
+              facts: "It's standard for motors and heavy industrial loads because it delivers far more power with less wasted current." },
+            { type: "numbered", title: "Reading Three-Phase Wiring", items: [
+              { title: "1. L1, L2, L3", desc: "The three live phases, each offset from the others" },
+              { title: "2. Neutral", desc: "A return path present in some, not all, three-phase systems" },
+              { title: "3. Star vs delta", desc: "Two ways to wire the three phases, giving different voltage options" },
+              { title: "4. Phase sequence", desc: "The order phases arrive in — wrong sequence spins a motor backwards" }
+            ]},
+            { type: "definition",
+              plain: "A three-phase motor runs, but noisily, and vibrates far more than it normally would.",
+              picture: "Like a three-legged stool missing one leg — it can still sort of stand, but it wobbles badly doing it.",
+              facts: "Measuring voltage across all three phases and finding one reading significantly lower than the others revealed a blown fuse had dropped one phase — the motor was limping along on the remaining two." },
+            { type: "numbered", title: "Diagnosing the rough-running motor", items: [
+              { title: "What you do", desc: "Measure voltage across all three phases and find one reading significantly lower than the others" },
+              { title: "What it tells you", desc: "A blown fuse had dropped one phase — the motor was limping along on the remaining two" }
+            ]},
+            { type: "check", questions: [
+              { q: "Why is three-phase power described as smoother than single-phase power?", choices: ["It delivers three AC supplies offset in timing, so power never fully dips to zero", "It runs at a much higher voltage than single-phase", "It uses only one live conductor instead of three", "It eliminates the need for any neutral conductor"], answer: 0, explain: "The definition states three-phase power's timing offset means power never fully dips to zero, unlike a single AC phase.", why: ["", "Smoothness comes from timing offset, not simply a higher voltage", "Three-phase uses three live conductors (L1, L2, L3), not one", "The reading list explicitly notes neutral is present in some, not all, three-phase systems — it isn't eliminated outright"] },
+              { q: "Per the reading three-phase wiring list, what happens if the phase sequence is wrong?", choices: ["It spins a motor backwards", "It has no observable effect at all", "It permanently damages the neutral conductor", "It converts the supply from delta to star automatically"], answer: 0, explain: "The list explicitly states wrong phase sequence spins a motor backwards.", why: ["", "The list explicitly states there IS an observable effect — reversed motor direction", "Phase sequence and neutral conductor damage aren't linked in this list", "Star vs delta is a separate wiring configuration choice, not something sequence errors change"] },
+              { q: "Per the reading three-phase wiring list, what's the difference between star and delta?", choices: ["Two ways to wire the three phases, giving different voltage options", "Star is always safer than delta", "Delta requires a neutral conductor and star never does", "They are simply two names for the identical wiring configuration"], answer: 0, explain: "The list states star vs delta are two ways to wire the three phases, giving different voltage options.", why: ["", "The list doesn't rank one configuration as inherently safer than the other", "Neutral presence is discussed as varying by system, not tied specifically to star vs delta in this list", "The list explicitly presents them as two distinct wiring approaches, not identical"] },
+              { q: "In the rough-running motor scenario, what did measuring voltage across all three phases reveal?", choices: ["A blown fuse had dropped one phase — the motor was limping along on the remaining two", "All three phases were reading correctly", "The motor's winding had shorted internally", "The phase sequence had been wired backwards"], answer: 0, explain: "The scenario concludes a blown fuse had dropped one phase, leaving the motor running roughly on the remaining two.", why: ["", "The scenario explicitly found one phase reading significantly lower — not all three correct", "A shorted winding isn't the fault identified in this specific scenario", "Reversed phase sequence causes backward rotation, not the rough/noisy symptom described here"] },
+              { q: "Per the scenario's insight, what does a rough-running three-phase motor often indicate?", choices: ["A missing phase", "A perfectly healthy motor under heavy load", "An incorrect star/delta configuration", "A firmware fault in the motor's controller"], answer: 0, explain: "The insight line explicitly states a rough-running three-phase motor often means a missing phase.", why: ["", "This is explicitly framed as a fault sign, not healthy heavy-load behavior", "Star/delta misconfiguration isn't the specific cause identified in this scenario", "Three-phase motors in this module are electromechanical, not firmware-controlled"] }
+            ] }
+          ]
+        },
+        {
+          id: "wiring-selection",
+          title: "Wire Gauge, Ampacity & Markings",
+          tag: "Wire Selection",
+          blocks: [
+            { type: "definition",
+              plain: "Ampacity is the maximum current a wire can safely carry continuously without overheating.",
+              picture: "Like choosing a pipe wide enough for the water flow — too narrow, and pressure (heat) builds up.",
+              facts: "A thicker wire (lower gauge number) carries more current — undersizing it is a fire risk, not just a fault." },
+            { type: "numbered", title: "Specifications That Matter", items: [
+              { title: "Voltage rating", desc: "The maximum voltage the insulation is rated to withstand safely" },
+              { title: "Current rating", desc: "The continuous current the conductor can carry without overheating" },
+              { title: "Insulation class", desc: "Determines chemical and abrasion resistance for the environment" },
+              { title: "Temperature rating", desc: "The maximum operating temperature the cable is built to handle" }
+            ]},
+            { type: "numbered", title: "Reading Wire & Cable Markings", items: [
+              { title: "1. Gauge", desc: "Printed directly on the jacket — e.g. 14 AWG or 2.5mm²" },
+              { title: "2. Voltage rating", desc: "The maximum safe operating voltage, printed alongside the gauge" },
+              { title: "3. Colour codes", desc: "Standardised colours identify phase, neutral, and earth conductors" },
+              { title: "4. Conduit fill", desc: "How much of a conduit's cross-section the wires may safely occupy" }
+            ]},
+            { type: "check", questions: [
+              { q: "What does ampacity actually measure?", choices: ["The maximum current a wire can safely carry continuously without overheating", "The maximum voltage a wire's insulation can withstand", "The physical length of a wire run", "The number of conductors bundled in one cable"], answer: 0, explain: "The definition states ampacity is the maximum current a wire can safely carry continuously without overheating.", why: ["", "That describes voltage rating, a separate spec on this same card", "Ampacity is about current capacity, not physical length", "Ampacity concerns current-carrying capacity, not conductor count"] },
+              { q: "Per the facts line, why is undersized wire described as a fire risk, not just an electrical fault?", choices: ["A thicker wire carries more current — undersizing it can overheat and start a fire, not just malfunction", "Undersized wire always trips a breaker instantly with no other consequence", "Wire gauge has no relationship to fire risk at all", "Only wire voltage rating affects fire risk, never gauge"], answer: 0, explain: "The facts line explicitly states undersized wire doesn't just fail — it can start a fire, since it can't carry the required current without overheating.", why: ["", "The facts line explicitly frames this as more than a simple malfunction — it's a fire risk", "The facts line explicitly ties gauge (thickness) to fire risk", "Gauge, not just voltage rating, is explicitly named as the fire-risk factor here"] },
+              { q: "Per the specifications list, what does insulation class determine?", choices: ["Chemical and abrasion resistance for the environment", "The maximum current the conductor can carry", "The maximum voltage the insulation withstands", "The wire's physical gauge number"], answer: 0, explain: "The specs list states insulation class determines chemical and abrasion resistance for the environment the cable is used in.", why: ["", "That's the current rating spec, not insulation class", "That's the voltage rating spec, not insulation class", "That's a separate marking (gauge), not insulation class"] },
+              { q: "Per the reading wire markings list, what do standardised colour codes identify?", choices: ["Phase, neutral, and earth conductors", "The wire's exact manufacturer", "The wire's maximum operating temperature", "The conduit fill percentage"], answer: 0, explain: "The list states colour codes identify phase, neutral, and earth conductors.", why: ["", "Manufacturer isn't what colour coding identifies per this list", "Temperature rating is a separate spec, not what colour codes convey", "Conduit fill is a separate marking item, not what colour codes convey"] },
+              { q: "Per the reading wire markings list, what does 'conduit fill' refer to?", choices: ["How much of a conduit's cross-section the wires may safely occupy", "The wire's maximum voltage rating", "The colour used to identify the earth conductor", "The gauge printed on the wire's jacket"], answer: 0, explain: "The list defines conduit fill as how much of a conduit's cross-section the wires may safely occupy.", why: ["", "That's the voltage rating item, not conduit fill", "That's part of the colour codes item, not conduit fill", "That's the gauge item, not conduit fill"] }
+            ] }
+          ]
+        },
+        {
+          id: "wiring-protection-faults",
+          title: "Circuit Protection Devices & Common Faults",
+          tag: "Protection",
+          blocks: [
+            { type: "numbered", title: "Circuit Protection Devices", items: [
+              { title: "1. MCB (breaker)", desc: "Trips on overcurrent, and can be manually reset afterward" },
+              { title: "2. Fuse", desc: "A one-time sacrificial link that opens the circuit on overcurrent" },
+              { title: "3. Overload relay", desc: "Protects a motor specifically from sustained overcurrent" },
+              { title: "4. RCD / ELCB", desc: "Trips on a current leak to earth, protecting against shock" }
+            ]},
+            { type: "tip", text: "Healthy wiring shows intact insulation with no cracking or discolouration, tight terminals with no signs of arcing, and a breaker or fuse rated correctly for the load." },
+            { type: "warning", title: "Wiring fault signs", items: [
+              "Discoloured or brittle insulation from overheating",
+              "Loose terminal showing signs of arcing or burn marks",
+              "Breaker undersized or oversized for the actual load"
+            ]},
+            { type: "check", questions: [
+              { q: "Per the protection devices list, what specifically does an overload relay protect against?", choices: ["A motor from sustained overcurrent", "A one-time overcurrent event on any circuit", "A current leak to earth", "A voltage spike from lightning"], answer: 0, explain: "The list states an overload relay protects a motor specifically from sustained overcurrent.", why: ["", "That describes a fuse's one-time sacrificial protection, not an overload relay's", "That describes an RCD/ELCB's job, not an overload relay's", "Lightning/surge protection isn't described by any device on this list"] },
+              { q: "Per the protection devices list, what triggers an RCD / ELCB to trip?", choices: ["A current leak to earth", "Any overcurrent condition", "A loose terminal connection", "A wrong phase sequence"], answer: 0, explain: "The list states an RCD/ELCB trips on a current leak to earth, protecting against shock.", why: ["", "General overcurrent tripping describes an MCB or fuse, not specifically an RCD/ELCB", "A loose terminal isn't what triggers an RCD/ELCB", "Phase sequence issues aren't what triggers an RCD/ELCB"] },
+              { q: "Per the protection devices list, what's the key difference between an MCB and a fuse?", choices: ["An MCB can be manually reset after tripping; a fuse is a one-time sacrificial link", "A fuse can be reset; an MCB must always be replaced", "They are functionally identical in every way", "Only a fuse protects against overcurrent"], answer: 0, explain: "The list states an MCB can be manually reset after tripping, while a fuse is a one-time sacrificial link that must be replaced.", why: ["", "This reverses the actual roles described in the list", "The list explicitly distinguishes them by reset behavior", "Both an MCB and a fuse are described as protecting against overcurrent"] },
+              { q: "Per the fault signs, what does discoloured or brittle insulation indicate?", choices: ["Overheating", "Normal aging with no real concern", "A correctly rated breaker", "A properly torqued terminal"], answer: 0, explain: "The fault signs explicitly list discoloured or brittle insulation as a sign of overheating.", why: ["", "This is explicitly listed as a fault sign, not a benign aging process", "This is a wiring/insulation symptom, unrelated to breaker sizing correctness", "This is an insulation symptom, not a terminal-torque symptom"] },
+              { q: "Per the fault signs' insight, what does discolouration on a terminal already tell you?", choices: ["That it ran hot", "That the wiring is definitely undersized", "That the terminal was recently installed", "Nothing useful without further testing"], answer: 0, explain: "The insight line states discolouration on a terminal already tells you it ran hot — a direct clue you can read at a glance.", why: ["", "Discolouration points to heat, not directly to a specific wire-sizing conclusion", "Fresh installation wouldn't typically show discolouration at all", "The insight explicitly frames discolouration as informative on its own, without needing further testing"] }
+            ] }
+          ]
+        },
+        {
+          id: "wiring-terminals",
+          title: "Terminal Blocks & Connectors",
+          tag: "Terminals",
+          blocks: [
+            { type: "definition",
+              plain: "A terminal block provides a secure, standardised point to join wires without permanently splicing them.",
+              picture: "Like a row of labelled sockets, each holding one connection firmly and predictably.",
+              facts: "Far more industrial faults trace back to a loose terminal than to a genuinely failed component." },
+            { type: "numbered", title: "Classifying Industrial Connectors", items: [
+              { title: "1. Ring terminal", desc: "Fully encircles a screw — won't slip out even if the screw loosens" },
+              { title: "2. Spade / fork terminal", desc: "Quick to attach or remove, but can slide out if not tightened" },
+              { title: "3. Ferrule", desc: "Protects stranded wire ends from fraying inside a terminal block" },
+              { title: "4. DIN rail connector", desc: "Mounts on standard rail, common throughout control panels" }
+            ]},
+            { type: "numbered", title: "Making a Reliable Industrial Connection", items: [
+              { title: "1. Correct strip length", desc: "Too little grip, too much exposed conductor risks a short" },
+              { title: "2. Correct ferrule or lug", desc: "Matched to the wire gauge, never forced onto the wrong size" },
+              { title: "3. Torque to spec", desc: "Under-tightened terminals loosen; over-tightened ones can crack" },
+              { title: "4. Strain relief", desc: "Prevents cable movement from working a good connection loose" }
+            ]},
+            { type: "definition",
+              plain: "A production line stops intermittently, with no consistent pattern to when or why.",
+              picture: "Like a wobbly table leg that only fails when someone leans a certain way — fine most of the time, until it isn't.",
+              facts: "Thermal-scanning the control panel under load revealed one terminal ran hot — never properly torqued during the original installation." },
+            { type: "numbered", title: "Diagnosing the intermittent stoppage", items: [
+              { title: "What you do", desc: "Thermal-scan the control panel under load, checking for any unusually warm terminal" },
+              { title: "What it tells you", desc: "One terminal ran hot under load — never properly torqued during the original installation" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the facts line, what do far more industrial faults trace back to than a genuinely failed component?", choices: ["A loose terminal", "A blown fuse", "A missing earth wire", "A wrong phase sequence"], answer: 0, explain: "The facts line explicitly states far more industrial faults trace back to a loose terminal than a genuinely failed component.", why: ["", "The facts line specifically names loose terminals, not blown fuses, as the more common cause", "The facts line specifically names loose terminals, not missing earths, as the more common cause", "The facts line specifically names loose terminals, not phase sequence, as the more common cause"] },
+              { q: "Per the classifying connectors list, what makes a ring terminal more secure than a spade terminal?", choices: ["It fully encircles the screw, so it won't slip out even if the screw loosens", "It's the only connector type rated for any current at all", "It never requires a matching wire gauge", "It replaces the need for any terminal block entirely"], answer: 0, explain: "The list states a ring terminal fully encircles the screw, so it won't slip out even if the screw loosens — unlike a spade terminal.", why: ["", "Both connector types carry rated current — that's not the distinguishing factor here", "The reliable-connection list explicitly requires matching gauge to the correct ferrule/lug for any connector", "Ring terminals are a type of connection made within a terminal block system, not a replacement for it"] },
+              { q: "Per the classifying connectors list, what does a ferrule protect against?", choices: ["Stranded wire ends fraying inside a terminal block", "Overcurrent on the whole circuit", "Voltage spikes from switching", "Incorrect phase sequence"], answer: 0, explain: "The list states a ferrule protects stranded wire ends from fraying inside a terminal block.", why: ["", "Overcurrent protection is the job of devices like MCBs and fuses, not a ferrule", "Voltage spike protection isn't a ferrule's job", "Phase sequence is unrelated to what a ferrule protects against"] },
+              { q: "Per the reliable-connection list, why should terminals be torqued to spec rather than tightened by feel?", choices: ["Under-tightened terminals loosen; over-tightened ones can crack", "Torque specs are purely a legal formality with no real effect", "Any tightness is fine as long as the wire doesn't visibly move", "Torque only matters for ring terminals, not other connector types"], answer: 0, explain: "The list's insight line states torque to spec — not by feel, and not by force — since under-tightening loosens and over-tightening can crack the terminal.", why: ["", "The list frames this as a real physical necessity, not a formality", "The list explicitly warns against relying on visual/feel judgment alone", "The reliable-connection habits apply broadly, not only to one connector type"] },
+              { q: "In the intermittent-line-stoppage scenario, what did thermal-scanning the panel under load reveal?", choices: ["One terminal ran hot — never properly torqued during the original installation", "A breaker was undersized for the load", "The phase sequence had been wired incorrectly", "A ferrule was missing on a stranded wire"], answer: 0, explain: "The scenario concludes one terminal ran hot, having never been properly torqued during the original installation.", why: ["", "Breaker sizing isn't the fault identified in this specific scenario", "Phase sequence isn't the fault identified in this specific scenario", "A missing ferrule isn't the fault identified in this specific scenario"] }
+            ] }
+          ]
+        },
+        {
+          id: "wiring-control-circuits",
+          title: "Contactors, Ladder Logic & Lockout/Tagout",
+          tag: "Control Circuits",
+          blocks: [
+            { type: "definition",
+              plain: "A contactor is a heavy-duty relay that switches motor-level current, controlled by a much smaller control signal.",
+              picture: "Like a large valve operated by a small lever — a light touch controls a powerful flow.",
+              facts: "A motor starter adds overload protection to a contactor, tripping before sustained overcurrent causes damage." },
+            { type: "numbered", title: "Reading a Ladder Diagram", items: [
+              { title: "1. Rungs", desc: "Each horizontal line represents one independent piece of control logic" },
+              { title: "2. Power rails", desc: "Vertical lines at each side supply power to every rung" },
+              { title: "3. Contacts", desc: "Symbols representing switches, sensors, or other conditions" },
+              { title: "4. Coils", desc: "The output of a rung — usually a relay, contactor, or indicator" }
+            ]},
+            { type: "tip", text: "Doing lockout/tagout right means isolating every energy source before work begins, locking the isolator so it physically cannot be re-energised, and tagging it clearly with your name and the reason." },
+            { type: "warning", title: "Lockout/tagout warning signs", items: [
+              "Working on equipment with no lock applied at all",
+              "Assuming a switch position without verifying it",
+              "Someone else's lock removed without their knowledge"
+            ]},
+            { type: "check", questions: [
+              { q: "Per the definition, what does a contactor do?", choices: ["Switches motor-level current, controlled by a much smaller control signal", "Directly senses temperature changes", "Converts AC to DC", "Stores energy for backup power"], answer: 0, explain: "The definition states a contactor is a heavy-duty relay that switches motor-level current from a much smaller control signal.", why: ["", "Temperature sensing describes a sensor, not a contactor", "AC-to-DC conversion is rectification, unrelated to a contactor's job", "Energy storage describes a battery or capacitor, not a contactor"] },
+              { q: "Per the facts line, what does a motor starter add to a plain contactor?", choices: ["Overload protection, tripping before sustained overcurrent causes damage", "A ladder logic program", "A three-phase power supply", "An RS-485 communication port"], answer: 0, explain: "The facts line states a motor starter adds overload protection to a contactor.", why: ["", "Ladder logic belongs to the PLC module, not a motor starter's specific addition", "A motor starter doesn't generate its own power supply", "Communication ports aren't part of a motor starter's described function"] },
+              { q: "Per the reading-a-ladder-diagram list, what do the power rails represent?", choices: ["Vertical lines at each side that supply power to every rung", "Symbols representing switches or sensor conditions", "The output of a rung, usually a relay or contactor", "Independent pieces of control logic drawn horizontally"], answer: 0, explain: "The list describes power rails as the vertical lines at each side, supplying power to every rung.", why: ["", "That describes contacts, not power rails", "That describes coils, not power rails", "That describes rungs, not power rails"] },
+              { q: "Per the reading-a-ladder-diagram list, what do coils represent?", choices: ["The output of a rung, usually a relay, contactor, or indicator", "Independent pieces of control logic, drawn as horizontal lines", "Vertical lines supplying power to every rung", "Symbols representing switches or sensor conditions"], answer: 0, explain: "The list describes coils as the output of a rung, usually a relay, contactor, or indicator.", why: ["", "That describes rungs, not coils", "That describes power rails, not coils", "That describes contacts, not coils"] },
+              { q: "Per the lockout/tagout guidance, why should you never trust that equipment is off unless you locked it yourself?", choices: ["Because someone else's lock could be removed without your knowledge, or a switch position could be wrongly assumed", "Because tags are purely decorative and carry no real meaning", "Because isolating energy sources is optional if the equipment looks off", "Because only one energy source ever needs isolating on any equipment"], answer: 0, explain: "The warning signs explicitly list someone else's lock being removed without their knowledge, and assuming a switch position without verifying it — both are why you must apply your own lock.", why: ["", "The guidance frames tags as meaningful — naming who applied the lock and why", "The guidance explicitly requires isolating EVERY energy source before work begins", "Equipment can have multiple energy sources, and all of them need isolating"] }
+            ] }
+          ]
+        },
+        {
+          id: "wiring-earthing-panel",
+          title: "Earthing & Reading a Control Panel",
+          tag: "Earthing & Panels",
+          blocks: [
+            { type: "definition",
+              plain: "Earthing provides a low-resistance path for fault current, so a protection device trips before anyone gets hurt.",
+              picture: "Like a safety rail guiding a fall along a harmless path instead of straight to the ground.",
+              facts: "A missing or poor earth connection can leave a metal chassis live, with no fuse ever tripping to warn you." },
+            { type: "numbered", title: "Reading a Control Panel", items: [
+              { title: "1. Breakers & fuses", desc: "Usually along the top or one side, feeding everything below" },
+              { title: "2. Contactors & relays", desc: "Grouped together, each labelled with the circuit they switch" },
+              { title: "3. Terminal strips", desc: "Along the bottom or edge, where field wiring connects in" },
+              { title: "4. Wiring labels", desc: "Each wire numbered to match the panel's own drawing" }
+            ]},
+            { type: "check", questions: [
+              { q: "What does earthing actually accomplish, per the definition?", choices: ["Provides a low-resistance path for fault current, so a protection device trips before anyone gets hurt", "Increases the voltage available to a circuit", "Eliminates the need for any circuit breaker", "Only matters for three-phase systems, never single-phase"], answer: 0, explain: "The definition states earthing provides a low-resistance path for fault current so protection devices trip safely, before a person is hurt.", why: ["", "Earthing is a safety path, not a voltage-boosting measure", "Earthing works alongside protection devices like breakers, not instead of them", "Nothing in this card restricts earthing's importance to three-phase systems only"] },
+              { q: "Per the facts line, what can a missing or poor earth connection leave behind?", choices: ["A metal chassis live, with no fuse ever tripping to warn you", "A slightly slower breaker trip time only", "No real consequence, since fuses always catch it anyway", "A permanently blown fuse"], answer: 0, explain: "The facts line explicitly warns a missing or poor earth can leave a chassis live with no fuse tripping — a serious, silent shock hazard.", why: ["", "The facts line describes a much more serious risk than a minor timing delay", "The facts line explicitly says NO fuse ever trips to warn you — the opposite of being caught", "A blown fuse would actually indicate the protection DID work — the facts line describes the opposite failure mode"] },
+              { q: "Per the reading-a-control-panel list, where are breakers and fuses usually located?", choices: ["Along the top or one side, feeding everything below", "Along the bottom or edge only", "Scattered randomly with no consistent placement", "Inside the terminal strips themselves"], answer: 0, explain: "The list states breakers and fuses are usually along the top or one side, feeding everything below.", why: ["", "That describes terminal strips' typical location, not breakers/fuses", "The list describes a consistent, predictable layout convention, not random placement", "Terminal strips and breakers are described as separate panel zones, not nested inside each other"] },
+              { q: "Per the reading-a-control-panel list, what do wiring labels do?", choices: ["Number each wire to match the panel's own drawing", "Indicate a wire's voltage rating only", "Replace the need for any panel drawing entirely", "Only appear on three-phase wiring, never single-phase"], answer: 0, explain: "The list states wiring labels number each wire to match the panel's own drawing.", why: ["", "Voltage rating is a separate wire-marking concept from earlier in this module, not what these labels convey", "The list frames labels as matching to the drawing, not replacing the need for it", "Nothing in this list restricts wiring labels to three-phase circuits only"] },
+              { q: "Per the reading-a-control-panel list, what makes a well-labelled panel valuable?", choices: ["It's the electrician's own schematic, readable at a glance", "It removes the need for any lockout/tagout procedure", "It only matters for panels with three-phase power", "It has no practical value beyond appearance"], answer: 0, explain: "The list's insight line states a well-labelled panel is the electrician's own schematic — a real, practical diagnostic aid.", why: ["", "Panel labelling and lockout/tagout are separate, both-necessary safety practices", "Nothing in this list restricts labelling's value to three-phase panels only", "The insight line explicitly frames good labelling as valuable, not merely cosmetic"] }
+            ] }
+          ]
+        },
+        {
+          id: "wiring-practical-repair",
+          title: "Practical & Repair Exercises",
+          tag: "Practical",
+          blocks: [
+            { type: "numbered", title: "Practical Exercise: Wire a Terminal Block Correctly", items: [
+              { title: "1. Strip each wire", desc: "To the correct length" },
+              { title: "2. Fit the correct ferrule", desc: "For the wire gauge" },
+              { title: "3. Insert each wire fully", desc: "Into its terminal" },
+              { title: "4. Torque every terminal", desc: "To its rated specification" },
+              { title: "5. Apply strain relief", desc: "To each cable" },
+              { title: "6. Confirm every connection", desc: "Visually and physically secure" }
+            ]},
+            { type: "definition",
+              plain: "A breaker trips randomly, sometimes hours apart, with no clear pattern to the load at the time.",
+              picture: "Like a smoke alarm that goes off at random times, not because of smoke, but because of a frayed wire inside it.",
+              facts: "A partially damaged cable was intermittently leaking current to earth under vibration — inspecting cable condition along its full run, not just the terminals, found it." },
+            { type: "numbered", title: "What went wrong, and how to prevent it", items: [
+              { title: "What went wrong", desc: "A partially damaged cable was intermittently leaking current to earth under vibration" },
+              { title: "How to prevent it", desc: "Inspect cable condition along its full run, not just the terminals at either end" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the practical exercise, what should be done immediately after fitting the correct ferrule?", choices: ["Insert each wire fully into its terminal", "Apply strain relief to each cable", "Torque every terminal to its rated specification", "Confirm every connection is secure"], answer: 0, explain: "Step 3 is inserting each wire fully into its terminal, right after step 2's ferrule fitting.", why: ["", "Strain relief is step 5, later in the sequence", "Torquing is step 4, after fully inserting the wire", "Confirming security is step 6, the final step"] },
+              { q: "Per the practical exercise, what's the very last step?", choices: ["Visually and physically confirm every connection is secure", "Strip each wire to the correct length", "Fit the correct ferrule for the wire gauge", "Torque every terminal to its rated specification"], answer: 0, explain: "Step 6, the final step, is visually and physically confirming every connection is secure.", why: ["", "That's step 1, the first step, not the last", "That's step 2, early in the sequence, not the last step", "That's step 4, before strain relief and the final confirmation"] },
+              { q: "In the nuisance-trip repair exercise, what was the actual root cause?", choices: ["A partially damaged cable was intermittently leaking current to earth under vibration", "A terminal was never torqued during installation", "The breaker was undersized for the load", "A phase had been dropped due to a blown fuse"], answer: 0, explain: "The scenario concludes a partially damaged cable was intermittently leaking current to earth under vibration.", why: ["", "The loose-terminal fault is from a different scenario (the intermittent line stoppage), not this one", "Breaker sizing isn't the cause identified in this specific scenario", "A dropped phase is the cause from the rough-running-motor scenario, not this one"] },
+              { q: "Per the repair exercise's lesson, why should cable be inspected along its full run, not just at the terminals?", choices: ["Because damage can occur anywhere along the cable, not only at the connection points", "Because terminals never fail in industrial wiring", "Because full-run inspection replaces the need for terminal torque checks", "Because cable damage is always visible from the terminals alone"], answer: 0, explain: "The lesson explicitly states to inspect cable condition along its full run, not just the terminals — since the actual damage was mid-cable, invisible from the ends.", why: ["", "This module's other scenario (the intermittent line stoppage) shows terminals absolutely can fail", "Terminal torque and full-cable inspection are separate, both-necessary checks", "The scenario's whole point is that the damage was NOT visible just from the terminals"] },
+              { q: "Per the practical exercise, what determines how much a terminal should be tightened?", choices: ["Its rated torque specification", "Whatever feels tight enough by hand", "The color of the wire being terminated", "The length of the stripped conductor"], answer: 0, explain: "Step 4 explicitly calls for torquing every terminal to its rated specification, not by feel.", why: ["", "The terminals card explicitly warns against tightening by feel", "Wire color relates to phase/neutral/earth identification, not torque specification", "Strip length is a separate step (step 1), unrelated to torque value"] }
+            ] }
+          ]
+        },
+        {
+          id: "wiring-reference",
+          title: "Quick Reference: Wire Gauge & Protection",
+          tag: "Reference",
+          blocks: [
+            { type: "table", title: "A fast lookup for everyday wiring decisions", headers: ["Gauge (AWG)", "Typical Rating", "Common Use", "Typical Protection"], rows: [
+              ["18", "~10A", "Control wiring", "1–5A fuse"],
+              ["14", "~15A", "Lighting circuits", "15A breaker"],
+              ["12", "~20A", "General power outlets", "20A breaker"],
+              ["10", "~30A", "Small motor circuits", "30A breaker / overload"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the reference table, what is 18 AWG typically used for?", choices: ["Control wiring", "Lighting circuits", "General power outlets", "Small motor circuits"], answer: 0, explain: "The table lists 18 AWG's common use as control wiring, with a typical rating of ~10A.", why: ["", "That's 14 AWG's common use, not 18's", "That's 12 AWG's common use, not 18's", "That's 10 AWG's common use, not 18's"] },
+              { q: "Per the reference table, what typical protection is listed for 14 AWG wire?", choices: ["15A breaker", "1–5A fuse", "20A breaker", "30A breaker / overload"], answer: 0, explain: "The table lists 14 AWG's typical protection as a 15A breaker, matching its ~15A rating.", why: ["", "That's 18 AWG's typical protection, not 14's", "That's 12 AWG's typical protection, not 14's", "That's 10 AWG's typical protection, not 14's"] },
+              { q: "Per the reference table, what is 12 AWG's typical rating?", choices: ["~20A", "~10A", "~15A", "~30A"], answer: 0, explain: "The table lists 12 AWG's typical rating as ~20A, used for general power outlets.", why: ["", "That's 18 AWG's typical rating, not 12's", "That's 14 AWG's typical rating, not 12's", "That's 10 AWG's typical rating, not 12's"] },
+              { q: "Per the reference table, what is 10 AWG commonly used for?", choices: ["Small motor circuits", "Control wiring", "Lighting circuits", "General power outlets"], answer: 0, explain: "The table lists 10 AWG's common use as small motor circuits, with ~30A typical rating.", why: ["", "That's 18 AWG's common use, not 10's", "That's 14 AWG's common use, not 10's", "That's 12 AWG's common use, not 10's"] },
+              { q: "Per the reference table, what typical protection is listed for 10 AWG wire?", choices: ["30A breaker / overload", "1–5A fuse", "15A breaker", "20A breaker"], answer: 0, explain: "The table lists 10 AWG's typical protection as a 30A breaker or overload device.", why: ["", "That's 18 AWG's typical protection, not 10's", "That's 14 AWG's typical protection, not 10's", "That's 12 AWG's typical protection, not 10's"] }
+            ] }
+          ]
+        },
+        {
+          id: "wiring-wrapup",
+          title: "Module Wrap-Up",
+          tag: "You Can Now…",
+          blocks: [
+            { type: "checklist", items: [
+              "Explain three-phase power and read its wiring labels",
+              "Select the correct wire gauge and protection for a load",
+              "Make a reliable, correctly torqued terminal connection",
+              "Read a basic ladder diagram and locate a contactor's role",
+              "Apply lockout/tagout correctly before working on equipment"
+            ]},
+            { type: "golden", text: "Check the terminals before you suspect the component — most faults live there." },
+            { type: "check", questions: [
+              { q: "What is the golden rule of this module?", choices: ["Check the terminals before you suspect the component — most faults live there", "Always suspect the motor before checking its wiring", "Lockout/tagout is optional if the equipment looks switched off", "Wire gauge never matters as long as a breaker is fitted"], answer: 0, explain: "The golden rule explicitly states to check the terminals before suspecting the component, since most faults live there.", why: ["", "The rough-running-motor scenario shows wiring, not the motor itself, was the real cause", "The lockout/tagout warning signs explicitly warn against assuming equipment is off without your own lock", "The wire-selection card explicitly warns that undersized wire is a fire risk, regardless of breaker presence"] },
+              { q: "Per the checklist, what should you be able to explain about three-phase power?", choices: ["Three-phase power and how to read its wiring labels", "How to program a PLC's ladder logic", "How to calibrate a drifting sensor", "How to terminate an RS-485 network"], answer: 0, explain: "The checklist names explaining three-phase power and reading its wiring labels as a core skill.", why: ["", "PLC programming belongs to the PLC & Automation module, not this one", "Sensor calibration belongs to the Sensors & Actuators module, not this one", "RS-485 termination belongs to the Industrial Communication module, not this one"] },
+              { q: "Per the checklist, what should you be able to select for a given load?", choices: ["The correct wire gauge and protection", "The correct motor driver IC", "The correct PLC scan time", "The correct Modbus address"], answer: 0, explain: "The checklist names selecting the correct wire gauge and protection for a load as a core skill.", why: ["", "Motor driver selection belongs to the Motors & Drives module, not this one", "PLC scan time belongs to the PLC & Automation module, not this one", "Modbus addressing belongs to the Industrial Communication module, not this one"] },
+              { q: "Per the checklist, what kind of terminal connection should you be able to make?", choices: ["A reliable, correctly torqued connection", "A connection with no ferrule, ever", "A connection tightened only by feel", "A connection that skips strain relief"], answer: 0, explain: "The checklist names making a reliable, correctly torqued terminal connection as a core skill.", why: ["", "The connectors card explicitly names the ferrule as protecting stranded wire ends — it isn't to be skipped", "The reliable-connection list explicitly calls for torquing to spec, not by feel", "The reliable-connection list explicitly includes strain relief as a required step"] },
+              { q: "Per the checklist, what should you be able to apply correctly before working on equipment?", choices: ["Lockout/tagout", "A ladder logic rewrite", "A phase sequence reversal", "A conduit fill recalculation"], answer: 0, explain: "The checklist names applying lockout/tagout correctly before working on equipment as this module's final skill.", why: ["", "Ladder logic rewriting isn't the safety procedure named in this checklist item", "Phase sequence reversal isn't a standard pre-work safety procedure named here", "Conduit fill recalculation isn't the safety procedure named in this checklist item"] }
+            ] }
+          ]
+        }
+      ]
+    },
   ],
 
   // ================================================================ QUESTIONS
