@@ -344,17 +344,26 @@
   }
 
   function mountCheckWidget(el, block, moduleId, topicId) {
-    var s = { selected: null, revealed: false };
+    // A check block is either the newer { questions: [...] } form (5+ questions,
+    // each with a "why" explanation per wrong choice) or the older single-question
+    // { q, choices, answer, explain } form. Both run through the same engine —
+    // the older form is treated as a 1-question set with no per-choice "why" text.
+    var questions = block.questions || [{ q: block.q, choices: block.choices, answer: block.answer, explain: block.explain, why: [] }];
+    var s = { qIndex: 0, selected: null, revealed: false };
 
     function paint() {
       if (state.readTopics[topicId]) {
         el.innerHTML = '<div class="check-passed">✅ <b>Nailed it</b> — this topic is marked learned.</div>';
         return;
       }
-      var choices = block.choices.map(function (c, i) {
+      var q = questions[s.qIndex];
+      var isLast = s.qIndex === questions.length - 1;
+      var gotItRight = s.revealed && s.selected === q.answer;
+
+      var choices = q.choices.map(function (c, i) {
         var cls = "";
         if (s.revealed) {
-          if (i === block.answer) cls = " correct";
+          if (i === q.answer) cls = " correct";
           else if (i === s.selected) cls = " wrong";
         }
         return (
@@ -363,13 +372,31 @@
           '</button>'
         );
       }).join("");
+
+      var wrongReasons = "";
+      if (s.revealed) {
+        var reasonItems = q.choices.map(function (c, i) {
+          if (i === q.answer) return "";
+          var why = q.why && q.why[i];
+          if (!why) return "";
+          return '<li><b>' + String.fromCharCode(65 + i) + '.</b> ' + escapeHtml(why) + '</li>';
+        }).join("");
+        if (reasonItems) {
+          wrongReasons = '<div class="wrong-reasons-box show"><b>Why the others are wrong:</b><ul>' + reasonItems + '</ul></div>';
+        }
+      }
+
       el.innerHTML = (
         '<div class="check-widget">' +
           '<div class="check-label">🧠 Quick Check — answer to mark this topic learned</div>' +
-          '<div class="check-q">' + escapeHtml(block.q) + '</div>' +
+          (questions.length > 1 ? '<div class="check-progress">Question ' + (s.qIndex + 1) + ' of ' + questions.length + '</div>' : "") +
+          '<div class="check-q">' + escapeHtml(q.q) + '</div>' +
           '<div class="choice-list">' + choices + '</div>' +
-          (s.revealed ? '<div class="explain-box show"><b>Why: </b><span>' + escapeHtml(block.explain) + '</span></div>' : "") +
-          (s.revealed && s.selected !== block.answer ? '<button class="sim-retry-btn check-retry">Try Again</button>' : "") +
+          (s.revealed ? '<div class="explain-box show"><b>Why: </b><span>' + escapeHtml(q.explain) + '</span></div>' : "") +
+          wrongReasons +
+          (s.revealed && !gotItRight ? '<button class="sim-retry-btn check-retry">Try Again</button>' : "") +
+          (gotItRight && !isLast ? '<button class="next-btn check-next">Next Question →</button>' : "") +
+          (gotItRight && isLast ? '<button class="next-btn check-next">Finish — Mark Learned</button>' : "") +
         '</div>'
       );
       wire();
@@ -381,11 +408,7 @@
           if (s.revealed) return;
           s.selected = parseInt(btn.getAttribute("data-idx"), 10);
           s.revealed = true;
-          if (s.selected === block.answer) {
-            markTopicLearned(moduleId, topicId);
-          } else {
-            paint();
-          }
+          paint();
         });
       });
       var retryBtn = el.querySelector(".check-retry");
@@ -394,6 +417,19 @@
           s.selected = null;
           s.revealed = false;
           paint();
+        });
+      }
+      var nextBtn = el.querySelector(".check-next");
+      if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+          if (s.qIndex === questions.length - 1) {
+            markTopicLearned(moduleId, topicId);
+          } else {
+            s.qIndex += 1;
+            s.selected = null;
+            s.revealed = false;
+            paint();
+          }
         });
       }
     }
