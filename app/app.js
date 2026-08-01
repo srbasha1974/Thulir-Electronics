@@ -67,6 +67,18 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
 
+  function resetProgress() {
+    if (!confirm("Reset all progress? This clears your XP, badges, streak, and every topic marked learned. This can't be undone.")) {
+      return;
+    }
+    state = defaultState();
+    saveState();
+    document.getElementById("trophy-overlay").classList.remove("show");
+    renderScoreboard();
+    renderSections();
+    renderQuiz();
+  }
+
   function addXP(amount) {
     state.xp += amount;
   }
@@ -759,8 +771,13 @@
       '<div class="blk-title" style="margin-top:6px">Trophies</div>' +
       '<div class="trophy-grid">' + trophies + '</div>' +
       '<div class="blk-title" style="margin-top:6px">Module Quiz Mastery</div>' +
-      '<div style="display:flex;flex-direction:column;gap:8px">' + mastery + '</div>'
+      '<div style="display:flex;flex-direction:column;gap:8px">' + mastery + '</div>' +
+      '<div class="result-actions" style="justify-content:flex-end;margin-top:6px">' +
+        '<button class="danger" id="reset-progress-btn">Reset Progress</button>' +
+      '</div>'
     );
+
+    document.getElementById("reset-progress-btn").addEventListener("click", resetProgress);
   }
 
   // ---------------------------------------------------------- TABS

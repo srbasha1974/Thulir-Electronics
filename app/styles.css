@@ -633,6 +633,8 @@ table.blk-table tr:last-child td { border-bottom: none; }
   cursor: pointer;
 }
 .result-actions button.primary { background: var(--accent); border-color: var(--accent); color: white; }
+.result-actions button.danger { background: transparent; border-color: rgba(255,91,91,0.4); color: #ff5b5b; }
+.result-actions button.danger:hover { background: rgba(255,91,91,0.12); }
 
 /* -------- Trophy modal -------- */
 .modal-overlay {
