@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thulir Bench Quest</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="toast-stack"></div>
+
+<div class="app-shell">
+
+  <div class="brand-row">
+    <div class="brand">
+      <span class="spark">⚡</span>
+      <div>
+        Thulir Bench Quest
+        <small>Electronics training, gamified</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreboard" id="scoreboard" title="Tap for trophy room">
+    <div class="sb-level">
+      <div class="sb-level-badge" id="sb-level-badge"><span id="sb-level-num">1</span></div>
+      <div>
+        <div class="sb-level-label">Level</div>
+        <div class="sb-xp-text" id="sb-xp-text">0 / 150 XP</div>
+      </div>
+    </div>
+    <div class="sb-xpbar-wrap">
+      <div class="sb-xpbar"><div id="sb-xp-fill" style="width:0%"></div></div>
+    </div>
+    <div class="sb-stat">
+      <div class="val">⭐ <span id="sb-xp-total">0</span></div>
+      <div class="lbl">Total XP</div>
+    </div>
+    <div class="sb-stat">
+      <div class="val">🔥 <span id="sb-streak">0</span></div>
+      <div class="lbl">Streak</div>
+    </div>
+    <div class="sb-stat">
+      <div class="val">🎯 <span id="sb-accuracy">0%</span></div>
+      <div class="lbl">Accuracy</div>
+    </div>
+    <div class="sb-stat">
+      <div class="val">🏆 <span id="sb-badges">0/9</span></div>
+      <div class="lbl">Badges</div>
+    </div>
+    <div class="sb-trophy-hint">Tap for trophy room →</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="sections">📖 Learn: Sections</button>
+    <button class="tab-btn" data-tab="quiz">🎯 Quiz: Questions</button>
+  </div>
+
+  <div class="panel active" id="panel-sections"></div>
+  <div class="panel" id="panel-quiz"></div>
+
+</div>
+
+<div class="modal-overlay" id="trophy-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>🏆 Trophy Room</h2>
+      <button class="modal-close" id="trophy-close">✕</button>
+    </div>
+    <div id="trophy-modal-body"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="diagrams.js"></script>
+<script src="sims.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

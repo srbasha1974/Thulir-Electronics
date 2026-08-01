@@ -1,0 +1,10 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "thulir-electronics-app",
+      "url": "http://localhost:8746",
+      "port": 8746
+    }
+  ]
+}
