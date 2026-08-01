@@ -3503,6 +3503,300 @@ window.THULIR_DATA = {
         }
       ]
     },
+
+    // ============================================================ MODULE 14: SYSTEMATIC TROUBLESHOOTING
+    {
+      id: "systematic-troubleshooting",
+      code: "MOD·14",
+      icon: "🧭",
+      color: "#ff6f3c",
+      title: "Systematic Troubleshooting",
+      subtitle: "Every skill from this course, brought together into one repeatable method.",
+      cards: [
+        {
+          id: "troubleshoot-overview",
+          title: "The Five-Step Method",
+          tag: "Overview",
+          blocks: [
+            { type: "intro", text: "Have you ever replaced a part, hoped for the best, and been wrong? Almost every technician has — by the end of this module, guessing won't be the plan anymore." },
+            { type: "table", title: "One repeatable process, for every fault you'll ever meet", headers: ["Step", "What It Does", "Step Number"], rows: [
+              ["Observe", "Gather every clue before touching anything", "Step 1"],
+              ["Isolate", "Narrow the fault to one block", "Step 2"],
+              ["Test", "Measure, don't guess", "Step 3"],
+              ["Verify", "Confirm the fix actually holds", "Step 4"],
+              ["Document", "Record it for next time", "Step 5"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the table, what does the Observe step do?", choices: ["Gather every clue before touching anything", "Narrow the fault to one block", "Measure, don't guess", "Confirm the fix actually holds"], answer: 0, explain: "The table describes Observe as gathering every clue before touching anything, listed as Step 1.", why: ["", "That describes Isolate, not Observe", "That describes Test, not Observe", "That describes Verify, not Observe"] },
+              { q: "Per the table, what step number is Isolate?", choices: ["Step 2", "Step 1", "Step 3", "Step 4"], answer: 0, explain: "The table lists Isolate as Step 2 — narrowing the fault to one block.", why: ["", "Step 1 is Observe, not Isolate", "Step 3 is Test, not Isolate", "Step 4 is Verify, not Isolate"] },
+              { q: "Per the table, what does the Test step do?", choices: ["Measure, don't guess", "Gather every clue before touching anything", "Narrow the fault to one block", "Record it for next time"], answer: 0, explain: "The table describes Test as 'Measure, don't guess', listed as Step 3.", why: ["", "That describes Observe, not Test", "That describes Isolate, not Test", "That describes Document, not Test"] },
+              { q: "Per the table, what step number is Verify?", choices: ["Step 4", "Step 2", "Step 3", "Step 5"], answer: 0, explain: "The table lists Verify as Step 4 — confirming the fix actually holds.", why: ["", "Step 2 is Isolate, not Verify", "Step 3 is Test, not Verify", "Step 5 is Document, not Verify"] },
+              { q: "Per the table, what does the Document step do, and what step number is it?", choices: ["Record it for next time — Step 5", "Confirm the fix actually holds — Step 4", "Measure, don't guess — Step 3", "Gather every clue before touching anything — Step 1"], answer: 0, explain: "The table describes Document as recording it for next time, listed as Step 5, the final step.", why: ["", "That describes Verify, Step 4, not Document", "That describes Test, Step 3, not Document", "That describes Observe, Step 1, not Document"] }
+            ] }
+          ]
+        },
+        {
+          id: "troubleshoot-mindset",
+          title: "Why Random Replacement Fails",
+          tag: "Mindset",
+          blocks: [
+            { type: "definition",
+              plain: "Replacing parts without diagnosis fixes a fault only by accident, and wastes time and stock when it doesn't.",
+              picture: "Like changing every fuse in a car because one blew, instead of finding out why it blew in the first place.",
+              facts: "A part replaced without diagnosis often fails again — the actual cause was never addressed at all." },
+            { type: "table", title: "Two approaches to the exact same fault", headers: ["Aspect", "Systematic Approach", "Guessing Approach"], rows: [
+              ["Before touching parts", "Diagnosis narrows the fault before any part is touched", "Parts are swapped based on a hunch"],
+              ["Cost", "One correct part, ordered and fitted once", "Stock and time spent on parts that were never faulty"],
+              ["Outcome", "The actual cause is found and fixed", "The real cause often remains, waiting to fail again"]
+            ]},
+            { type: "numbered", title: "Reading Symptoms Correctly", items: [
+              { title: "1. Intermittent vs constant", desc: "An intermittent fault points at a connection; a constant one points at a part" },
+              { title: "2. Related vs unrelated", desc: "Two symptoms together may share one cause, or may be coincidence" },
+              { title: "3. Thermal-dependent", desc: "A fault that appears only when warm often points at a specific part" },
+              { title: "4. Load-dependent", desc: "A fault only under load points at a part that fails under stress" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the definition, why does replacing parts without diagnosis only fix a fault 'by accident'?", choices: ["Because it wastes time and stock when it doesn't happen to hit the actual cause", "Because it always fixes the fault correctly every time", "Because parts replaced without diagnosis never fail again", "Because diagnosis is never actually necessary for a real repair"], answer: 0, explain: "The definition states replacing without diagnosis fixes a fault only by accident, wasting time and stock when it misses the real cause.", why: ["", "The definition explicitly frames this as accidental success, not a reliable fix", "The facts line explicitly states a part replaced without diagnosis often fails again", "This entire card exists to argue diagnosis IS necessary"] },
+              { q: "Per the comparison table, what's the outcome of the guessing approach, according to this card?", choices: ["The real cause often remains, waiting to fail again", "The actual cause is always found and fixed", "Parts and time are never wasted", "It's always faster than the systematic approach"], answer: 0, explain: "The table lists the guessing approach's outcome as the real cause often remaining, waiting to fail again.", why: ["", "That's the systematic approach's outcome, not the guessing approach's", "The table explicitly lists wasted stock and time under the guessing approach", "The table doesn't make a speed claim — it's about outcome and cost, not speed"] },
+              { q: "Per the reading-symptoms list, what does an intermittent fault typically point at, versus a constant one?", choices: ["An intermittent fault points at a connection; a constant one points at a part", "Both intermittent and constant faults always point at the exact same cause", "An intermittent fault always means the whole board must be replaced", "A constant fault can never be diagnosed with any confidence"], answer: 0, explain: "The list explicitly distinguishes intermittent faults (pointing at a connection) from constant ones (pointing at a part).", why: ["", "The list explicitly distinguishes these as different symptom patterns with different likely causes", "Nothing in this list suggests intermittent faults require whole-board replacement", "Constant faults are described as pointing clearly at a specific part, which aids diagnosis"] },
+              { q: "Per the reading-symptoms list, what does a load-dependent fault suggest?", choices: ["A part that fails under stress", "A part that has already completely failed at all times", "A wiring issue that only affects intermittent faults", "A fault that can only be thermal, never load-related"], answer: 0, explain: "The list states a fault only under load points at a part that fails under stress.", why: ["", "A completely failed part would show a constant fault regardless of load, not specifically a load-dependent one", "The list treats load-dependent as its own distinct category, not tied specifically to intermittent connection faults", "Thermal-dependent and load-dependent are described as two separate, distinct symptom patterns"] },
+              { q: "Per the reading-symptoms list, why might two symptoms occurring together need careful interpretation?", choices: ["They may share one cause, or may simply be coincidence", "Two symptoms occurring together always share the exact same root cause", "Symptom co-occurrence is never relevant to diagnosis", "This is only relevant to thermal-dependent faults"], answer: 0, explain: "The list explicitly states related-vs-unrelated symptoms may share one cause, or may be coincidence — requiring careful judgment either way.", why: ["", "The list explicitly says it MAY be one cause, not always", "The list explicitly treats this as a meaningful diagnostic consideration", "This item applies broadly to reading symptoms, not narrowly to thermal faults"] }
+            ] }
+          ]
+        },
+        {
+          id: "troubleshoot-mindset-example",
+          title: "Real Example: Three Parts Replaced, Still Broken",
+          tag: "Mindset Example",
+          blocks: [
+            { type: "definition",
+              plain: "A board has had three different components replaced already, and the original fault is still there.",
+              picture: "Like repainting a wall three times to hide a crack that keeps showing through — the crack was never actually the paint's fault.",
+              facts: "Starting over with the five-step method, beginning with observation rather than a fourth guess, revealed the actual fault was a cracked track none of the three replaced parts had anything to do with." },
+            { type: "numbered", title: "Diagnosing after three failed guesses", items: [
+              { title: "What you do", desc: "Start over with the five-step method, beginning with observation, not a fourth guess" },
+              { title: "What it tells you", desc: "The actual fault was a cracked track none of the three replaced parts had anything to do with" }
+            ]},
+            { type: "check", questions: [
+              { q: "In this scenario, what was the actual root cause of the board's fault?", choices: ["A cracked track none of the three replaced parts had anything to do with", "A fourth, undiscovered faulty component", "A firmware corruption issue", "A loose connector that was never checked"], answer: 0, explain: "The scenario concludes the actual fault was a cracked track, unrelated to any of the three parts already replaced.", why: ["", "The scenario identifies a cracked track, not a fourth faulty part", "Firmware corruption isn't the cause identified in this specific scenario", "A loose connector isn't the cause identified in this specific scenario"] },
+              { q: "Per the scenario's insight, what was the fastest fix after three failed guesses?", choices: ["Starting over, properly, with the five-step method", "Immediately replacing a fourth part on another hunch", "Ordering every possible replacement part in bulk", "Escalating without doing any further diagnosis"], answer: 0, explain: "The insight line explicitly states sometimes the fastest fix is starting over, properly — with the systematic method, not another guess.", why: ["", "The whole scenario is a critique of exactly this kind of repeated guessing", "Bulk-ordering parts isn't the lesson this scenario teaches", "Starting over with the method IS a form of diagnosis, not skipping it"] },
+              { q: "Per this scenario, what did starting over with the five-step method begin with?", choices: ["Observation", "A fourth part replacement", "Documentation", "Verification of the previous three fixes"], answer: 0, explain: "The scenario explicitly states starting over began with observation, not a fourth guess.", why: ["", "The scenario explicitly rejects a fourth guess as the starting point", "Documentation is the final step of the method, not the starting point described here", "Verification is step 4 of the method; this scenario restarts from step 1, observation"] },
+              { q: "What does this scenario illustrate about the relationship between guessing and wasted effort?", choices: ["Three guesses wasted three parts, while proper diagnosis found the real cause the guesses never touched", "Guessing is always faster than proper diagnosis, even if it takes several attempts", "Replacing parts is never wasteful, regardless of whether they were actually faulty", "The number of parts replaced has no bearing on whether the fault gets fixed"], answer: 0, explain: "The scenario shows three wasted part replacements before the real cause — a cracked track — was found through proper diagnosis.", why: ["", "Three failed guesses before finding the real cause argues against guessing being faster here", "The scenario's whole point is that the three replaced parts were unrelated to the actual fault — a wasted cost", "The scenario explicitly ties the wasted replacements to failing to find the actual fault"] },
+              { q: "Why is this scenario placed right after the 'Reading Symptoms Correctly' card in this module?", choices: ["It demonstrates the real cost of skipping systematic symptom reading in favor of repeated guessing", "It has no connection to the previous card at all", "It proves reading symptoms is unnecessary if you replace enough parts", "It shows that guessing eventually always works given enough attempts"], answer: 0, explain: "The scenario is a concrete illustration of the mindset card's argument — that guessing wastes resources while proper, symptom-based diagnosis actually finds the cause.", why: ["", "The scenario directly reinforces this module's central mindset argument", "The scenario argues the opposite — proper diagnosis, not more guessing, found the cause", "The scenario shows three guesses failed before the real cause was found through the systematic method, not through more guessing"] }
+            ] }
+          ]
+        },
+        {
+          id: "troubleshoot-method-1-2",
+          title: "The Method: Observe & Isolate",
+          tag: "Method (Steps 1–2)",
+          blocks: [
+            { type: "numbered", title: "The Five-Step Method", items: [
+              { title: "1. Observe", desc: "Gather symptoms, history, and context before touching anything" },
+              { title: "2. Isolate", desc: "Narrow the fault down to one block or stage" },
+              { title: "3. Test", desc: "Measure to confirm, rather than assume, where the fault sits" },
+              { title: "4. Verify", desc: "Confirm the fix actually resolves the original symptom" }
+            ]},
+            { type: "definition",
+              plain: "Before touching a tool, gather every clue — what happened, when, and what changed right before it.",
+              picture: "Like a doctor taking a history before ordering a single test.",
+              facts: "A clear symptom description often points straight at the likely block, before a meter is even picked up." },
+            { type: "definition",
+              plain: "Use the block diagram thinking from Module 5 to confirm which stage is working, and which isn't.",
+              picture: "Like checking each room's lights before assuming which single bulb has blown.",
+              facts: "Isolating the block first turns a board-wide search into a search of just a handful of parts." },
+            { type: "definition",
+              plain: "A fault tree lists possible causes for a symptom, each with a quick test to confirm or rule it out.",
+              picture: "Like a flowchart of yes/no questions, each one eliminating a branch of possible causes.",
+              facts: "Even a rough, mental fault tree beats jumping straight to the most familiar or convenient part." },
+            { type: "check", questions: [
+              { q: "Per the five-step method list, what happens in Step 1: Observe?", choices: ["Gather symptoms, history, and context before touching anything", "Narrow the fault down to one block or stage", "Measure to confirm where the fault sits", "Confirm the fix actually resolves the symptom"], answer: 0, explain: "Step 1, Observe, is gathering symptoms, history, and context before touching anything.", why: ["", "That's Step 2, Isolate, not Step 1", "That's Step 3, Test, not Step 1", "That's Step 4, Verify, not Step 1"] },
+              { q: "Per the Step 2 definition, what thinking from an earlier module does isolating a faulty block use?", choices: ["Block diagram thinking", "Half-split method thinking", "Fault tree thinking", "Signal injection thinking"], answer: 0, explain: "The definition explicitly credits block diagram thinking (from the Circuit Building module) as what confirms which stage is working.", why: ["", "Half-split method is a separate technique covered later in this module, not what Step 2 explicitly names", "Fault tree is a separate, related concept from a different card, not what Step 2 explicitly names", "Signal injection is a separate technique covered later in this module, not what Step 2 explicitly names"] },
+              { q: "Per the Step 2 definition's facts line, why does isolating the block first matter so much?", choices: ["It turns a board-wide search into a search of just a handful of parts", "It eliminates the need for the Observe step entirely", "It guarantees the fault will be found without any testing", "It only applies to boards with a single component"], answer: 0, explain: "The facts line states isolating the block first turns a board-wide search into a search of just a handful of parts — a huge narrowing of scope.", why: ["", "Observe (step 1) still comes first, feeding into isolation, not eliminated by it", "Isolation narrows the search — step 3 (test) is still needed to confirm the fault", "Nothing in this card restricts isolation's value to single-component boards"] },
+              { q: "Per the fault tree definition, what does a fault tree list?", choices: ["Possible causes for a symptom, each with a quick test to confirm or rule it out", "Every part ever used in the entire repair shop", "A single guaranteed cause for any given symptom", "Only causes that require replacing the whole board"], answer: 0, explain: "The definition states a fault tree lists possible causes for a symptom, each paired with a quick confirming or ruling-out test.", why: ["", "A fault tree is scoped to one symptom's possible causes, not the whole shop's inventory", "A fault tree explicitly lists MULTIPLE possible causes, not a single guaranteed one", "Nothing in this card ties fault trees specifically to whole-board replacement causes"] },
+              { q: "Per the fault tree definition's facts line, how does even a rough mental fault tree compare to a convenient guess?", choices: ["It beats jumping straight to the most familiar or convenient part", "It's always slower and less effective than a convenient guess", "It has no advantage over guessing at all", "It only works when written down formally, never mentally"], answer: 0, explain: "The facts line states even a rough, mental fault tree beats jumping straight to the most familiar or convenient part.", why: ["", "The facts line explicitly says the fault tree approach beats guessing, not the reverse", "The facts line explicitly claims a real advantage over guessing", "The facts line explicitly says 'even a rough, mental' version is enough — formal writing isn't required"] }
+            ] }
+          ]
+        },
+        {
+          id: "troubleshoot-method-3-5",
+          title: "The Method: Test, Verify & Document",
+          tag: "Method (Steps 3–5)",
+          blocks: [
+            { type: "numbered", title: "Step 3: Test & Measure", items: [
+              { title: "1. Confirm power first", desc: "Most faults trace back to a missing or wrong supply somewhere" },
+              { title: "2. Measure against expected values", desc: "A datasheet or known-good board tells you what 'correct' looks like" },
+              { title: "3. Use the right tool for the fault", desc: "Multimeter, scope, or ESR meter — matched to what you suspect" },
+              { title: "4. Re-test to confirm", desc: "One reading can be a fluke; a repeated one rarely is" }
+            ]},
+            { type: "definition",
+              plain: "After a repair, re-test under the same conditions that originally revealed the fault.",
+              picture: "Like re-running the exact test that failed before, not just a quick glance that it powers on.",
+              facts: "A fix that isn't verified under the original conditions can still fail the moment it leaves the bench." },
+            { type: "numbered", title: "Step 5: Document the Repair", items: [
+              { title: "1. What the symptom was", desc: "Written in plain terms, exactly as the customer or line described it" },
+              { title: "2. What the actual cause was", desc: "The confirmed root cause, not just the part that was replaced" },
+              { title: "3. What was tested", desc: "Key readings taken, for reference if the fault ever returns" },
+              { title: "4. What was replaced", desc: "Part numbers and values, for stock and future reference" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the Test & Measure list, what should be confirmed first?", choices: ["Power", "The exact firmware version", "The board's serial number", "The customer's original complaint wording"], answer: 0, explain: "Step 1 of Test & Measure is confirming power first, since most faults trace back to a missing or wrong supply.", why: ["", "Firmware version isn't the first check in this specific step-3 list", "Serial number isn't the first check in this specific step-3 list", "Complaint wording is part of the Observe step, not this Test step"] },
+              { q: "Per the Test & Measure list, why should you re-test to confirm a reading?", choices: ["One reading can be a fluke; a repeated one rarely is", "Re-testing is purely a formality with no diagnostic value", "A single reading is always sufficient and never needs confirming", "Re-testing replaces the need for using the right tool"], answer: 0, explain: "Step 4 explicitly states one reading can be a fluke, but a repeated one rarely is — re-testing adds confidence.", why: ["", "The list explicitly frames re-testing as valuable, not just formal", "The list explicitly recommends re-testing, implying a single reading alone isn't always sufficient confirmation", "Tool selection (step 3) and re-testing (step 4) are separate, complementary steps"] },
+              { q: "Per the Verify definition, why should you re-test under the same conditions the fault originally appeared in?", choices: ["A fix that isn't verified under the original conditions can still fail the moment it leaves the bench", "Original conditions are irrelevant once a part has been replaced", "A quick glance that it powers on is always sufficient verification", "Verification only matters for faults that were constant, never intermittent ones"], answer: 0, explain: "The facts line explicitly warns a fix not verified under original conditions can still fail once it leaves the bench.", why: ["", "The facts line explicitly says original conditions DO matter for verification", "The definition explicitly contrasts this with 'just a quick glance that it powers on' as insufficient", "Nothing in this card restricts verification to constant faults only — intermittent faults especially need original-condition testing"] },
+              { q: "Per the Document list, what should be recorded about the cause, specifically?", choices: ["The confirmed root cause, not just the part that was replaced", "Only the part number, with no explanation of why it failed", "Nothing — cause doesn't need documenting, only the fix", "Only the technician's personal guess about what might have caused it"], answer: 0, explain: "Step 2 of Document explicitly calls for the confirmed root cause, not just the part that was replaced.", why: ["", "The list explicitly separates 'what was replaced' (step 4) from 'what the actual cause was' (step 2) — both matter", "The list explicitly names cause as one of four things to document", "The list calls for the CONFIRMED cause, not an unconfirmed guess"] },
+              { q: "Per the Document list, why does documenting 'what was tested' matter?", choices: ["It provides key readings for reference if the fault ever returns", "It's only useful for warranty paperwork, with no diagnostic value", "Testing never needs to be documented, only the final fix", "It replaces the need to document the symptom at all"], answer: 0, explain: "Step 3 states documenting what was tested provides key readings for reference if the fault ever returns.", why: ["", "The list frames this as diagnostically useful reference material, not just paperwork", "The list explicitly names testing as one of the four things to document", "Symptom (step 1) and testing (step 3) are separate, both-necessary documentation items"] }
+            ] }
+          ]
+        },
+        {
+          id: "troubleshoot-techniques",
+          title: "Half-Splitting, Tracing & Comparison Testing",
+          tag: "Techniques",
+          blocks: [
+            { type: "definition",
+              plain: "Test roughly halfway along a signal path — a good result means the fault is beyond that point, bad means before it.",
+              picture: "Like guessing a number by always splitting the remaining range in half, not counting up from one.",
+              facts: "On a long signal chain, half-splitting finds a fault in far fewer tests than checking stage by stage." },
+            { type: "table", title: "Signal tracing vs signal injection", headers: ["Aspect", "Signal Tracing", "Signal Injection"], rows: [
+              ["What it follows", "Follows a signal that's already present in the circuit", "Introduces a known test signal at a chosen point"],
+              ["Best for", "Confirming a live, running fault", "When no natural signal is present to trace"],
+              ["Equipment needed", "No extra equipment beyond a meter or scope", "Needs a signal generator, from the Test & Measurement module"]
+            ]},
+            { type: "definition",
+              plain: "Comparing readings against an identical, working board instantly reveals which values are actually wrong.",
+              picture: "Like comparing a patient's results against a healthy baseline instead of guessing what's normal.",
+              facts: "It removes the guesswork of 'is this reading normal?' — the known-good board simply shows you." },
+            { type: "numbered", title: "Where Faults Commonly Hide", items: [
+              { title: "1. Connectors & flex points", desc: "Repeated movement and vibration work connections loose" },
+              { title: "2. High-heat areas", desc: "Components near heat sources age and fail faster" },
+              { title: "3. Electrolytic capacitors", desc: "The most common wear-out part on any power board" },
+              { title: "4. Corrosion-prone edges", desc: "Board edges and exposed metal near moisture or handling" }
+            ]},
+            { type: "definition",
+              plain: "An audio amplifier with six cascaded stages produces no output at all, anywhere in the chain.",
+              picture: "Like guessing a hidden number between 1 and 64 in just six tries by always halving the range, instead of counting up from one.",
+              facts: "Testing at stage three first — signal present there means the fault is in stages four to six — narrowed a silent six-stage amplifier down to a single faulty stage in just two tests, not six." },
+            { type: "numbered", title: "Half-splitting the amplifier", items: [
+              { title: "What you do", desc: "Test at stage three first — signal present there means the fault is in stages four to six" },
+              { title: "What it tells you", desc: "Two tests, not six, narrowed a silent six-stage amplifier down to a single faulty stage" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the half-split definition, what does a good (signal-present) result at the halfway test point mean?", choices: ["The fault is beyond that point", "The fault is before that point", "There is no fault anywhere in the chain", "The test must be repeated from the very start of the chain"], answer: 0, explain: "The definition states a good result means the fault is beyond that halfway point, not before it.", why: ["", "That's what a BAD result at the halfway point would mean, the reverse", "A good result at one test point doesn't rule out a fault elsewhere in the remaining half", "Half-splitting specifically avoids restarting from the very beginning — that's the whole efficiency gain"] },
+              { q: "Per the comparison table, when is signal injection the better choice over signal tracing?", choices: ["When no natural signal is present to trace", "When you want to avoid using any equipment at all", "Only when the circuit is completely powered off", "Never — signal tracing is always sufficient"], answer: 0, explain: "The table states signal injection works well when no natural signal is present to trace, unlike tracing which follows an existing signal.", why: ["", "The table explicitly notes signal injection needs a signal generator — it isn't equipment-free", "The table doesn't specify power state as the deciding factor between tracing and injection", "The table explicitly presents both as valid, complementary techniques for different situations"] },
+              { q: "Per the comparison table, what equipment does signal tracing require beyond a meter or scope?", choices: ["No extra equipment", "A signal generator", "A thermal camera", "An ESR meter"], answer: 0, explain: "The table states signal tracing needs no extra equipment beyond a meter or scope.", why: ["", "A signal generator is what signal INJECTION requires, not tracing", "A thermal camera isn't named as required equipment for either technique on this table", "An ESR meter isn't named as required equipment for either technique on this table"] },
+              { q: "Per the comparison-testing definition, what guesswork does a known-good board remove?", choices: ["'Is this reading normal?' — the known-good board simply shows you", "Whether the fault is intermittent or constant", "Whether to use signal tracing or injection", "Whether the board needs power at all to be tested"], answer: 0, explain: "The facts line explicitly states comparison testing removes the guesswork of whether a reading is normal — the known-good board shows you directly.", why: ["", "Intermittent vs constant is a different diagnostic distinction, from an earlier card in this module", "Tracing vs injection is a separate technique choice, unrelated to comparison testing specifically", "Comparison testing explicitly involves measuring readings, which requires the board to be powered"] },
+              { q: "In the six-stage amplifier scenario, how many tests did half-splitting take to find the fault, compared to testing stage by stage?", choices: ["Two tests, instead of up to six sequential ones", "Six tests, the same as testing stage by stage", "Only one test was needed in total", "It took more tests than checking stage by stage would have"], answer: 0, explain: "The scenario states two smart tests beat six sequential ones — half-splitting narrowed the fault in just two tests.", why: ["", "The whole point of half-splitting is using FEWER tests than checking every stage sequentially", "The scenario states two tests, not just one, were needed", "The scenario explicitly frames half-splitting as MORE efficient, not less, than stage-by-stage testing"] }
+            ] }
+          ]
+        },
+        {
+          id: "troubleshoot-pitfalls",
+          title: "Common Mistakes & When to Ask for Help",
+          tag: "Pitfalls",
+          blocks: [
+            { type: "tip", text: "Good practice means confirming one root cause before calling the repair done, testing after every single change (not just at the end), and staying open to the fault being somewhere unexpected." },
+            { type: "warning", title: "Common troubleshooting mistakes", items: [
+              "Stopping at the first plausible-looking cause",
+              "Changing several things at once, losing track of what fixed it",
+              "Assuming the obvious symptom is the only one present"
+            ]},
+            { type: "numbered", title: "When to Stop and Ask for Help", items: [
+              { title: "1. Same fault, repeated attempts", desc: "Two failed attempts is a signal to get a second opinion" },
+              { title: "2. Outside your training", desc: "Some faults genuinely need a more experienced technician" },
+              { title: "3. Safety is uncertain", desc: "Never guess your way past a hazard you're not sure about" },
+              { title: "4. The cost of guessing is rising", desc: "More parts swapped without progress means it's time to pause" }
+            ]},
+            { type: "definition",
+              plain: "A board returns for the second time with the exact same symptom, weeks after being 'repaired.'",
+              picture: "Like patching the same pothole twice without ever fixing what keeps cracking the road underneath.",
+              facts: "Both repairs replaced the part that failed, but never asked why that part failed in the first place — always asking what caused the failure, not just what failed, would have prevented the repeat." },
+            { type: "numbered", title: "What went wrong, and how to prevent it", items: [
+              { title: "What went wrong", desc: "Both repairs replaced the part that failed, but never asked why that part failed in the first place" },
+              { title: "How to prevent it", desc: "Always ask what caused the failure, not just what failed — a symptom fixed twice means the cause never was" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the common mistakes list, what happens if you stop at the first plausible-looking cause?", choices: ["This is listed as a common mistake, risking a missed actual cause", "This is always the correct and complete approach", "It guarantees the true root cause was found", "It only applies when testing a power supply, never anything else"], answer: 0, explain: "The list explicitly names stopping at the first plausible-looking cause as a common mistake.", why: ["", "The list frames this as a mistake to avoid, not a correct approach", "The list explicitly frames this as a mistake precisely because it risks missing the true cause", "This mistake applies to troubleshooting broadly, not narrowly to power supplies"] },
+              { q: "Per the common mistakes list, why is changing several things at once a problem?", choices: ["You lose track of what actually fixed it", "It always fixes the fault faster than changing one thing at a time", "It has no real downside at all", "It's only a problem when working alone, never in a team"], answer: 0, explain: "The list explicitly states changing several things at once risks losing track of what actually fixed it.", why: ["", "The good-practice tip explicitly favors testing after every single change, implying one-at-a-time is more reliable, not necessarily faster in a good way", "The list explicitly frames this as a real problem", "This mistake applies regardless of whether you're working alone or with others"] },
+              { q: "Per 'When to Stop and Ask for Help,' what's the signal from repeated attempts at the same fault?", choices: ["Two failed attempts is a signal to get a second opinion", "You should always attempt at least five times before asking for help", "Repeated attempts should never prompt asking for help", "Only three or more attempts count as a real signal"], answer: 0, explain: "The list explicitly states two failed attempts is a signal to get a second opinion.", why: ["", "The list explicitly gives two attempts as the threshold, not five", "The list explicitly frames repeated attempts as a legitimate signal to escalate", "The list explicitly names two attempts, not three, as the threshold"] },
+              { q: "Per 'When to Stop and Ask for Help,' what should you never do when safety is uncertain?", choices: ["Guess your way past a hazard you're not sure about", "Ask a more experienced technician for guidance", "Pause the repair to reassess", "Document the uncertainty for the next technician"], answer: 0, explain: "The list explicitly states never guess your way past a hazard you're not sure about.", why: ["", "Asking for guidance is the recommended action, not something to avoid", "Pausing to reassess is a reasonable, safe response, not the forbidden action", "Documenting uncertainty is a reasonable, safe response, not the forbidden action"] },
+              { q: "In the repeat-repair scenario, what specifically went wrong across both repair attempts?", choices: ["Both repairs replaced the failed part but never asked why it failed in the first place", "The wrong replacement part was used both times", "The board was never actually tested after either repair", "The customer never reported the fault clearly enough"], answer: 0, explain: "The scenario states both repairs replaced the part that failed, but never asked why it failed — missing the actual root cause.", why: ["", "The scenario doesn't identify a wrong part as the issue — it identifies a missed root cause", "The scenario's focus is on the missing 'why', not on missing verification testing specifically", "Symptom description isn't identified as the failure point in this scenario"] }
+            ] }
+          ]
+        },
+        {
+          id: "troubleshoot-practical-repair",
+          title: "Practical & Repair Exercises",
+          tag: "Practical",
+          blocks: [
+            { type: "numbered", title: "Practical Exercise: Troubleshoot a Multi-Fault Board", items: [
+              { title: "1. Observe and record", desc: "Every symptom before touching the board" },
+              { title: "2. Isolate each symptom", desc: "To its likely block" },
+              { title: "3. Build a quick fault tree", desc: "For each suspected cause" },
+              { title: "4. Test and measure", desc: "To confirm each diagnosis" },
+              { title: "5. Repair, then verify", desc: "Each fix under original conditions" },
+              { title: "6. Document every symptom", desc: "Cause, and repair made" }
+            ]},
+            { type: "definition",
+              plain: "A board arrives with only 'doesn't work' written on the ticket — no other information at all.",
+              picture: "Like being handed a locked box with no note about what's supposed to be inside, or why it's locked.",
+              facts: "Starting at step one — observe — and testing the board yourself to gather the missing symptoms showed even a blank starting point still fits the same five-step method, beginning to end." },
+            { type: "numbered", title: "Applying the five steps from a blank start", items: [
+              { title: "What you do", desc: "Start at step one — observe — testing the board yourself to gather the missing symptoms" },
+              { title: "What it tells you", desc: "Even a blank starting point still fits the same five-step method, beginning to end" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the practical exercise, what's done in step 2, right after observing and recording symptoms?", choices: ["Isolate each symptom to its likely block", "Build a quick fault tree for each suspected cause", "Test and measure to confirm each diagnosis", "Document every symptom, cause, and repair made"], answer: 0, explain: "Step 2 is isolating each symptom to its likely block, right after step 1's observation.", why: ["", "That's step 3, after isolating each symptom", "That's step 4, after building the fault tree", "That's step 6, the final documentation step"] },
+              { q: "Per the practical exercise, what's the insight about multiple faults on one board?", choices: ["Multiple faults just mean the method repeats — not that it changes", "Multiple faults require an entirely different troubleshooting method", "The five-step method only works for boards with a single fault", "Multiple faults should always be handled by replacing the whole board"], answer: 0, explain: "The exercise's insight line explicitly states multiple faults just mean the method repeats — it doesn't change the approach.", why: ["", "The insight line explicitly says the SAME method applies, not a different one", "The insight line explicitly extends the method to multi-fault boards", "Nothing in this exercise suggests whole-board replacement as the default multi-fault response"] },
+              { q: "In the vague-ticket repair exercise, what did starting at step one — observe — actually involve?", choices: ["Testing the board yourself to gather the missing symptoms", "Refusing to work on the board until a better ticket was written", "Skipping straight to step three, test, since no symptoms were given", "Assuming the most common fault without any observation at all"], answer: 0, explain: "The scenario states starting at observe meant testing the board yourself to gather the missing symptoms, since the ticket provided none.", why: ["", "The scenario shows proceeding with the work, not refusing it", "The scenario explicitly starts at step one, observe, not skipping ahead to step three", "The scenario explicitly describes active observation, not an unfounded assumption"] },
+              { q: "Per the vague-ticket scenario's insight, what does a blank starting point mean for the five-step method?", choices: ["It still fits the same five-step method, beginning to end — step one just takes a little longer", "The method cannot be applied at all without a detailed ticket", "It requires switching to a completely different diagnostic approach", "It means the fault cannot be found without more customer information"], answer: 0, explain: "The insight line explicitly states no information just means step one takes a little longer — the method still applies beginning to end.", why: ["", "The insight line explicitly confirms the method still applies, even from a blank start", "The insight line explicitly says it's still the SAME method, not a different one", "The scenario shows the technician gathering the missing information themselves, not requiring it from elsewhere"] },
+              { q: "Per the practical exercise, what should happen in step 5, after building a fault tree and testing?", choices: ["Repair, then verify each fix under original conditions", "Observe and record every symptom", "Isolate each symptom to its likely block", "Build a quick fault tree for each suspected cause"], answer: 0, explain: "Step 5 is repairing and then verifying each fix under original conditions, after steps 1–4.", why: ["", "That's step 1, the very first step, not step 5", "That's step 2, early in the sequence, not step 5", "That's step 3, before testing and repair, not step 5"] }
+            ] }
+          ]
+        },
+        {
+          id: "troubleshoot-reference",
+          title: "Quick Reference: The Five-Step Method",
+          tag: "Reference",
+          blocks: [
+            { type: "table", title: "One line per step — what it means, and the mistake to avoid", headers: ["Step", "Goal", "Key Tool", "Avoid"], rows: [
+              ["1. Observe", "Gather every clue", "Notes, questions", "Touching before asking"],
+              ["2. Isolate", "Narrow to one block", "Block diagram", "Guessing the whole board"],
+              ["3. Test", "Confirm with data", "Meter, scope, ESR", "Assuming without measuring"],
+              ["4. Verify", "Confirm it holds", "Original test conditions", "Calling it done too soon"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the reference table, what's the goal of the Observe step?", choices: ["Gather every clue", "Narrow to one block", "Confirm with data", "Confirm it holds"], answer: 0, explain: "The table lists Observe's goal as gathering every clue, with 'Notes, questions' as the key tool.", why: ["", "That's Isolate's goal, not Observe's", "That's Test's goal, not Observe's", "That's Verify's goal, not Observe's"] },
+              { q: "Per the reference table, what should be avoided during the Isolate step?", choices: ["Guessing the whole board", "Touching before asking", "Assuming without measuring", "Calling it done too soon"], answer: 0, explain: "The table lists 'Guessing the whole board' as the mistake to avoid during Isolate.", why: ["", "That's the mistake to avoid during Observe, not Isolate", "That's the mistake to avoid during Test, not Isolate", "That's the mistake to avoid during Verify, not Isolate"] },
+              { q: "Per the reference table, what key tool is listed for the Test step?", choices: ["Meter, scope, ESR", "Notes, questions", "Block diagram", "Original test conditions"], answer: 0, explain: "The table lists 'Meter, scope, ESR' as the key tool for the Test step.", why: ["", "That's the key tool for Observe, not Test", "That's the key tool for Isolate, not Test", "That's the key tool for Verify, not Test"] },
+              { q: "Per the reference table, what's the goal of the Verify step?", choices: ["Confirm it holds", "Gather every clue", "Narrow to one block", "Confirm with data"], answer: 0, explain: "The table lists Verify's goal as 'Confirm it holds', with original test conditions as the key tool.", why: ["", "That's Observe's goal, not Verify's", "That's Isolate's goal, not Verify's", "That's Test's goal, not Verify's"] },
+              { q: "Per the reference table, what should be avoided during the Test step?", choices: ["Assuming without measuring", "Touching before asking", "Guessing the whole board", "Calling it done too soon"], answer: 0, explain: "The table lists 'Assuming without measuring' as the mistake to avoid during Test.", why: ["", "That's the mistake to avoid during Observe, not Test", "That's the mistake to avoid during Isolate, not Test", "That's the mistake to avoid during Verify, not Test"] }
+            ] }
+          ]
+        },
+        {
+          id: "troubleshoot-wrapup",
+          title: "Module Wrap-Up",
+          tag: "You Can Now…",
+          blocks: [
+            { type: "checklist", items: [
+              "Apply the five-step method to any fault, on any board",
+              "Isolate a fault to one block before testing individual parts",
+              "Use half-splitting to narrow a fault in fewer tests",
+              "Verify a fix under the same conditions that revealed it",
+              "Document a repair clearly enough for the next technician"
+            ]},
+            { type: "golden", text: "Observe, isolate, test, verify, document — the same five steps, on every fault you'll ever meet." },
+            { type: "check", questions: [
+              { q: "What is the golden rule of this module?", choices: ["Observe, isolate, test, verify, document — the same five steps, on every fault you'll ever meet", "Guess first, then verify only if the guess turns out wrong", "Documentation is optional if the repair was simple", "The five-step method only applies to electronic, not mechanical, faults"], answer: 0, explain: "The golden rule explicitly names all five steps, applying to every fault you'll ever meet.", why: ["", "This entire module argues against guessing first — diagnosis comes before touching parts", "The Document step is explicitly one of the five required steps, regardless of repair complexity", "The golden rule explicitly says 'every fault you'll ever meet', with no such carve-out"] },
+              { q: "Per the checklist, what should you be able to apply to any fault, on any board?", choices: ["The five-step method", "Only the half-split technique", "Only signal injection", "Only comparison testing"], answer: 0, explain: "The checklist names applying the five-step method to any fault, on any board, as this module's core skill.", why: ["", "Half-splitting is one specific technique within the method, not the whole checklist item", "Signal injection is one specific technique within the method, not the whole checklist item", "Comparison testing is one specific technique within the method, not the whole checklist item"] },
+              { q: "Per the checklist, what should you do before testing individual parts?", choices: ["Isolate a fault to one block", "Immediately replace the most convenient part", "Skip documentation entirely", "Assume the fault based on appearance alone"], answer: 0, explain: "The checklist names isolating a fault to one block before testing individual parts as a core skill.", why: ["", "This module explicitly argues against convenience-based part replacement", "Documentation is explicitly a required, separate step, not something to skip", "This module explicitly argues for measuring, not assuming from appearance"] },
+              { q: "Per the checklist, what technique should you be able to use to narrow a fault in fewer tests?", choices: ["Half-splitting", "Random substitution", "Whole-board replacement", "Guessing based on the most recent repair"], answer: 0, explain: "The checklist names using half-splitting to narrow a fault in fewer tests as a core skill.", why: ["", "Random substitution is exactly the guessing approach this module argues against", "Whole-board replacement isn't the technique named in this checklist item", "Guessing based on recent repairs isn't the technique named in this checklist item"] },
+              { q: "Per the checklist, under what conditions should a fix be verified?", choices: ["The same conditions that revealed it", "Any convenient condition, regardless of the original fault", "Only a visual inspection, with no functional test", "Only if the customer specifically requests it"], answer: 0, explain: "The checklist names verifying a fix under the same conditions that revealed it as a core skill.", why: ["", "The Verify card explicitly warns that a fix not verified under ORIGINAL conditions can still fail later", "The Verify card explicitly contrasts this with 'just a quick glance that it powers on' as insufficient", "Verification is presented as a required step of the method, not conditional on a customer request"] }
+            ] }
+          ]
+        }
+      ]
+    },
   ],
 
   // ================================================================ QUESTIONS
