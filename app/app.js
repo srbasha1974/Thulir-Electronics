@@ -395,8 +395,8 @@
           (s.revealed ? '<div class="explain-box show"><b>Why: </b><span>' + escapeHtml(q.explain) + '</span></div>' : "") +
           wrongReasons +
           (s.revealed && !gotItRight ? '<button class="sim-retry-btn check-retry">Try Again</button>' : "") +
-          (gotItRight && !isLast ? '<button class="next-btn check-next">Next Question →</button>' : "") +
-          (gotItRight && isLast ? '<button class="next-btn check-next">Finish — Mark Learned</button>' : "") +
+          (gotItRight && !isLast ? '<button class="next-btn show check-next">Next Question →</button>' : "") +
+          (gotItRight && isLast ? '<button class="next-btn show check-next">Finish — Mark Learned</button>' : "") +
         '</div>'
       );
       wire();
