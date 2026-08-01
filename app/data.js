@@ -3797,6 +3797,258 @@ window.THULIR_DATA = {
         }
       ]
     },
+
+    // ============================================================ MODULE 15: REPAIR DOCUMENTATION
+    {
+      id: "repair-documentation",
+      code: "MOD·15",
+      icon: "📋",
+      color: "#9fff5b",
+      title: "Repair Documentation",
+      subtitle: "The repair isn't finished until it's written down.",
+      cards: [
+        {
+          id: "docs-overview",
+          title: "The Five Records Every Repair Leaves Behind",
+          tag: "Overview",
+          blocks: [
+            { type: "intro", text: "Have you ever fixed the same fault twice, because nobody wrote down what worked the first time? That's the exact problem this module fixes — for good." },
+            { type: "table", title: "A repair that isn't written down might as well not have happened", headers: ["Record", "What It Covers", "Key Idea"], rows: [
+              ["Fault Reports", "What was wrong, in plain terms", "Symptom"],
+              ["Bill of Materials", "Every part used, listed clearly", "BOM"],
+              ["Photo Evidence", "Proof of condition, before and after", "Before/after"],
+              ["SOPs", "The same job, done the same way", "Repeatable"],
+              ["Repair Records", "The full history of a board", "History"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the table, what does the Fault Reports record cover?", choices: ["What was wrong, in plain terms", "Every part used, listed clearly", "Proof of condition, before and after", "The same job, done the same way"], answer: 0, explain: "The table describes Fault Reports as what was wrong, in plain terms, with 'Symptom' as the key idea.", why: ["", "That describes Bill of Materials, not Fault Reports", "That describes Photo Evidence, not Fault Reports", "That describes SOPs, not Fault Reports"] },
+              { q: "Per the table, what key idea is listed for Bill of Materials?", choices: ["BOM", "Symptom", "Before/after", "Repeatable"], answer: 0, explain: "The table lists 'BOM' as the key idea for Bill of Materials — every part used, listed clearly.", why: ["", "Symptom is the key idea for Fault Reports, not Bill of Materials", "Before/after is the key idea for Photo Evidence, not Bill of Materials", "Repeatable is the key idea for SOPs, not Bill of Materials"] },
+              { q: "Per the table, what does Photo Evidence cover?", choices: ["Proof of condition, before and after", "What was wrong, in plain terms", "The same job, done the same way", "The full history of a board"], answer: 0, explain: "The table describes Photo Evidence as proof of condition, before and after, with 'Before/after' as the key idea.", why: ["", "That describes Fault Reports, not Photo Evidence", "That describes SOPs, not Photo Evidence", "That describes Repair Records, not Photo Evidence"] },
+              { q: "Per the table, what key idea is listed for SOPs?", choices: ["Repeatable", "BOM", "Symptom", "History"], answer: 0, explain: "The table lists 'Repeatable' as the key idea for SOPs — the same job, done the same way.", why: ["", "BOM is the key idea for Bill of Materials, not SOPs", "Symptom is the key idea for Fault Reports, not SOPs", "History is the key idea for Repair Records, not SOPs"] },
+              { q: "Per the table, what does the Repair Records entry cover?", choices: ["The full history of a board", "Every part used, listed clearly", "Proof of condition, before and after", "What was wrong, in plain terms"], answer: 0, explain: "The table describes Repair Records as the full history of a board, with 'History' as the key idea.", why: ["", "That describes Bill of Materials, not Repair Records", "That describes Photo Evidence, not Repair Records", "That describes Fault Reports, not Repair Records"] }
+            ] }
+          ]
+        },
+        {
+          id: "docs-fundamentals",
+          title: "Why Documentation Matters",
+          tag: "Fundamentals",
+          blocks: [
+            { type: "definition",
+              plain: "Documentation records what was wrong, what was done, and what was found — for anyone who needs it later.",
+              picture: "Like a doctor's patient file — the treatment only helps future care if it's actually written down.",
+              facts: "Good documentation turns one technician's knowledge into the whole team's knowledge." },
+            { type: "table", title: "The same fault, with and without a paper trail", headers: ["Aspect", "Documented Repair", "Undocumented Repair"], rows: [
+              ["Next technician", "Sees the exact cause and fix", "Starts again from zero"],
+              ["Repeat faults", "Recognised immediately", "A repeat fault looks brand new, every time"],
+              ["Warranty & history", "Easy to confirm", "No record to confirm what was ever done"]
+            ]},
+            { type: "definition",
+              plain: "A board returns with a familiar-looking fault, but no record exists of it ever being repaired before.",
+              picture: "Like meeting someone for the tenth time who introduces themselves as if it's the first — nothing was ever remembered.",
+              facts: "Diagnosing it fully again, since nothing was written down the first time it happened, meant an hour of diagnosis was repeated entirely, purely because nothing had ever been recorded." },
+            { type: "numbered", title: "Diagnosing the forgotten fault", items: [
+              { title: "What you do", desc: "Diagnose it fully again, since nothing was written down the first time it happened" },
+              { title: "What it tells you", desc: "An hour of diagnosis was repeated entirely, purely because nothing had ever been recorded" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the facts line, what does good documentation turn one technician's knowledge into?", choices: ["The whole team's knowledge", "A permanently secret, personal note", "Something only useful during the original repair", "A legal requirement with no practical value"], answer: 0, explain: "The facts line explicitly states good documentation turns one technician's knowledge into the whole team's knowledge.", why: ["", "The facts line explicitly frames documentation as shared, not secret", "The comparison table shows documentation's value extends well beyond the original repair, into future repeat faults", "The card frames documentation as practically valuable, not merely a formality"] },
+              { q: "Per the comparison table, what happens to a repeat fault on an undocumented repair?", choices: ["It looks brand new, every time", "It's recognised immediately", "It's automatically flagged by the repair system", "It never happens again once a part is replaced once"], answer: 0, explain: "The table states an undocumented repeat fault looks brand new every time — no memory of it exists.", why: ["", "That's the documented repair's outcome, not the undocumented one's", "No automatic system is described in this card — recognition depends on the record existing", "This card explicitly shows repeat faults CAN happen even after a repair"] },
+              { q: "Per the comparison table, why is warranty and history easy to confirm on a documented repair?", choices: ["A record exists confirming what was done, unlike an undocumented repair with no record at all", "Warranty confirmation has nothing to do with documentation", "Documented repairs are automatically covered under warranty regardless of the actual repair", "Only undocumented repairs can be warranty-confirmed"], answer: 0, explain: "The table explicitly contrasts documented repairs (easy to confirm) against undocumented ones (no record to confirm what was ever done).", why: ["", "The table explicitly ties this ease of confirmation directly to documentation existing", "Warranty coverage depends on the actual repair terms, not automatically granted by documentation", "The table explicitly states undocumented repairs have NO record to confirm anything — the opposite is true"] },
+              { q: "In the forgotten-fault scenario, what was the actual cost of the missing record?", choices: ["An hour of diagnosis was repeated entirely, purely because nothing had been recorded", "The board had to be completely replaced", "The customer was charged twice for the same part", "The fault was permanently unfixable without the original record"], answer: 0, explain: "The scenario states an hour of diagnosis was repeated entirely, purely because nothing had ever been recorded the first time.", why: ["", "Whole-board replacement isn't the outcome described in this scenario", "Double-charging isn't the outcome described in this scenario", "The scenario explicitly shows the fault WAS diagnosed and fixed again — just at a repeated cost"] },
+              { q: "Per this scenario's insight, what does 'a fault fixed without a record' effectively become?", choices: ["Fixed for the first time, forever, every time it happens again", "Permanently prevented from ever recurring", "Automatically documented by the repair process itself", "Less costly to diagnose each subsequent time"], answer: 0, explain: "The insight line states a fault fixed without a record might as well be fixed for the first time, forever — each recurrence starts from zero.", why: ["", "The scenario explicitly shows the exact same fault recurring, not being prevented", "The scenario's whole point is that NOTHING was automatically documented — that's the entire problem", "The scenario shows the diagnosis cost was repeated in FULL, not reduced"] }
+            ] }
+          ]
+        },
+        {
+          id: "docs-fault-reports",
+          title: "Writing a Good Fault Report",
+          tag: "Fault Reports",
+          blocks: [
+            { type: "definition",
+              plain: "A good fault report describes the symptom, the conditions, and the findings clearly enough for anyone to follow.",
+              picture: "Like a witness statement — specific, factual, and useful to someone who wasn't there.",
+              facts: "A vague report like 'doesn't work' gives the next technician nothing at all to start from." },
+            { type: "numbered", title: "Writing a Clear Symptom Description", items: [
+              { title: "1. Be specific, not vague", desc: "'No output on channel 2' beats 'sound is broken'" },
+              { title: "2. Include conditions", desc: "Note when it happens — cold start, under load, intermittently" },
+              { title: "3. Include history", desc: "Mention any prior repairs or recent changes to the unit" },
+              { title: "4. Avoid assumptions", desc: "Record what was observed, not what you think caused it" }
+            ]},
+            { type: "numbered", title: "Recording Test Results", items: [
+              { title: "1. What was measured", desc: "The exact point and quantity — 'voltage at TP3', not just 'power'" },
+              { title: "2. Expected vs actual", desc: "Both values, so anyone can see the gap immediately" },
+              { title: "3. Instrument used", desc: "Multimeter, scope, or ESR meter — relevant if the reading is ever questioned" },
+              { title: "4. Timestamp", desc: "When the reading was taken — useful for intermittent faults especially" }
+            ]},
+            { type: "definition",
+              plain: "The exact same board returns eight months later with what looks like the same symptom again.",
+              picture: "Like finding a detailed old map to a place you already know the way to — the return trip suddenly takes no time at all.",
+              facts: "Pulling the original ticket, which listed the cause, the fix, and the exact readings taken, replaced a full re-diagnosis with a five-minute confirmation." },
+            { type: "numbered", title: "The ticket that said everything", items: [
+              { title: "What you do", desc: "Pull the original ticket, which lists the cause, the fix, and the exact readings taken" },
+              { title: "What it tells you", desc: "A five-minute confirmation replaced a full re-diagnosis, purely because the first ticket was complete" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the facts line, what does a vague report like 'doesn't work' give the next technician?", choices: ["Nothing at all to start from", "Everything they need to diagnose immediately", "A complete list of expected vs actual readings", "The exact timestamp of when the fault occurred"], answer: 0, explain: "The facts line explicitly states a vague report like 'doesn't work' gives the next technician nothing at all to start from.", why: ["", "The facts line explicitly says the opposite — nothing useful is provided", "Expected vs actual readings are a specific, detailed element this vague report lacks entirely", "A timestamp is a specific detail this vague report lacks entirely"] },
+              { q: "Per the symptom-description list, why does 'no output on channel 2' beat 'sound is broken'?", choices: ["It's specific, not vague, pinpointing exactly what's wrong", "It's shorter, and length is the only thing that matters", "'Sound is broken' is actually the more useful description", "Specificity only matters for test results, never symptom descriptions"], answer: 0, explain: "The list explicitly favors being specific, not vague — 'no output on channel 2' pinpoints exactly what's wrong, unlike a vague general complaint.", why: ["", "The list's point is about specificity of content, not brevity for its own sake", "The list explicitly favors the specific version over the vague one, not the reverse", "This list is specifically about writing symptom descriptions well"] },
+              { q: "Per the symptom-description list, what should be avoided when writing a report?", choices: ["Assumptions — record what was observed, not what you think caused it", "Including any conditions under which the fault occurs", "Mentioning any prior repairs on the unit", "Being specific about the exact symptom"], answer: 0, explain: "The list explicitly warns to avoid assumptions — recording what was observed, not a guess at the cause.", why: ["", "Including conditions is explicitly recommended, item 2 on this same list", "Including history is explicitly recommended, item 3 on this same list", "Being specific is explicitly recommended, item 1 on this same list"] },
+              { q: "Per the recording-test-results list, why should both expected and actual values be recorded?", choices: ["So anyone can see the gap immediately", "Only the actual value matters; expected values are unnecessary", "Expected values are only relevant for warranty claims, not diagnosis", "Recording both values is optional busywork with no diagnostic use"], answer: 0, explain: "The list states recording both expected and actual values lets anyone see the gap immediately — the facts line adds a number without an expected value proves very little.", why: ["", "The list explicitly recommends BOTH values, not just actual", "The list frames both values as generally useful, not narrowly for warranty purposes", "The facts line explicitly states this comparison proves something meaningful"] },
+              { q: "In the eight-months-later scenario, what did pulling the original ticket accomplish?", choices: ["A five-minute confirmation replaced a full re-diagnosis, since the ticket was complete", "It revealed the original repair had actually failed completely", "It showed the fault had never really been the same issue at all", "It required contacting the original technician directly for details"], answer: 0, explain: "The scenario states pulling the complete original ticket turned what could have been a full re-diagnosis into a five-minute confirmation.", why: ["", "The scenario doesn't suggest the original repair failed — it shows the ticket enabled fast confirmation", "The scenario describes 'what looks like the same symptom again', consistent with a genuine repeat, not a different issue", "The scenario explicitly shows the WRITTEN ticket was sufficient — no need to contact the original technician"] }
+            ] }
+          ]
+        },
+        {
+          id: "docs-photo-bom",
+          title: "Photo Evidence & Building a BOM",
+          tag: "Photos & BOM",
+          blocks: [
+            { type: "definition",
+              plain: "Before-and-after photos record the unit's condition and the work performed, without relying on memory.",
+              picture: "Like a home inspection report — the photo is proof, independent of anyone's recollection.",
+              facts: "A photo of damage on arrival protects both the technician and the customer from later disputes." },
+            { type: "numbered", title: "Building a Bill of Materials (BOM)", items: [
+              { title: "1. Part number", desc: "The exact manufacturer or supplier reference, not a rough description" },
+              { title: "2. Value & rating", desc: "e.g. 470μF 25V — enough detail to source an identical replacement" },
+              { title: "3. Quantity", desc: "How many of that exact part were used in the repair" },
+              { title: "4. Supplier reference", desc: "Where it came from, useful if the same part is needed again" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the facts line, what does a photo of damage on arrival protect against?", choices: ["Later disputes between the technician and the customer", "The need for any written fault report at all", "The requirement to test the unit at all", "The need to record any test results"], answer: 0, explain: "The facts line explicitly states a photo of damage on arrival protects both the technician and customer from later disputes.", why: ["", "Photos are a separate, complementary record to the fault report, not a replacement for it", "Photos don't replace the need for actually testing the unit", "Photos and test-result recording are separate, complementary documentation practices"] },
+              { q: "Per the definition, what do before-and-after photos record, independent of memory?", choices: ["The unit's condition and the work performed", "Only the customer's name and contact details", "Only the final invoice amount", "Only the technician's personal notes"], answer: 0, explain: "The definition states before-and-after photos record the unit's condition and the work performed, without relying on memory.", why: ["", "Customer contact details aren't the photo's documented content described here", "Invoice amount isn't the photo's documented content described here", "Photos are described as independent proof, not personal notes"] },
+              { q: "Per the BOM list, what makes an entry for part number useful?", choices: ["It's the exact manufacturer or supplier reference, not a rough description", "A vague, general description is just as useful as an exact reference", "Part number only matters for parts costing over a certain price", "Part number is optional if quantity is recorded"], answer: 0, explain: "The list states part number should be the exact manufacturer or supplier reference, not a rough description.", why: ["", "The list explicitly favors exact references over rough descriptions", "No price threshold is mentioned in this list", "The list treats part number and quantity as separate, both-necessary BOM fields"] },
+              { q: "Per the BOM list, what does recording 'value & rating' enable?", choices: ["Sourcing an identical replacement, with enough detail like '470μF 25V'", "Determining the part's exact retail price only", "Skipping the need to record a part number", "Confirming the technician's identity"], answer: 0, explain: "The list states value & rating (e.g. 470μF 25V) gives enough detail to source an identical replacement.", why: ["", "Retail price isn't the purpose described for this specific BOM field", "The BOM list treats part number and value/rating as separate, both-necessary fields", "Technician identity isn't what this BOM field records"] },
+              { q: "Per the BOM list's insight, what happens with a vague BOM entry?", choices: ["Someone re-identifies the part from scratch", "The part is automatically reordered correctly regardless of detail", "Nothing — vague entries are just as functional as detailed ones", "It only matters for parts used in bulk quantities"], answer: 0, explain: "The insight line explicitly states a vague BOM entry means someone re-identifies the part from scratch — exactly the wasted effort good documentation avoids.", why: ["", "The insight line explicitly describes a real cost — re-identification work — not automatic correct reordering", "The insight line explicitly frames this as a real problem, not a non-issue", "This issue applies to any quantity, not just bulk parts"] }
+            ] }
+          ]
+        },
+        {
+          id: "docs-filing-versions",
+          title: "Filing Schematics & Version Control",
+          tag: "Filing & Versions",
+          blocks: [
+            { type: "numbered", title: "Filing Schematics & Datasheets", items: [
+              { title: "1. Name files consistently", desc: "A clear, standard naming pattern beats a folder of guesses" },
+              { title: "2. Keep the right revision", desc: "An outdated schematic can send a repair in the wrong direction entirely" },
+              { title: "3. Link records to the repair", desc: "File the exact reference used alongside that specific ticket" },
+              { title: "4. Back up the archive", desc: "Reference material lost is expertise lost along with it" }
+            ]},
+            { type: "definition",
+              plain: "Version control tracks which revision of a schematic or board you're actually working from.",
+              picture: "Like an app update — the same product name, but the details underneath can be quite different.",
+              facts: "A repair based on the wrong revision's schematic can send you chasing a part that isn't even there." },
+            { type: "check", questions: [
+              { q: "Per the filing list, why does a clear, standard naming pattern matter?", choices: ["It beats a folder of guesses when trying to find the right file later", "File naming has no real effect on finding documents later", "Naming only matters for photos, never for schematics or datasheets", "A random naming pattern is just as effective as a consistent one"], answer: 0, explain: "The list states consistent naming beats a folder of guesses — making files findable later.", why: ["", "The list explicitly frames naming as mattering for findability", "This item is specifically about schematics and datasheets, per the card title", "The list explicitly favors a clear, standard pattern over guesswork"] },
+              { q: "Per the filing list, why should the right revision specifically be kept?", choices: ["An outdated schematic can send a repair in the wrong direction entirely", "Revision number has no bearing on repair accuracy", "Only the newest revision is ever worth keeping, regardless of what board you're working on", "Revisions only matter for photos, never schematics"], answer: 0, explain: "The list states an outdated schematic can send a repair in the wrong direction entirely — the right revision must match the actual board.", why: ["", "The list explicitly ties revision accuracy to repair accuracy", "The version-control definition explains different boards may need different revisions, not always the newest one", "This item is specifically about schematics and datasheets, not photos"] },
+              { q: "Per the filing list, why should records be linked to the specific repair ticket?", choices: ["To file the exact reference used alongside that specific ticket, for future traceability", "Linking records to tickets is purely optional busywork", "Only BOM entries need to be linked to tickets, never schematics", "Linking prevents the schematic from ever being reused on another repair"], answer: 0, explain: "The list states linking records to the repair means filing the exact reference used alongside that specific ticket.", why: ["", "The list presents this as a meaningful practice for future traceability, not busywork", "This item applies broadly to reference material, not narrowly to BOM entries only", "Nothing in this card suggests linking prevents reuse on other repairs"] },
+              { q: "Per the version-control definition, why can a repair based on the wrong schematic revision go wrong?", choices: ["It can send you chasing a part that isn't even there on that specific board revision", "Schematic revisions never actually differ from each other in practice", "The wrong revision only affects cosmetic labeling, never actual circuitry", "Version control only matters for software, never hardware schematics"], answer: 0, explain: "The facts line explicitly states a repair based on the wrong revision's schematic can send you chasing a part that isn't even there.", why: ["", "The whole point of version control is that revisions CAN meaningfully differ", "The facts line describes a real functional consequence, not merely cosmetic", "This card explicitly applies version control to schematics and boards, not just software"] },
+              { q: "Per the filing list, what happens if the reference archive isn't backed up?", choices: ["Reference material lost is expertise lost along with it", "Nothing — reference material can always be perfectly recreated from memory", "Backup only matters for photos, never for schematics or datasheets", "Losing the archive has no real consequence for future repairs"], answer: 0, explain: "The list explicitly states reference material lost is expertise lost along with it — backing up the archive protects that knowledge.", why: ["", "The whole point of documentation is that memory alone isn't reliable enough to recreate lost material", "This item is specifically about schematics and datasheets, per the card title", "The list explicitly frames archive loss as a real, serious consequence"] }
+            ] }
+          ]
+        },
+        {
+          id: "docs-sops-systems",
+          title: "SOPs, Digital vs Paper & Common Mistakes",
+          tag: "SOPs & Systems",
+          blocks: [
+            { type: "definition",
+              plain: "A Standard Operating Procedure is a written, repeatable set of steps for a task that's done often.",
+              picture: "Like a recipe — anyone following it gets a consistent result, not just the person who wrote it.",
+              facts: "SOPs exist for safety-critical and frequently repeated tasks — like lockout/tagout from an earlier module." },
+            { type: "table", title: "Digital vs paper systems", headers: ["Aspect", "Digital Systems", "Paper Systems"], rows: [
+              ["Searchability", "Searchable across every past repair instantly", "Hard to search, and easy to lose or damage"],
+              ["Sharing", "Easy to back up and share across a team", "Simple to start, no software to learn"],
+              ["Dependency", "Needs reliable access to a device or network", "Always available, with no dependency on power"]
+            ]},
+            { type: "tip", text: "Good documentation practice means writing the record immediately while details are fresh, using specific values rather than vague descriptions, and filing photos and readings with the matching ticket." },
+            { type: "warning", title: "Common documentation mistakes", items: [
+              "Leaving documentation until the end of the day",
+              "Writing 'fixed' with no explanation of what or why",
+              "Losing track of which photo matches which repair"
+            ]},
+            { type: "check", questions: [
+              { q: "Per the definition, what does an SOP provide that a one-off set of verbal instructions doesn't?", choices: ["A written, repeatable set of steps that anyone following it gets a consistent result from", "A faster way to complete a task than following any steps at all", "A one-time-only procedure that's never followed twice", "A procedure that only the original author can ever follow"], answer: 0, explain: "The definition states an SOP is written and repeatable — anyone following it gets a consistent result, not just the person who wrote it.", why: ["", "Speed isn't the point of an SOP — consistency and repeatability are", "The definition explicitly describes a task 'done often', the opposite of one-time-only", "The definition explicitly states anyone can follow it, not just the original author"] },
+              { q: "Per the facts line, what kind of tasks do SOPs exist for?", choices: ["Safety-critical and frequently repeated tasks", "Only tasks that are done exactly once, ever", "Only tasks with no safety implications at all", "Only tasks that take less than a minute to complete"], answer: 0, explain: "The facts line explicitly names safety-critical and frequently repeated tasks as what SOPs exist for, citing lockout/tagout as an example.", why: ["", "The definition explicitly describes tasks 'done often', not one-time tasks", "The facts line explicitly names safety-critical tasks as a key category", "Task duration isn't the criterion named in this facts line"] },
+              { q: "Per the digital vs paper table, what's a key advantage of digital systems?", choices: ["Searchable across every past repair instantly", "Always available, with no dependency on power", "Simple to start, with no software to learn", "Impossible to lose or damage under any circumstances"], answer: 0, explain: "The table lists digital systems as searchable across every past repair instantly.", why: ["", "That's paper's advantage, not digital's", "That's paper's advantage, not digital's", "The table lists paper as easy to lose or damage — it doesn't claim digital is impossible to lose either"] },
+              { q: "Per the digital vs paper table, what's a key advantage of paper systems?", choices: ["Always available, with no dependency on power", "Searchable across every past repair instantly", "Easy to back up and share across a team", "Requires reliable network access to function at all"], answer: 0, explain: "The table lists paper systems as always available, with no dependency on power.", why: ["", "That's digital's advantage, not paper's", "That's digital's advantage, not paper's", "That's digital's dependency, not paper's — paper explicitly has none"] },
+              { q: "Per the common mistakes list, what happens if you write 'fixed' with no explanation of what or why?", choices: ["This is listed as a common mistake that helps no one but the person who wrote it", "This is considered a perfectly complete documentation entry", "It automatically triggers a request for more detail from the system", "It only matters if the repair involved a schematic revision"], answer: 0, explain: "The list explicitly names writing 'fixed' with no explanation as a common mistake — the repair exercise's insight line adds it helps no one but the person who wrote it.", why: ["", "The list explicitly frames this as a mistake, not a complete entry", "No automatic system prompt is described in this card", "This mistake applies broadly to any documentation entry, not only schematic-revision-related repairs"] }
+            ] }
+          ]
+        },
+        {
+          id: "docs-practical-repair",
+          title: "Practical & Repair Exercises",
+          tag: "Practical",
+          blocks: [
+            { type: "numbered", title: "Practical Exercise: Write a Complete Repair Record", items: [
+              { title: "1. Write a clear, specific symptom description", desc: "" },
+              { title: "2. Record every test result", desc: "With expected vs actual values" },
+              { title: "3. Take before-and-after photos", desc: "Of the repair" },
+              { title: "4. List every part used", desc: "In a proper Bill of Materials" },
+              { title: "5. Note the schematic revision", desc: "Referenced during the repair" },
+              { title: "6. Review the record", desc: "As if you were the next technician" }
+            ]},
+            { type: "definition",
+              plain: "A ticket reads only 'replaced capacitor, fixed' — no values, no location, no test results at all.",
+              picture: "Like a receipt that just says 'item purchased' with no name, price, or store listed.",
+              facts: "The next technician can't confirm the fix, reorder the part, or recognise a repeat fault — always recording the part's value, its location, and the readings that confirmed the fix would have prevented this." },
+            { type: "numbered", title: "What went wrong, and how to prevent it", items: [
+              { title: "What went wrong", desc: "The next technician can't confirm the fix, reorder the part, or recognise a repeat fault" },
+              { title: "How to prevent it", desc: "Always record the part's value, its location, and the readings that confirmed the fix" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the practical exercise, what's the final step, after listing every part in a BOM and noting the schematic revision?", choices: ["Review the record as if you were the next technician", "Write a clear, specific symptom description", "Record every test result with expected vs actual values", "Take before-and-after photos of the repair"], answer: 0, explain: "Step 6, the final step, is reviewing the record as if you were the next technician.", why: ["", "That's step 1, the first step, not the last", "That's step 2, early in the sequence, not the last step", "That's step 3, before the BOM and schematic steps, not the last step"] },
+              { q: "Per the practical exercise's insight, how should you approach writing the record?", choices: ["Write it as if you'll never remember this repair again", "Write it as briefly as possible, since detail wastes time", "Write it only for your own future reference, not anyone else's", "Skip writing it if the repair felt routine or simple"], answer: 0, explain: "The exercise's insight line explicitly states to write it as if you'll never remember this repair again — assuming zero memory, not relying on it.", why: ["", "This module consistently argues for specific detail, not brevity at the cost of usefulness", "Step 6 explicitly frames the review from the NEXT technician's perspective, not just your own", "Nothing in this exercise exempts routine or simple repairs from documentation"] },
+              { q: "In the incomplete-ticket repair exercise, what specifically was missing from 'replaced capacitor, fixed'?", choices: ["Values, location, and test results", "The technician's name only", "The date the repair was performed", "The customer's contact information"], answer: 0, explain: "The scenario explicitly states the ticket had no values, no location, no test results at all.", why: ["", "Technician name isn't the specific gap identified in this scenario", "Date isn't the specific gap identified in this scenario", "Customer contact info isn't the specific gap identified in this scenario"] },
+              { q: "Per the incomplete-ticket scenario, what three things could the next technician NOT do because of the missing detail?", choices: ["Confirm the fix, reorder the part, or recognise a repeat fault", "Read the schematic at all", "Access the repair shop's tools", "Contact the original customer"], answer: 0, explain: "The scenario states the next technician couldn't confirm the fix, reorder the part, or recognise a repeat fault — three concrete, listed consequences.", why: ["", "Schematic access isn't the specific consequence named in this scenario", "Tool access isn't the specific consequence named in this scenario", "Customer contact isn't the specific consequence named in this scenario"] },
+              { q: "Per the practical exercise, what should be recorded alongside every test result?", choices: ["Expected vs actual values", "Only the final repair cost", "Only the technician's initials", "Only whether the test passed or failed, with no numbers"], answer: 0, explain: "Step 2 specifically calls for recording every test result with expected vs actual values.", why: ["", "Repair cost isn't the specific pairing named in step 2", "Technician initials aren't the specific pairing named in step 2", "The fault-reports card explicitly states a number without an expected value proves very little — pass/fail alone isn't enough"] }
+            ] }
+          ]
+        },
+        {
+          id: "docs-reference",
+          title: "Quick Reference: What Every Repair Record Needs",
+          tag: "Reference",
+          blocks: [
+            { type: "table", title: "Five fields, every single ticket", headers: ["Field", "Example", "Why It Matters", "Often Missed"], rows: [
+              ["Symptom", "No output, channel 2", "Confirms the starting fault", "Too vague to act on"],
+              ["Test results", "TP3: 0V, expected 5V", "Proves the diagnosis", "Missing expected value"],
+              ["Part replaced", "C14, 470μF 25V", "Enables reordering", "No value or rating"],
+              ["Photos", "Before / after shots", "Independent proof of work", "Not linked to the ticket"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the reference table, why does the Symptom field matter?", choices: ["It confirms the starting fault", "It enables reordering the part", "It proves the diagnosis was correct", "It provides independent proof of the work performed"], answer: 0, explain: "The table lists the Symptom field's importance as confirming the starting fault.", why: ["", "That's the Part Replaced field's importance, not Symptom's", "That's the Test Results field's importance, not Symptom's", "That's the Photos field's importance, not Symptom's"] },
+              { q: "Per the reference table, what's often missed for the Test Results field?", choices: ["Missing expected value", "Too vague to act on", "No value or rating", "Not linked to the ticket"], answer: 0, explain: "The table lists 'Missing expected value' as what's often missed for Test Results.", why: ["", "That's what's often missed for Symptom, not Test Results", "That's what's often missed for Part Replaced, not Test Results", "That's what's often missed for Photos, not Test Results"] },
+              { q: "Per the reference table, why does the Part Replaced field matter?", choices: ["It enables reordering", "It confirms the starting fault", "It provides independent proof of the work", "It proves the diagnosis"], answer: 0, explain: "The table lists the Part Replaced field's importance as enabling reordering.", why: ["", "That's the Symptom field's importance, not Part Replaced's", "That's the Photos field's importance, not Part Replaced's", "That's the Test Results field's importance, not Part Replaced's"] },
+              { q: "Per the reference table, what's often missed for the Photos field?", choices: ["Not linked to the ticket", "Too vague to act on", "Missing expected value", "No value or rating"], answer: 0, explain: "The table lists 'Not linked to the ticket' as what's often missed for Photos.", why: ["", "That's what's often missed for Symptom, not Photos", "That's what's often missed for Test Results, not Photos", "That's what's often missed for Part Replaced, not Photos"] },
+              { q: "Per the reference table, what example is given for the Part Replaced field?", choices: ["C14, 470μF 25V", "No output, channel 2", "TP3: 0V, expected 5V", "Before / after shots"], answer: 0, explain: "The table gives 'C14, 470μF 25V' as the example for the Part Replaced field.", why: ["", "That's the Symptom field's example, not Part Replaced's", "That's the Test Results field's example, not Part Replaced's", "That's the Photos field's example, not Part Replaced's"] }
+            ] }
+          ]
+        },
+        {
+          id: "docs-wrapup",
+          title: "Module Wrap-Up",
+          tag: "You Can Now…",
+          blocks: [
+            { type: "checklist", items: [
+              "Write a clear, specific fault report anyone can follow",
+              "Record test results with both expected and actual values",
+              "Build a complete Bill of Materials for a repair",
+              "Explain why schematic revision control matters",
+              "Recognise and avoid the most common documentation mistakes"
+            ]},
+            { type: "golden", text: "The repair isn't finished until someone else could pick up your notes and understand it completely." },
+            { type: "check", questions: [
+              { q: "What is the golden rule of this module?", choices: ["The repair isn't finished until someone else could pick up your notes and understand it completely", "Documentation is only necessary for warranty repairs", "Writing 'fixed' is sufficient as long as the board works again", "Photos are optional if the fault report is detailed enough"], answer: 0, explain: "The golden rule explicitly states the repair isn't finished until someone else could pick up your notes and understand it completely.", why: ["", "The whole module frames documentation as necessary for every repair, not just warranty ones", "The common mistakes list explicitly names writing 'fixed' with no explanation as a mistake to avoid", "Photos are presented as one of five distinct, valuable records — not optional if other fields are filled"] },
+              { q: "Per the checklist, what should you be able to write that anyone can follow?", choices: ["A clear, specific fault report", "A schematic from scratch, with no reference material", "A full BOM without knowing any part numbers", "A repair record that skips the symptom description"], answer: 0, explain: "The checklist names writing a clear, specific fault report anyone can follow as a core skill.", why: ["", "Schematic creation from scratch isn't a skill taught in this documentation-focused module", "The BOM list explicitly requires exact part numbers, not guesswork", "Symptom description is explicitly the first, essential field in a fault report"] },
+              { q: "Per the checklist, what should test results be recorded with?", choices: ["Both expected and actual values", "Only actual values, with no expected comparison", "Only a pass/fail flag, with no numbers at all", "Only the instrument's serial number"], answer: 0, explain: "The checklist names recording test results with both expected and actual values as a core skill.", why: ["", "The fault-reports card explicitly recommends recording BOTH values, not just actual", "The fault-reports card explicitly states a number without an expected value proves little — plain pass/fail isn't enough", "Instrument type is a separate field from this specific checklist item about expected/actual values"] },
+              { q: "Per the checklist, what should you be able to build for a repair?", choices: ["A complete Bill of Materials", "A completely new schematic from memory", "A digital-only record system with no paper backup ever allowed", "A record that omits part values to save space"], answer: 0, explain: "The checklist names building a complete Bill of Materials for a repair as a core skill.", why: ["", "Building a new schematic from memory isn't a skill taught in this module", "The digital vs paper card presents both as valid options with tradeoffs, not one exclusively mandated", "The BOM list explicitly requires value & rating as a necessary field, not something to omit"] },
+              { q: "Per the checklist, what should you be able to explain about schematic revisions?", choices: ["Why schematic revision control matters", "Why revisions never actually differ from each other", "Why paper systems are always superior to digital ones", "Why photos are unnecessary once a BOM exists"], answer: 0, explain: "The checklist names explaining why schematic revision control matters as a core skill.", why: ["", "The version-control card explicitly explains why revisions CAN meaningfully differ", "The digital vs paper table presents genuine tradeoffs, not a blanket superiority claim", "Photos and BOM are presented as separate, complementary records, not substitutes for each other"] }
+            ] }
+          ]
+        }
+      ]
+    },
   ],
 
   // ================================================================ QUESTIONS
