@@ -912,3 +912,101 @@ table.blk-table tr:last-child td { border-bottom: none; }
   .sb-stat { min-width: 50px; }
   .brand { font-size: 1.05rem; }
 }
+
+/* -------- Auth -------- */
+.app-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-faint);
+  font-weight: 700;
+}
+.auth-gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.auth-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  max-width: 380px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.auth-card .brand { justify-content: center; text-align: left; }
+.auth-card h2 { margin: 0; text-align: center; }
+#auth-form { display: flex; flex-direction: column; gap: 12px; }
+.auth-field { display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem; font-weight: 700; color: var(--text-dim); }
+.auth-field input {
+  font: inherit;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 12px;
+}
+.auth-field input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.auth-error {
+  font-size: 0.82rem;
+  color: var(--bad);
+  min-height: 1em;
+}
+.auth-submit {
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-weight: 800;
+  font: inherit;
+  padding: 12px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.auth-submit:disabled { opacity: 0.6; cursor: default; }
+.auth-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+.auth-switch button {
+  border: none;
+  background: none;
+  color: var(--accent);
+  font-weight: 800;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.auth-note { font-size: 0.78rem; color: var(--text-faint); text-align: center; min-height: 1em; }
+.auth-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+.logout-btn {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-dim);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.78rem;
+  padding: 7px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.logout-btn:hover { border-color: var(--accent); color: var(--text); }
+@media (max-width: 560px) {
+  .auth-user-info span { display: none; }
+}

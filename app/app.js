@@ -4,7 +4,13 @@
   var DATA = window.THULIR_DATA;
   var SECTIONS = DATA.sections;
   var QUESTIONS = DATA.questions;
-  var STORAGE_KEY = "thulir-bench-quest-v1";
+
+  // ---------------------------------------------------------- AUTH / CLOUD SYNC
+  var SUPABASE_URL = "https://fffathiyclrpzxrrwytk.supabase.co";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmZmF0aGl5Y2xycHp4cnJ3eXRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1OTU2NTQsImV4cCI6MjEwMTE3MTY1NH0.-ATsszPzA7g5pYqSuLvsAeoOtiw0BUV9IZRcmk4v17Y";
+  var COURSE = "electronics";
+  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  var currentUser = null;
 
   var XP_TOPIC = 15;
   var XP_MODULE_BONUS = 50;
@@ -46,25 +52,40 @@
     };
   }
 
-  var state = loadState();
+  var state = null;
 
-  function loadState() {
-    try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return defaultState();
-      var parsed = JSON.parse(raw);
-      var d = defaultState();
-      return Object.assign(d, parsed, {
-        quiz: Object.assign(d.quiz, parsed.quiz || {}),
-        sim: Object.assign(d.sim, parsed.sim || {})
+  function mergeWithDefaults(parsed) {
+    var d = defaultState();
+    return Object.assign(d, parsed, {
+      quiz: Object.assign(d.quiz, (parsed && parsed.quiz) || {}),
+      sim: Object.assign(d.sim, (parsed && parsed.sim) || {})
+    });
+  }
+
+  function loadStateFromCloud() {
+    return sb.from("progress").select("state").eq("user_id", currentUser.id).eq("course", COURSE).maybeSingle()
+      .then(function (res) {
+        if (res.error) throw res.error;
+        if (res.data && res.data.state) {
+          return mergeWithDefaults(res.data.state);
+        }
+        var fresh = defaultState();
+        return sb.from("progress").insert({ user_id: currentUser.id, course: COURSE, state: fresh }).then(function () {
+          return fresh;
+        });
       });
-    } catch (e) {
-      return defaultState();
-    }
   }
 
   function saveState() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    if (!currentUser) return;
+    sb.from("progress").upsert({
+      user_id: currentUser.id,
+      course: COURSE,
+      state: state,
+      updated_at: new Date().toISOString()
+    }, { onConflict: "user_id,course" }).then(function (res) {
+      if (res.error) console.error("Progress save failed:", res.error);
+    });
   }
 
   function resetProgress() {
@@ -790,6 +811,88 @@
     });
   }
 
+  // ---------------------------------------------------------- AUTH UI
+  var authMode = "login";
+
+  function setAuthMode(mode) {
+    authMode = mode;
+    document.getElementById("auth-title").textContent = mode === "login" ? "Log In" : "Sign Up";
+    document.getElementById("auth-submit").textContent = mode === "login" ? "Log In" : "Sign Up";
+    document.getElementById("auth-switch-text").textContent = mode === "login" ? "Don't have an account?" : "Already have an account?";
+    document.getElementById("auth-switch-btn").textContent = mode === "login" ? "Sign Up" : "Log In";
+    document.getElementById("auth-error").textContent = "";
+    document.getElementById("auth-note").textContent = "";
+  }
+
+  function showAuthGate() {
+    document.getElementById("app-loading").style.display = "none";
+    document.getElementById("app-shell").style.display = "none";
+    document.getElementById("auth-gate").style.display = "flex";
+  }
+
+  function showApp() {
+    document.getElementById("app-loading").style.display = "none";
+    document.getElementById("auth-gate").style.display = "none";
+    document.getElementById("app-shell").style.display = "";
+    document.getElementById("auth-user-email").textContent = currentUser.email;
+  }
+
+  function bootWithUser(user) {
+    currentUser = user;
+    loadStateFromCloud().then(function (loaded) {
+      state = loaded;
+      showApp();
+      renderScoreboard();
+      renderSections();
+      renderQuiz();
+    }).catch(function (err) {
+      console.error(err);
+      alert("Could not load your progress. Please refresh and try again.");
+    });
+  }
+
+  function wireAuthUI() {
+    document.getElementById("auth-switch-btn").addEventListener("click", function () {
+      setAuthMode(authMode === "login" ? "signup" : "login");
+    });
+
+    document.getElementById("auth-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var email = document.getElementById("auth-email").value.trim();
+      var password = document.getElementById("auth-password").value;
+      var errEl = document.getElementById("auth-error");
+      var noteEl = document.getElementById("auth-note");
+      var btn = document.getElementById("auth-submit");
+      errEl.textContent = "";
+      noteEl.textContent = "";
+      btn.disabled = true;
+
+      var action = authMode === "login"
+        ? sb.auth.signInWithPassword({ email: email, password: password })
+        : sb.auth.signUp({ email: email, password: password });
+
+      action.then(function (res) {
+        btn.disabled = false;
+        if (res.error) {
+          errEl.textContent = res.error.message;
+          return;
+        }
+        if (authMode === "signup" && res.data && res.data.user && !res.data.session) {
+          noteEl.textContent = "Check your email to confirm your account, then log in.";
+          setAuthMode("login");
+        }
+        // If a session came back, onAuthStateChange below boots the app.
+      }).catch(function () {
+        btn.disabled = false;
+        errEl.textContent = "Something went wrong. Please try again.";
+      });
+    });
+
+    document.getElementById("logout-btn").addEventListener("click", function () {
+      sb.auth.signOut();
+    });
+  }
+
   // ---------------------------------------------------------- INIT
   function init() {
     document.querySelectorAll(".tab-btn").forEach(function (b) {
@@ -809,9 +912,19 @@
       }
     });
 
-    renderScoreboard();
-    renderSections();
-    renderQuiz();
+    wireAuthUI();
+
+    sb.auth.onAuthStateChange(function (event, session) {
+      if (session && session.user) {
+        if (!currentUser || currentUser.id !== session.user.id) {
+          bootWithUser(session.user);
+        }
+      } else {
+        currentUser = null;
+        state = null;
+        showAuthGate();
+      }
+    });
   }
 
   document.addEventListener("DOMContentLoaded", init);

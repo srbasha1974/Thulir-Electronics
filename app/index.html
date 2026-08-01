@@ -10,7 +10,39 @@
 
 <div id="toast-stack"></div>
 
-<div class="app-shell">
+<div id="app-loading" class="app-loading">Loading…</div>
+
+<div id="auth-gate" class="auth-gate" style="display:none">
+  <div class="auth-card">
+    <div class="brand">
+      <span class="spark">⚡</span>
+      <div>
+        Thulir Bench Quest
+        <small>Electronics training, gamified</small>
+      </div>
+    </div>
+    <h2 id="auth-title">Log In</h2>
+    <form id="auth-form">
+      <label class="auth-field">
+        <span>Email</span>
+        <input type="email" id="auth-email" required autocomplete="email">
+      </label>
+      <label class="auth-field">
+        <span>Password</span>
+        <input type="password" id="auth-password" required autocomplete="current-password" minlength="6">
+      </label>
+      <div class="auth-error" id="auth-error"></div>
+      <button type="submit" class="auth-submit" id="auth-submit">Log In</button>
+    </form>
+    <div class="auth-switch">
+      <span id="auth-switch-text">Don't have an account?</span>
+      <button type="button" id="auth-switch-btn">Sign Up</button>
+    </div>
+    <div class="auth-note" id="auth-note"></div>
+  </div>
+</div>
+
+<div class="app-shell" id="app-shell" style="display:none">
 
   <div class="brand-row">
     <div class="brand">
@@ -19,6 +51,10 @@
         Thulir Bench Quest
         <small>Electronics training, gamified</small>
       </div>
+    </div>
+    <div class="auth-user-info">
+      <span id="auth-user-email"></span>
+      <button id="logout-btn" class="logout-btn">Log Out</button>
     </div>
   </div>
 
@@ -72,6 +108,7 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="data.js"></script>
 <script src="diagrams.js"></script>
 <script src="sims.js"></script>
