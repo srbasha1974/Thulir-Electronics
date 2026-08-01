@@ -1849,6 +1849,285 @@ window.THULIR_DATA = {
         }
       ]
     },
+
+    // ============================================================ MODULE 08: EMBEDDED SYSTEMS
+    {
+      id: "embedded-systems",
+      code: "MOD·08",
+      icon: "🧠",
+      color: "#5bffda",
+      title: "Embedded Systems",
+      subtitle: "When the fault isn't just hardware — it might be what's running on the chip.",
+      cards: [
+        {
+          id: "embedded-overview",
+          title: "The Five Skills of Embedded Repair",
+          tag: "Overview",
+          blocks: [
+            { type: "intro", text: "Have you ever plugged in a 'dead' gadget and wondered if the problem was the hardware, or the code running inside it? By the end of this module, you'll have a clear way to tell the two apart." },
+            { type: "table", title: "A 'dead' board might be a hardware fault — or it might just be lost code", headers: ["Skill", "What It Covers", "Key Idea"], rows: [
+              ["Microcontrollers", "A computer on a single chip", "CPU + memory"],
+              ["Firmware", "The code that runs the hardware", "Can corrupt"],
+              ["GPIO & Peripherals", "How the chip talks to the world", "In / out"],
+              ["Serial Monitor", "A window into what the board is doing", "Baud rate"],
+              ["Debugging", "Telling firmware faults from hardware ones", "Systematic"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the table, what is a microcontroller described as?", choices: ["A computer on a single chip", "The code that runs the hardware", "A window into what the board is doing", "How the chip talks to the world"], answer: 0, explain: "The table describes microcontrollers as a computer on a single chip, with CPU + memory as the key idea.", why: ["", "That describes Firmware, not Microcontrollers", "That describes the Serial Monitor, not Microcontrollers", "That describes GPIO & Peripherals, not Microcontrollers"] },
+              { q: "Per the table, what is firmware described as?", choices: ["The code that runs the hardware", "A computer on a single chip", "How the chip talks to the world", "Telling firmware faults from hardware ones"], answer: 0, explain: "The table describes firmware as the code that runs the hardware, noted as able to corrupt.", why: ["", "That describes Microcontrollers, not Firmware", "That describes GPIO & Peripherals, not Firmware", "That describes Debugging, not Firmware"] },
+              { q: "Per the table, what key idea is listed for GPIO & Peripherals?", choices: ["In / out", "CPU + memory", "Can corrupt", "Baud rate"], answer: 0, explain: "The table lists 'In / out' as the key idea for GPIO & Peripherals — how the chip talks to the world.", why: ["", "CPU + memory is the key idea for Microcontrollers, not GPIO & Peripherals", "Can corrupt is the key idea for Firmware, not GPIO & Peripherals", "Baud rate is the key idea for the Serial Monitor, not GPIO & Peripherals"] },
+              { q: "Per the table, what key idea is listed for the Serial Monitor?", choices: ["Baud rate", "In / out", "Systematic", "CPU + memory"], answer: 0, explain: "The table lists 'Baud rate' as the key idea for the Serial Monitor — a window into what the board is doing.", why: ["", "In / out is the key idea for GPIO & Peripherals, not the Serial Monitor", "Systematic is the key idea for Debugging, not the Serial Monitor", "CPU + memory is the key idea for Microcontrollers, not the Serial Monitor"] },
+              { q: "Per the table, what does Debugging cover in this module?", choices: ["Telling firmware faults from hardware ones", "A computer on a single chip", "The code that runs the hardware", "A window into what the board is doing"], answer: 0, explain: "The table describes Debugging as telling firmware faults from hardware ones, with 'Systematic' as the key idea.", why: ["", "That describes Microcontrollers, not Debugging", "That describes Firmware, not Debugging", "That describes the Serial Monitor, not Debugging"] }
+            ] }
+          ]
+        },
+        {
+          id: "embedded-fundamentals",
+          title: "What Is an Embedded System?",
+          tag: "Fundamentals",
+          blocks: [
+            { type: "definition",
+              plain: "An embedded system is a small computer built into a device to do one job — not a general-purpose PC.",
+              picture: "Like a factory worker trained for one task, instead of an office worker who could do anything.",
+              facts: "It's inside chargers, TVs, washing machines, and toys — anywhere a device needs to 'decide' something." },
+            { type: "numbered", title: "Microcontroller vs Microprocessor", items: [
+              { title: "1. Microcontroller (MCU)", desc: "CPU, memory, and I/O all on one chip — most repair-bench boards use these" },
+              { title: "2. Microprocessor (MPU)", desc: "Needs separate memory and support chips — found in more powerful systems" },
+              { title: "3. Fewer external parts", desc: "An MCU-based board is simpler to trace and diagnose" },
+              { title: "4. Why it matters here", desc: "Most consumer repair work centres on MCU-based boards, not full computers" }
+            ]},
+            { type: "numbered", title: "Common Embedded Boards", items: [
+              { title: "1. Arduino-style boards", desc: "AVR-based, popular for hobbyist and simple consumer designs" },
+              { title: "2. ESP32 / ESP8266", desc: "Wi-Fi-enabled — common in smart home and IoT devices" },
+              { title: "3. STM32", desc: "ARM-based, widely used in industrial and appliance control boards" },
+              { title: "4. PIC microcontrollers", desc: "Common in older or cost-sensitive consumer electronics" }
+            ]},
+            { type: "numbered", title: "Specifications That Matter", items: [
+              { title: "Clock speed", desc: "How many operations per second the chip can process" },
+              { title: "Flash & RAM size", desc: "How much code and working memory the chip can hold" },
+              { title: "Operating voltage", desc: "Usually 3.3V or 5V — mixing them up damages the chip" },
+              { title: "I/O pin count", desc: "How many inputs and outputs the design has to work with" }
+            ]},
+            { type: "definition",
+              plain: "A sensor board shows no activity at all — no lights, no output, completely unresponsive.",
+              picture: "Like a lamp that doesn't light because it's not even plugged in — not because the bulb is bad.",
+              facts: "Checking the supply voltage at the MCU first, before suspecting the firmware, revealed a missing 3.3V rail — the chip never even started." },
+            { type: "numbered", title: "Diagnosing the dead sensor board", items: [
+              { title: "What you do", desc: "Check the supply voltage at the MCU first, before suspecting the firmware at all" },
+              { title: "What it tells you", desc: "A missing 3.3V rail meant the chip never even started — firmware was never the problem" }
+            ]},
+            { type: "check", questions: [
+              { q: "What makes an embedded system different from a general-purpose PC?", choices: ["It's a small computer built into a device to do one specific job", "It has no CPU or memory of its own", "It can only run one program ever, with no way to update it", "It's always more powerful than a desktop PC"], answer: 0, explain: "The definition states an embedded system is built into a device to do one job, unlike a general-purpose PC.", why: ["", "The definition explicitly says it's a computer, with a CPU and memory of its own", "Firmware can be updated, as covered elsewhere in this module — it isn't fixed forever", "Embedded systems are typically far less powerful than a PC, being built for one focused task"] },
+              { q: "Per the MCU vs MPU comparison, why are most repair-bench boards MCU-based?", choices: ["An MCU packs CPU, memory, and I/O onto one chip, meaning fewer external parts to trace", "MPUs are always cheaper than MCUs", "MCUs cannot be found in consumer electronics", "MPUs have no CPU of their own"], answer: 0, explain: "The list states an MCU-based board has fewer external parts, making it simpler to trace and diagnose — exactly why most repair work centres on them.", why: ["", "Cost isn't the comparison point made in this list", "The list explicitly says most repair-bench boards use MCUs, meaning they ARE common in consumer electronics", "An MPU does have a CPU — it just needs separate memory and support chips"] },
+              { q: "Per the common embedded boards list, which family is described as ARM-based and widely used in industrial and appliance control?", choices: ["STM32", "Arduino-style boards", "ESP32 / ESP8266", "PIC microcontrollers"], answer: 0, explain: "The list describes STM32 as ARM-based, widely used in industrial and appliance control boards.", why: ["", "Arduino-style boards are described as AVR-based, not ARM-based", "ESP32/ESP8266 are described as Wi-Fi-enabled, not specifically ARM-based industrial control chips", "PIC microcontrollers are described as common in older or cost-sensitive consumer electronics, not this description"] },
+              { q: "Per the specifications list, why is operating voltage the spec that's 'easy to get wrong'?", choices: ["Chips are usually 3.3V or 5V, and mixing them up damages the chip", "It's the only spec that can't be found on a datasheet", "It has no real consequence if set incorrectly", "It only matters for boards with no I/O pins"], answer: 0, explain: "The specs list explicitly warns that mixing up 3.3V and 5V operating voltage damages the chip.", why: ["", "Voltage rating is a standard datasheet spec, not a hidden one", "The list explicitly warns this mistake damages the chip — it's a real consequence", "Operating voltage matters for the whole chip, not specifically boards without I/O"] },
+              { q: "In the dead-sensor-board scenario, what did checking the supply voltage at the MCU reveal?", choices: ["A missing 3.3V rail — the chip never even started, so firmware was never the problem", "A corrupted firmware image", "A shorted GPIO pin", "A blown fuse in the power supply chain unrelated to the MCU"], answer: 0, explain: "The scenario states a missing 3.3V rail meant the chip never even started — confirming power should be checked before ever suspecting firmware.", why: ["", "The scenario explicitly concludes firmware was never the problem", "A shorted GPIO pin isn't the fault identified in this scenario", "The scenario specifically traces the fault to the MCU's own supply rail, not a separate fuse"] }
+            ] }
+          ]
+        },
+        {
+          id: "embedded-hardware",
+          title: "MCU Hardware & Protection",
+          tag: "Hardware",
+          blocks: [
+            { type: "numbered", title: "The Building Blocks of an MCU", items: [
+              { title: "1. CPU core", desc: "Executes the firmware's instructions, one after another" },
+              { title: "2. Flash memory", desc: "Stores the firmware itself, even with power removed" },
+              { title: "3. RAM", desc: "Holds working data while the program is actually running" },
+              { title: "4. Peripherals", desc: "Built-in timers, ADCs, and communication interfaces" }
+            ]},
+            { type: "numbered", title: "Supporting Components on the Board", items: [
+              { title: "1. Crystal oscillator", desc: "Gives the chip its precise timing heartbeat" },
+              { title: "2. Voltage regulator", desc: "Steps down and steadies the supply to what the chip needs" },
+              { title: "3. Reset circuit", desc: "A resistor and capacitor (or button) that starts the chip cleanly" },
+              { title: "4. Programming header", desc: "Pins used to load or update firmware onto the chip" }
+            ]},
+            { type: "numbered", title: "Protecting Embedded Boards", items: [
+              { title: "1. GPIO pins are ESD-sensitive", desc: "Ground yourself before handling an exposed board" },
+              { title: "2. Never hot-plug the programmer", desc: "Connect it before power, not while the board is live" },
+              { title: "3. Power down before removing a chip", desc: "Hot removal can damage both the chip and the socket" },
+              { title: "4. Static-safe during flashing", desc: "Keep the board on a grounded mat while firmware loads" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the building blocks list, what does flash memory store?", choices: ["The firmware itself, even with power removed", "Working data only while the program is running", "Timing signals for the CPU", "Nothing — flash is only used during programming"], answer: 0, explain: "The list states flash memory stores the firmware itself, persisting even with power removed.", why: ["", "That describes RAM, not flash memory", "Timing is the crystal oscillator's job, not flash memory's", "Flash retains the firmware permanently, not only during the programming step"] },
+              { q: "Per the building blocks list, what does RAM hold?", choices: ["Working data while the program is actually running", "The firmware permanently, even powered off", "Built-in timers and ADCs", "The chip's clock timing signal"], answer: 0, explain: "The list states RAM holds working data while the program is running — unlike flash, it doesn't retain data with power removed.", why: ["", "That describes flash memory, not RAM", "That describes peripherals, not RAM", "That describes the crystal oscillator, not RAM"] },
+              { q: "Per the supporting components list, why does a missing heartbeat from the crystal oscillator look exactly like a dead chip?", choices: ["The crystal gives the chip its precise timing, and without it the chip can't run its instructions properly", "The crystal supplies the chip's main operating voltage", "The crystal stores the firmware image", "The crystal is only used for the programming header"], answer: 0, explain: "The list's insight line states a missing heartbeat from the crystal looks exactly like a dead chip, since timing is essential to running any instructions at all.", why: ["", "Voltage regulation is the voltage regulator's job, not the crystal's", "Firmware storage is flash memory's job, not the crystal's", "The crystal supplies system timing broadly, not specifically the programming header"] },
+              { q: "Per the protecting embedded boards list, when should the programmer be connected to the board?", choices: ["Before power, not while the board is live", "Only while the board is powered and running", "It doesn't matter when it's connected", "Only after firmware has already been flashed once"], answer: 0, explain: "The list explicitly warns never to hot-plug the programmer — connect it before power, not while the board is live.", why: ["", "The list explicitly warns against connecting it live — this is the opposite of the correct practice", "The list gives a specific, deliberate order for this reason", "Connection timing matters on every flash, not just the first one"] },
+              { q: "Per the protecting embedded boards list, why is a bare MCU pin an ESD risk worth taking seriously?", choices: ["GPIO pins are ESD-sensitive, so grounding yourself before handling an exposed board matters", "MCU pins are physically fragile and snap easily", "ESD only affects powered-on boards, never bare chips", "GPIO pins are immune to static, unlike other board components"], answer: 0, explain: "The list states GPIO pins are ESD-sensitive, requiring you to ground yourself before handling an exposed board — the same ESD discipline covered in the earlier safety module.", why: ["", "Physical fragility isn't the stated reason — ESD sensitivity is", "ESD risk applies to bare, unpowered boards specifically, which is exactly why this list warns about it", "The list explicitly states GPIO pins ARE ESD-sensitive, not immune"] }
+            ] }
+          ]
+        },
+        {
+          id: "embedded-gpio-faults",
+          title: "Reading GPIO & Common Hardware Faults",
+          tag: "GPIO & Hardware Faults",
+          blocks: [
+            { type: "definition",
+              plain: "GPIO (General Purpose Input/Output) pins can be configured as either inputs or outputs, in software.",
+              picture: "Like a set of switches and sensors that firmware decides the job of, pin by pin.",
+              facts: "A pin set to output can be checked with a meter; a pin set to input reacts to what's connected to it." },
+            { type: "tip", text: "Healthy hardware shows supply voltage present and steady at the MCU, a crystal oscillator reading a clean signal on a scope, and a reset line that sits high but briefly pulses low at power-on." },
+            { type: "warning", title: "Hardware fault signs", items: [
+              "No voltage at the MCU's supply pin at all",
+              "Reset line stuck permanently low",
+              "Chip runs noticeably hot with no load"
+            ]},
+            { type: "check", questions: [
+              { q: "What does the definition mean by saying firmware decides what a GPIO pin does?", choices: ["A GPIO pin can be configured as either input or output in software, so hardware alone can't tell you its role", "GPIO pins are physically wired as inputs or outputs at the factory and can never change", "Firmware has no control over GPIO pins at all", "GPIO pins can only ever be outputs"], answer: 0, explain: "The definition states GPIO pins can be configured as either input or output in software — firmware decides, hardware alone can't tell you.", why: ["", "The whole point of GPIO is that its role is set in software, not fixed at manufacture", "The definition explicitly states firmware configures GPIO pins", "GPIO pins can be either inputs or outputs, not just outputs"] },
+              { q: "Per the definition, how can you check a GPIO pin that's been configured as an output?", choices: ["With a meter", "Only by reading the firmware source code", "It cannot be checked at all", "Only with a signal generator injecting a test signal"], answer: 0, explain: "The definition states a pin set to output can be checked with a meter.", why: ["", "Reading the pin's electrical state is done with a meter, not by inspecting source code", "The definition explicitly says it CAN be checked", "A signal generator isn't needed to check a simple output pin's state"] },
+              { q: "Per the healthy signs, what should the reset line look like on a properly functioning board?", choices: ["It sits high, and briefly pulses low at power-on", "It stays permanently low at all times", "It stays permanently high, never pulsing", "It has no defined behavior at all"], answer: 0, explain: "The healthy signs describe the reset line sitting high, with a brief low pulse at power-on to start the chip cleanly.", why: ["", "Permanently low is listed as a FAULT sign, not healthy", "Never pulsing at power-on would mean the reset circuit isn't doing its job", "The healthy signs describe a specific, expected reset-line behavior"] },
+              { q: "Per the fault signs, what does a chip running noticeably hot with no load usually indicate?", choices: ["A hardware fault", "Perfectly normal, expected behavior", "A firmware update in progress", "A GPIO pin correctly configured as an output"], answer: 0, explain: "The fault signs list a chip running noticeably hot with no load as a sign pointing to hardware, not firmware.", why: ["", "This is explicitly listed as a fault sign, not normal behavior", "Firmware updates don't inherently cause a chip to run hot with no load", "GPIO configuration is unrelated to a chip's overall temperature under no load"] },
+              { q: "Per the fault signs, what does a reset line stuck permanently low usually indicate?", choices: ["A hardware fault, since the reset circuit should pulse low only briefly at power-on", "Normal behavior for every embedded board", "That firmware has been successfully flashed", "That the crystal oscillator is running perfectly"], answer: 0, explain: "The fault signs explicitly list a reset line stuck permanently low, contrasted with the healthy sign of a brief pulse at power-on.", why: ["", "The healthy signs describe a brief pulse, not a permanently stuck line — this is explicitly a fault", "A stuck reset line prevents the chip from running at all, unrelated to firmware flashing success", "A stuck reset line is a reset-circuit fault, not a statement about crystal health"] }
+            ] }
+          ]
+        },
+        {
+          id: "embedded-firmware",
+          title: "Firmware: Hardware's Instructions",
+          tag: "Firmware",
+          blocks: [
+            { type: "definition",
+              plain: "Firmware is the software permanently stored on the chip that tells the hardware exactly what to do.",
+              picture: "Like a recipe baked into the chip — the hardware is the kitchen, firmware is what gets cooked.",
+              facts: "Firmware can become corrupted without any hardware fault at all — the chip is fine, the instructions aren't." },
+            { type: "numbered", title: "How Firmware Gets Onto the Chip", items: [
+              { title: "1. ISP / programmer", desc: "A dedicated programmer writes firmware directly to the chip" },
+              { title: "2. USB bootloader", desc: "A small built-in program that accepts new firmware over USB" },
+              { title: "3. JTAG / SWD", desc: "A debug interface used for programming and live debugging" },
+              { title: "4. OTA (over-the-air)", desc: "Wi-Fi-enabled chips can receive firmware updates wirelessly" }
+            ]},
+            { type: "table", title: "Firmware vs hardware fault", headers: ["Symptom", "Points To Firmware", "Points To Hardware"], rows: [
+              ["Power & voltages", "All read correctly", "A voltage rail is missing or unstable"],
+              ["Damage", "None visible; board was recently updated or reflashed", "Visible damage — burn marks, corrosion, cracks"],
+              ["Behaviour", "Inconsistent or partially working", "Fault appeared after physical impact or liquid"]
+            ]},
+            { type: "definition",
+              plain: "Power was lost mid-update. The board now shows no activity at all, as if it were switched off.",
+              picture: "Like a book with a torn page mid-chapter — the story stops mid-sentence, but the rest of the book is still fine.",
+              facts: "Checking supply voltage first (it's fine), then connecting the programmer, showed the bootloader still responds — the firmware was corrupted, not the chip itself." },
+            { type: "numbered", title: "Diagnosing the 'bricked' board", items: [
+              { title: "What you do", desc: "Check the supply voltage first, then connect the programmer to check for a bootloader" },
+              { title: "What it tells you", desc: "The bootloader still responds — the firmware was corrupted, not the chip itself" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the definition, what does it mean that firmware can become corrupted 'without any hardware fault at all'?", choices: ["The chip itself can be perfectly fine while its stored instructions are broken", "Firmware corruption always means the chip is also physically damaged", "Firmware can never be corrupted under any circumstances", "Hardware faults always accompany firmware corruption"], answer: 0, explain: "The facts line states firmware can corrupt with the chip perfectly fine — the instructions aren't, but the hardware is.", why: ["", "The facts line explicitly separates the two — the chip can be fine while firmware isn't", "The whole point of this card is that firmware CAN become corrupted", "The facts line explicitly states these are separable — one can happen without the other"] },
+              { q: "Per the 'How Firmware Gets Onto the Chip' list, what is JTAG / SWD used for?", choices: ["A debug interface used for programming and live debugging", "A small built-in program that accepts firmware over USB", "A dedicated external programmer that writes firmware directly", "Wireless firmware updates over Wi-Fi"], answer: 0, explain: "The list describes JTAG/SWD as a debug interface used for programming and live debugging.", why: ["", "That describes a USB bootloader, not JTAG/SWD", "That describes an ISP/programmer, not JTAG/SWD", "That describes OTA (over-the-air), not JTAG/SWD"] },
+              { q: "Per the firmware-vs-hardware comparison table, what points toward a hardware fault rather than a firmware one?", choices: ["A voltage rail is missing or unstable", "Power and voltages all read correctly", "The board was recently updated or reflashed", "Behaviour is inconsistent or partially working"], answer: 0, explain: "The table lists a missing or unstable voltage rail under 'Points To Hardware'.", why: ["", "That points to firmware, per the table's 'Points To Firmware' column", "That points to firmware, since a recent reflash suggests a firmware-side cause", "That points to firmware, per the table's 'Points To Firmware' column"] },
+              { q: "Per the firmware-vs-hardware comparison table, what points toward a firmware fault rather than a hardware one?", choices: ["Power and voltages all read correctly", "A voltage rail is missing or unstable", "Visible damage — burn marks, corrosion, cracks", "The fault appeared after physical impact or liquid"], answer: 0, explain: "The table lists power and voltages reading correctly under 'Points To Firmware' — since the hardware is confirmed fine, the fault likely lies in the code.", why: ["", "That points to hardware, per the table's 'Points To Hardware' column", "That points to hardware, per the table's 'Points To Hardware' column", "That points to hardware, per the table's 'Points To Hardware' column"] },
+              { q: "In the 'bricked' board scenario, what did a responsive bootloader after a power-loss-during-update indicate?", choices: ["The chip survived — the firmware was corrupted, not the chip itself, and a reflash would fix it", "The chip itself was permanently destroyed", "The power supply was still faulty", "No further action was possible — the board was unrecoverable"], answer: 0, explain: "The scenario concludes a responsive bootloader means the chip survived — only the firmware was corrupted, and a reflash fixes it.", why: ["", "The scenario's whole point is the chip was NOT destroyed — it responded", "The scenario explicitly checked supply voltage first and confirmed it was fine", "The scenario explicitly states a reflash fixes it — it wasn't unrecoverable"] }
+            ] }
+          ]
+        },
+        {
+          id: "embedded-diagnosis",
+          title: "Diagnosis: Blink Test, Serial Monitor & Recovery",
+          tag: "Diagnosis",
+          blocks: [
+            { type: "definition",
+              plain: "Uploading the simplest possible program — blinking one LED — confirms the chip can run code at all.",
+              picture: "Like checking a car starts and idles before diagnosing why the radio doesn't work.",
+              facts: "If the blink test succeeds, the chip, power, and programming path are all confirmed working." },
+            { type: "numbered", title: "Using the Serial Monitor", items: [
+              { title: "1. Connect at the correct baud rate", desc: "Mismatched rates show only garbled text" },
+              { title: "2. Watch the boot messages", desc: "Many boards print their own status as they start up" },
+              { title: "3. Print debug values", desc: "Firmware can report sensor readings or internal state as it runs" },
+              { title: "4. Look for error codes", desc: "Repeated resets or fault codes point straight at the problem" }
+            ]},
+            { type: "numbered", title: "Systematic Embedded Troubleshooting", items: [
+              { title: "1. Check power rails first", desc: "Confirm every supply voltage the chip actually needs" },
+              { title: "2. Check the crystal", desc: "Confirm the timing signal is present and clean" },
+              { title: "3. Check the reset line", desc: "Confirm it pulses correctly, not stuck high or low" },
+              { title: "4. Check the firmware last", desc: "Only suspect the code once the hardware is confirmed healthy" }
+            ]},
+            { type: "numbered", title: "Common Recovery Techniques", items: [
+              { title: "1. Reflash the firmware", desc: "Overwrites corrupted code with a known-good version" },
+              { title: "2. Factory reset", desc: "Clears stored settings that may be causing a fault" },
+              { title: "3. Force bootloader mode", desc: "A button or pin combination recovers an unresponsive chip" },
+              { title: "4. Replace the crystal", desc: "A damaged or drifted crystal can stop the chip cold" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the definition, what does a successful blink test actually confirm about a board?", choices: ["The chip, power, and programming path are all confirmed working", "The firmware has zero bugs anywhere in the codebase", "Every peripheral on the chip is functioning correctly", "The board's sensors are all reading accurate values"], answer: 0, explain: "The facts line states a successful blink test confirms the chip, power, and programming path are all working — nothing more, nothing less.", why: ["", "A blink test only proves the chip can run simple code — it says nothing about the rest of a complex firmware image", "The blink test doesn't exercise every peripheral, only the basic ability to run code and toggle a pin", "The blink test has nothing to do with sensor accuracy specifically"] },
+              { q: "Per the serial monitor steps, what happens if you connect at the wrong baud rate?", choices: ["Mismatched rates show only garbled text", "The board refuses to power on at all", "The firmware automatically corrects the mismatch", "Nothing — baud rate has no effect on readability"], answer: 0, explain: "Step 1 explicitly states mismatched baud rates show only garbled text.", why: ["", "Baud rate mismatch affects only the serial link, not the board's power state", "Firmware doesn't auto-correct a baud rate mismatch on the monitor side", "The steps explicitly say a mismatch produces garbled text — it does matter"] },
+              { q: "Per systematic embedded troubleshooting, what should be checked first, before anything else?", choices: ["Power rails", "The firmware", "The crystal", "The reset line"], answer: 0, explain: "Step 1 of the systematic troubleshooting list is checking power rails first.", why: ["", "Firmware is explicitly checked last, per step 4", "The crystal is checked second, per step 2, not first", "The reset line is checked third, per step 3, not first"] },
+              { q: "Per systematic embedded troubleshooting, when should firmware be suspected?", choices: ["Only once the hardware is confirmed healthy, checked last", "Immediately, before checking power", "Before checking the crystal", "At the same time as checking the reset line"], answer: 0, explain: "Step 4 explicitly states firmware should only be suspected once hardware is confirmed healthy — checked last in the sequence.", why: ["", "The list explicitly orders power first, firmware last — the reverse of this option", "The crystal is checked before firmware, in step 2", "The reset line (step 3) comes before firmware (step 4), not simultaneously"] },
+              { q: "Per the recovery techniques list, what does 'force bootloader mode' accomplish?", choices: ["A button or pin combination recovers an unresponsive chip", "It permanently erases the chip's flash memory", "It replaces the crystal oscillator automatically", "It only works over a Wi-Fi OTA connection"], answer: 0, explain: "The list describes forcing bootloader mode as using a button or pin combination to recover an unresponsive chip.", why: ["", "The technique recovers the chip; it doesn't describe permanent flash erasure", "Crystal replacement is a separate, physical recovery technique listed elsewhere on this card", "The list doesn't restrict this technique to Wi-Fi OTA-enabled chips only"] }
+            ] }
+          ]
+        },
+        {
+          id: "embedded-practical-repair",
+          title: "Practical & Repair Exercises",
+          tag: "Practical",
+          blocks: [
+            { type: "numbered", title: "Practical Exercise: Recover a Non-Responsive Board", items: [
+              { title: "1. Check every supply voltage", desc: "The MCU requires" },
+              { title: "2. Confirm the crystal oscillator", desc: "Is running cleanly" },
+              { title: "3. Connect the serial monitor", desc: "At the correct baud rate" },
+              { title: "4. Attempt the blink test", desc: "To confirm the chip runs code" },
+              { title: "5. Force bootloader mode", desc: "And attempt a reflash" },
+              { title: "6. Confirm normal operation", desc: "After the reflash completes" }
+            ]},
+            { type: "definition",
+              plain: "A 'dead' board was reflashed twice already. It still shows no activity of any kind.",
+              picture: "Like trying to reinstall an app on a phone with no battery — the software step was never the problem.",
+              facts: "The supply voltage was never actually checked — the chip never had power to run the new firmware." },
+            { type: "numbered", title: "What went wrong, and how to prevent it", items: [
+              { title: "What went wrong", desc: "The supply voltage was never actually checked — the chip never had power to run the new firmware" },
+              { title: "How to prevent it", desc: "Always confirm hardware health before reflashing — code can't run on a chip with no power" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the practical exercise, what should be attempted before force-booting into bootloader mode and reflashing?", choices: ["The blink test, to confirm the chip runs code", "Replacing the crystal oscillator", "A factory reset", "Disconnecting the serial monitor"], answer: 0, explain: "Step 4 of the practical exercise is attempting the blink test, before step 5's forced bootloader mode and reflash.", why: ["", "Crystal replacement isn't part of this specific practical exercise sequence", "Factory reset isn't part of this specific practical exercise sequence", "The serial monitor is connected as step 3, not disconnected before reflashing"] },
+              { q: "Per the practical exercise, what's the final step after a reflash completes?", choices: ["Confirm normal operation", "Force bootloader mode again", "Recheck the supply voltage a second time", "Replace the crystal oscillator"], answer: 0, explain: "Step 6, the final step, is confirming normal operation after the reflash completes.", why: ["", "Bootloader mode is forced in step 5, before the reflash, not repeated afterward", "Supply voltage is checked once, in step 1, not specifically repeated as the final step", "Crystal replacement isn't part of this exercise's final confirmation step"] },
+              { q: "In the silent-board repair exercise, what went wrong during the two prior reflash attempts?", choices: ["The supply voltage was never actually checked — the chip never had power to run the new firmware", "The wrong firmware image was used both times", "The bootloader was permanently disabled", "The crystal oscillator had failed"], answer: 0, explain: "The scenario states the supply voltage was never actually checked, so the chip never had power to run whatever firmware was loaded.", why: ["", "The scenario doesn't identify a wrong firmware image as the cause", "The scenario doesn't describe a disabled bootloader as the cause", "The scenario doesn't identify crystal failure as the cause"] },
+              { q: "Per the repair exercise's lesson, why does reflashing a board with no power fix nothing?", choices: ["Code can't run on a chip that never has power to begin with", "Reflashing always requires a working crystal oscillator instead of power", "Firmware images are power-independent and don't need the chip to run", "Reflashing physically repairs damaged power circuitry"], answer: 0, explain: "The lesson is explicit: code can't run on a chip with no power — reflashing doesn't help if the chip was never powered in the first place.", why: ["", "The lesson is specifically about power, not the crystal", "The whole point of this lesson is that firmware absolutely requires power to run", "Reflashing loads code — it does nothing to fix a power delivery problem"] },
+              { q: "Per the practical exercise, what should be confirmed about the crystal oscillator?", choices: ["That it is running cleanly", "That it has been physically replaced", "That it matches the wrong baud rate", "That it is disconnected during the blink test"], answer: 0, explain: "Step 2 of the practical exercise is confirming the crystal oscillator is running cleanly.", why: ["", "The exercise confirms the existing crystal is healthy — it doesn't call for automatic replacement", "Baud rate relates to the serial monitor step, not the crystal check", "The crystal should remain connected throughout — nothing in this exercise disconnects it"] }
+            ] }
+          ]
+        },
+        {
+          id: "embedded-reference",
+          title: "Quick Reference: Embedded Fault Signs",
+          tag: "Reference",
+          blocks: [
+            { type: "table", title: "One line per check — what healthy looks like, and what doesn't", headers: ["Check", "Tool", "Healthy Sign", "Fault Sign"], rows: [
+              ["Supply voltage", "Multimeter", "Steady at rated voltage", "Missing or unstable"],
+              ["Crystal oscillator", "Oscilloscope", "Clean, steady signal", "Flat or distorted"],
+              ["Reset line", "Multimeter / scope", "Brief pulse at power-on", "Stuck high or low"],
+              ["Serial output", "Serial monitor", "Boot messages appear", "Silent or garbled text"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the reference table, what tool checks the crystal oscillator?", choices: ["Oscilloscope", "Multimeter", "Multimeter / scope", "Serial monitor"], answer: 0, explain: "The table lists 'Oscilloscope' as the tool for checking the crystal oscillator.", why: ["", "That's the tool for Supply voltage, not the crystal oscillator", "That's the tool for the Reset line, not the crystal oscillator", "That's the tool for Serial output, not the crystal oscillator"] },
+              { q: "Per the reference table, what's the fault sign for supply voltage?", choices: ["Missing or unstable", "Flat or distorted", "Stuck high or low", "Silent or garbled text"], answer: 0, explain: "The table lists supply voltage's fault sign as missing or unstable.", why: ["", "That's the crystal oscillator's fault sign, not supply voltage's", "That's the reset line's fault sign, not supply voltage's", "That's the serial output's fault sign, not supply voltage's"] },
+              { q: "Per the reference table, what's the healthy sign for the reset line?", choices: ["Brief pulse at power-on", "Steady at rated voltage", "Clean, steady signal", "Boot messages appear"], answer: 0, explain: "The table lists the reset line's healthy sign as a brief pulse at power-on.", why: ["", "That's supply voltage's healthy sign, not the reset line's", "That's the crystal oscillator's healthy sign, not the reset line's", "That's serial output's healthy sign, not the reset line's"] },
+              { q: "Per the reference table, what's the fault sign for serial output?", choices: ["Silent or garbled text", "Missing or unstable", "Flat or distorted", "Stuck high or low"], answer: 0, explain: "The table lists serial output's fault sign as silent or garbled text.", why: ["", "That's supply voltage's fault sign, not serial output's", "That's the crystal oscillator's fault sign, not serial output's", "That's the reset line's fault sign, not serial output's"] },
+              { q: "Per the reference table, what's the healthy sign for the crystal oscillator?", choices: ["Clean, steady signal", "Boot messages appear", "Brief pulse at power-on", "Steady at rated voltage"], answer: 0, explain: "The table lists the crystal oscillator's healthy sign as a clean, steady signal.", why: ["", "That's serial output's healthy sign, not the crystal oscillator's", "That's the reset line's healthy sign, not the crystal oscillator's", "That's supply voltage's healthy sign, not the crystal oscillator's"] }
+            ] }
+          ]
+        },
+        {
+          id: "embedded-wrapup",
+          title: "Module Wrap-Up",
+          tag: "You Can Now…",
+          blocks: [
+            { type: "checklist", items: [
+              "Explain the difference between a microcontroller and a microprocessor",
+              "Identify the key supporting components around an MCU",
+              "Tell a firmware fault apart from a hardware fault",
+              "Use the blink test and serial monitor to diagnose a board",
+              "Recover a non-responsive board using the right technique"
+            ]},
+            { type: "golden", text: "Confirm power, then timing, then reset — only suspect the firmware last." },
+            { type: "check", questions: [
+              { q: "What is the golden rule of this module?", choices: ["Confirm power, then timing, then reset — only suspect the firmware last", "Always reflash firmware before checking anything else", "Firmware faults and hardware faults look nothing alike", "A blink test proves every peripheral works correctly"], answer: 0, explain: "The golden rule explicitly orders power, then timing, then reset — with firmware suspected only last.", why: ["", "The systematic troubleshooting list explicitly checks hardware first, firmware last — the reverse of this option", "The whole module exists because the two CAN look identical, which is exactly why a systematic order matters", "The blink test only confirms the chip can run simple code, not that every peripheral works"] },
+              { q: "Per the checklist, what should you be able to explain about microcontrollers vs microprocessors?", choices: ["The difference between a microcontroller and a microprocessor", "The difference between RS-232 and RS-485", "The difference between a stepper and a servo motor", "The difference between sourcing and sinking I/O"], answer: 0, explain: "The checklist names explaining the difference between a microcontroller and a microprocessor as a core skill.", why: ["", "RS-232 vs RS-485 belongs to the Industrial Communication module, not this one", "Stepper vs servo belongs to the Motors & Drives module, not this one", "Sourcing vs sinking belongs to the PLC & Automation module, not this one"] },
+              { q: "Per the checklist, what should you be able to identify around an MCU?", choices: ["The key supporting components", "A PLC's I/O module type", "A transformer's turns ratio", "A Modbus device address"], answer: 0, explain: "The checklist names identifying the key supporting components around an MCU as a core skill.", why: ["", "PLC I/O modules belong to the PLC & Automation module, not this one", "Transformer turns ratio belongs to the Power Electronics module, not this one", "Modbus addressing belongs to the Industrial Communication module, not this one"] },
+              { q: "Per the checklist, what two diagnostic tools should you be able to use together on a board?", choices: ["The blink test and the serial monitor", "An oscilloscope and a function generator only", "A thermal camera and an ESR meter", "A clamp meter and an insulation tester"], answer: 0, explain: "The checklist names using the blink test and serial monitor together to diagnose a board.", why: ["", "Oscilloscope and function generator pairing isn't the specific combination named in this checklist", "Thermal camera and ESR meter aren't the tools named in this embedded-specific checklist item", "Clamp meter and insulation tester belong more to wiring/motor diagnostics, not this checklist item"] },
+              { q: "Per the checklist, what should you be able to do with a non-responsive board?", choices: ["Recover it using the right technique", "Always replace it outright, without diagnosis", "Ignore it until a newer replacement arrives", "Assume it's always a firmware fault"], answer: 0, explain: "The checklist names recovering a non-responsive board using the right technique as this module's final skill.", why: ["", "This module explicitly teaches recovery techniques, not automatic replacement", "The whole module is about diagnosing and recovering, not ignoring a fault", "The module explicitly teaches checking hardware before ever assuming firmware"] }
+            ] }
+          ]
+        }
+      ]
+    },
   ],
 
   // ================================================================ QUESTIONS
