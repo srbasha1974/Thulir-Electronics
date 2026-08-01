@@ -1585,6 +1585,270 @@ window.THULIR_DATA = {
         }
       ]
     },
+
+    // ============================================================ MODULE 07: POWER ELECTRONICS
+    {
+      id: "power-electronics",
+      code: "MOD·07",
+      icon: "🔌",
+      color: "#ffb85b",
+      title: "Power Electronics",
+      subtitle: "Turning raw AC into the clean, steady power every circuit depends on.",
+      cards: [
+        {
+          id: "power-overview",
+          title: "The Five Stages of Power Electronics",
+          tag: "Overview",
+          blocks: [
+            { type: "intro", text: "Have you ever wondered how a wall socket's AC becomes the steady, safe DC your phone charger actually delivers? Four stages make that happen, every time — by the end of this module, you'll know each one." },
+            { type: "table", title: "From raw mains AC to the clean DC every board actually needs", headers: ["Stage", "What It Does", "Key Idea"], rows: [
+              ["Rectification", "Turning AC into pulsing DC", "Diodes"],
+              ["Filtering", "Smoothing the pulses out", "Ripple"],
+              ["Regulation", "Holding voltage steady", "Linear / SMPS"],
+              ["Switch-Mode Supplies", "Efficient, compact power conversion", "PWM"],
+              ["Thermal Management", "Keeping power parts alive", "Heat sinks"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the table, what does the Rectification stage do?", choices: ["Turning AC into pulsing DC", "Smoothing the pulses out", "Holding voltage steady", "Keeping power parts alive"], answer: 0, explain: "The table lists Rectification's job as turning AC into pulsing DC, with diodes as the key idea.", why: ["", "That's the Filtering stage's job, not Rectification's", "That's the Regulation stage's job, not Rectification's", "That's the Thermal Management stage's job, not Rectification's"] },
+              { q: "Per the table, what is the key idea behind the Filtering stage?", choices: ["Ripple", "Diodes", "PWM", "Heat sinks"], answer: 0, explain: "The table lists 'Ripple' as the key idea for the Filtering stage — smoothing the pulses out.", why: ["", "Diodes is the key idea for Rectification, not Filtering", "PWM is the key idea for Switch-Mode Supplies, not Filtering", "Heat sinks is the key idea for Thermal Management, not Filtering"] },
+              { q: "Per the table, what does the Regulation stage do?", choices: ["Holding voltage steady", "Turning AC into pulsing DC", "Efficient, compact power conversion", "Smoothing the pulses out"], answer: 0, explain: "The table lists Regulation's job as holding voltage steady, with Linear/SMPS as the key idea.", why: ["", "That's the Rectification stage's job, not Regulation's", "That's the Switch-Mode Supplies stage's job, not Regulation's", "That's the Filtering stage's job, not Regulation's"] },
+              { q: "Per the table, what is the key idea behind Switch-Mode Supplies?", choices: ["PWM", "Ripple", "Diodes", "Heat sinks"], answer: 0, explain: "The table lists 'PWM' as the key idea for Switch-Mode Supplies, delivering efficient, compact power conversion.", why: ["", "Ripple is the key idea for Filtering, not Switch-Mode Supplies", "Diodes is the key idea for Rectification, not Switch-Mode Supplies", "Heat sinks is the key idea for Thermal Management, not Switch-Mode Supplies"] },
+              { q: "Per the table, what does the Thermal Management stage do?", choices: ["Keeping power parts alive", "Holding voltage steady", "Turning AC into pulsing DC", "Efficient, compact power conversion"], answer: 0, explain: "The table lists Thermal Management's job as keeping power parts alive, with heat sinks as the key idea.", why: ["", "That's the Regulation stage's job, not Thermal Management's", "That's the Rectification stage's job, not Thermal Management's", "That's the Switch-Mode Supplies stage's job, not Thermal Management's"] }
+            ] }
+          ]
+        },
+        {
+          id: "power-rectification",
+          title: "Rectification: From AC to Pulsing DC",
+          tag: "Rectification",
+          blocks: [
+            { type: "definition",
+              plain: "Rectification converts alternating current, which reverses direction, into pulsing current that only flows one way.",
+              picture: "Like a one-way valve on a pipe that swings back and forth — water still gets through, but only in one direction.",
+              facts: "Diodes do the actual work — a diode's one-way behaviour is the entire principle behind rectification." },
+            { type: "table", title: "Half-wave vs full-wave rectification", headers: ["Aspect", "Half-Wave", "Full-Wave (Bridge)"], rows: [
+              ["Diodes used", "A single diode, blocking half of every cycle", "Four diodes, using both halves of the cycle"],
+              ["Efficiency", "Simple, but wastes half the incoming power", "Far more efficient, smoother output"],
+              ["Output pattern", "Leaves large gaps between output pulses", "The standard choice in almost every real supply"]
+            ]},
+            { type: "numbered", title: "The Bridge Rectifier", items: [
+              { title: "Four diodes", desc: "Arranged so current always exits the same way, whichever half of AC it is" },
+              { title: "Current path alternates", desc: "A different diode pair conducts on each half of the incoming cycle" },
+              { title: "Ripple frequency doubles", desc: "Both halves are used, so the output pulses twice as often as the input" },
+              { title: "Common fault", desc: "One shorted diode causes heavy ripple; one open diode halves the output badly" }
+            ]},
+            { type: "definition",
+              plain: "A charger powers its load, but produces an audible hum that wasn't there when it was new.",
+              picture: "Like a fridge that suddenly starts humming after years of running silently — nothing looks wrong, but something inside has changed.",
+              facts: "Scoping the rectifier's output shows far more ripple than the datasheet's expected value — a hum is often ripple you can hear before you can see it." },
+            { type: "numbered", title: "Diagnosing the hum", items: [
+              { title: "What you do", desc: "Scope the rectifier's output and compare the ripple to the datasheet's expected value" },
+              { title: "What it tells you", desc: "One diode in the bridge had failed open — the supply was quietly running on half-wave rectification" }
+            ]},
+            { type: "check", questions: [
+              { q: "What does rectification actually do to the incoming AC?", choices: ["Converts it into pulsing current that only flows one way", "Removes ripple from a pulsing DC signal", "Holds output voltage steady under load", "Switches current rapidly to save energy"], answer: 0, explain: "Rectification forces a two-way alternating current into pulsing current that flows only one direction.", why: ["", "That's filtering's job, not rectification's", "That's regulation's job, not rectification's", "That's how an SMPS works, not plain rectification"] },
+              { q: "Per the comparison table, why is full-wave (bridge) rectification the standard choice in real supplies?", choices: ["It uses both halves of the cycle, giving far more efficiency and a smoother output", "It uses fewer diodes than half-wave, so it's cheaper", "It doesn't require any diodes at all", "It produces larger gaps between output pulses"], answer: 0, explain: "The table shows full-wave uses all four diodes to capture both halves of the AC cycle, unlike half-wave which wastes half the incoming power.", why: ["", "Full-wave actually uses more diodes (four) than half-wave (one), not fewer", "Diodes are exactly what do the rectifying work in both half-wave and full-wave circuits", "Large gaps between pulses is the half-wave column's downside, not full-wave's advantage"] },
+              { q: "Per the numbered list, why does ripple frequency double in a bridge rectifier compared to the input AC frequency?", choices: ["Because both halves of the AC cycle are used, so the output pulses twice as often", "Because the diodes run twice as hot", "Because only one diode conducts at any time", "Because the bridge doubles the input voltage"], answer: 0, explain: "Since a different diode pair conducts on each half of the AC cycle, the output gets a pulse from both halves — doubling the pulse rate.", why: ["", "Diode temperature isn't what doubles the ripple frequency", "A bridge always has current flowing through a diode PAIR, not a single diode at a time", "A bridge rectifier doesn't double the voltage — it just uses both halves of the existing AC swing"] },
+              { q: "Per the numbered list, what's the common fault behavior if one diode in the bridge fails open?", choices: ["The output is halved badly, effectively running on half-wave rectification", "The supply produces no output at all", "The output voltage doubles", "Nothing changes — the other three diodes fully compensate"], answer: 0, explain: "The numbered list states an open diode halves the output badly — exactly what the charger-hum scenario demonstrated.", why: ["", "The scenario shows the charger still worked, just with a hum — it wasn't completely dead", "An open diode reduces output, it doesn't double the voltage", "The scenario explicitly shows a real, audible effect — the other diodes did not fully compensate"] },
+              { q: "In the charger-with-a-hum scenario, what did scoping the rectifier's output reveal, and what did it mean?", choices: ["Far more ripple than the datasheet expected — one diode had failed open, running the supply on half-wave rectification", "Perfectly clean output matching the datasheet — the hum was unrelated to rectification", "No output at all — the bridge had failed completely", "Output voltage far above the rated maximum"], answer: 0, explain: "The scope showed excess ripple, revealing a failed-open diode had silently degraded the bridge into half-wave operation — a hum you can hear before you can see it on a meter.", why: ["", "The whole point of the scenario is that the ripple WAS the clue — it wasn't clean or unrelated", "The charger still worked (with a hum), so it wasn't a complete bridge failure with no output", "The fault was excess ripple from a degraded rectifier, not an overvoltage condition"] }
+            ] }
+          ]
+        },
+        {
+          id: "power-filtering-regulation",
+          title: "Filtering & Regulation: Smoothing and Holding Steady",
+          tag: "Filtering & Regulation",
+          blocks: [
+            { type: "definition",
+              plain: "A filter capacitor charges on each pulse and discharges between them, smoothing the rectifier's pulsing output.",
+              picture: "Like a water tank absorbing a pulsing flow, so what comes out the other end is steady.",
+              facts: "A weak or failing filter capacitor is one of the most common causes of visible ripple on a 'working' supply." },
+            { type: "numbered", title: "Reading Ripple on a Scope", items: [
+              { title: "AC-couple the input", desc: "Removes the large DC offset so small ripple is actually visible" },
+              { title: "Measure peak-to-peak", desc: "Ripple is reported as a peak-to-peak voltage, not an average" },
+              { title: "Compare to the datasheet", desc: "Every supply has an expected maximum ripple to measure against" },
+              { title: "Check under load", desc: "Ripple often only appears clearly once real current is being drawn" }
+            ]},
+            { type: "definition",
+              plain: "A regulator holds its output voltage constant, even as input voltage or load current changes.",
+              picture: "Like a tap that automatically adjusts itself to keep the flow constant, no matter the pressure behind it.",
+              facts: "Every downstream component depends on the regulator holding steady — regulation failure cascades everywhere." },
+            { type: "table", title: "Linear vs switching regulators", headers: ["Aspect", "Linear Regulator", "Switching Regulator"], rows: [
+              ["Noise & simplicity", "Simple, low noise, easy to troubleshoot", "More complex, and can introduce switching noise"],
+              ["Efficiency", "Wastes excess energy as heat", "Highly efficient, runs much cooler"],
+              ["Best fit", "Small, low-current loads", "Standard choice for higher-current supplies"]
+            ]},
+            { type: "definition",
+              plain: "A linear regulator outputs the correct voltage, but runs uncomfortably hot even under light load.",
+              picture: "Like a tap held half-shut against high pressure — the flow is right, but the strain shows up as heat.",
+              facts: "Checking the input-to-output voltage difference reveals the input voltage was far higher than needed — correct output, but wasting most of the difference as heat." },
+            { type: "numbered", title: "Diagnosing the hot regulator", items: [
+              { title: "What you do", desc: "Check the input-to-output voltage difference, since a linear regulator dissipates that gap as heat" },
+              { title: "What it tells you", desc: "The input voltage was far higher than needed, wasting most of the difference as heat" }
+            ]},
+            { type: "check", questions: [
+              { q: "Why is a weak or failing filter capacitor one of the most common causes of visible ripple?", choices: ["It can no longer smooth the rectifier's pulsing output by charging and discharging properly", "It causes the diodes in the bridge to fail open", "It increases the AC input frequency", "It disconnects the regulator from the supply"], answer: 0, explain: "The filter capacitor's whole job is to charge on each pulse and discharge between them — a weak one can't smooth the pulses anymore, leaving visible ripple.", why: ["", "A weak filter cap doesn't cause diode failures — that's a separate, unrelated fault", "A filter capacitor doesn't affect the incoming AC frequency at all", "A filter cap issue is a smoothing problem, not a disconnection from the regulator"] },
+              { q: "Per the ripple-reading steps, why should ripple be measured as peak-to-peak rather than an average?", choices: ["Ripple is reported as a peak-to-peak voltage, per how supplies specify their maximum ripple", "Peak-to-peak is easier to read on a multimeter", "Average voltage always equals peak-to-peak for ripple", "Ripple has no defined measurement convention"], answer: 0, explain: "The steps explicitly state ripple is reported as a peak-to-peak voltage, not an average — matching how datasheets specify it.", why: ["", "This measurement is taken on a scope, not simply read off a multimeter", "Peak-to-peak and average are different quantities entirely for a ripple waveform", "The steps explicitly give peak-to-peak as the standard convention"] },
+              { q: "Per the ripple-reading steps, why should ripple be checked under load, not just at idle?", choices: ["Ripple often only appears clearly once real current is being drawn", "Ripple only exists when the supply is unloaded", "Load has no effect on ripple at all", "Checking under load damages the filter capacitor"], answer: 0, explain: "The steps state ripple often only appears clearly once real current is being drawn — a supply can look deceptively clean at idle.", why: ["", "This is backwards — ripple often hides at idle and appears under load, not the reverse", "The steps explicitly say load reveals ripple, meaning load does affect it", "Checking under load is a normal diagnostic step, not something that damages the capacitor"] },
+              { q: "Per the comparison table, what's the tradeoff between linear and switching regulators?", choices: ["Linear is simple and low-noise but wastes energy as heat; switching is efficient but more complex and can introduce noise", "Linear is always more efficient than switching", "Switching regulators are simpler to troubleshoot than linear ones", "Both regulator types have identical noise characteristics"], answer: 0, explain: "The table shows this exact tradeoff: linear trades efficiency for simplicity and low noise; switching trades some simplicity and noise for much higher efficiency.", why: ["", "The table shows switching, not linear, as the highly efficient option", "The table lists linear as the easy-to-troubleshoot option, not switching", "The table explicitly distinguishes their noise characteristics — switching can introduce noise, linear is low-noise"] },
+              { q: "In the hot-regulator scenario, why did a linear regulator with the correct output voltage still run uncomfortably hot?", choices: ["The input voltage was far higher than needed, and the linear regulator dissipates that excess gap as heat", "The regulator was outputting the wrong voltage", "The load was drawing far more current than rated", "The filter capacitor had failed open"], answer: 0, explain: "Checking the input-to-output voltage difference showed the input was much higher than necessary — a linear regulator burns off that entire excess as heat, even while the output stays correct.", why: ["", "The scenario explicitly states the output voltage was correct", "The scenario is about excess input voltage, not excess load current", "Filter capacitor failure isn't part of this particular scenario — it's an input-voltage issue"] }
+            ] }
+          ]
+        },
+        {
+          id: "power-smps",
+          title: "Switch-Mode Power Supplies (SMPS)",
+          tag: "SMPS",
+          blocks: [
+            { type: "definition",
+              plain: "A switch-mode power supply regulates voltage by rapidly switching current, rather than dissipating excess as heat.",
+              picture: "Like PWM motor control, but used to regulate voltage instead of driving a motor.",
+              facts: "It's smaller and far more efficient than a linear supply of the same power rating, but more complex to repair." },
+            { type: "numbered", title: "Specifications That Matter", items: [
+              { title: "Output voltage & current", desc: "What the supply is actually rated to deliver continuously" },
+              { title: "Efficiency", desc: "How much input power actually reaches the output, versus wasted as heat" },
+              { title: "Switching frequency", desc: "How fast the internal switch operates — affects size and noise" },
+              { title: "Regulation accuracy", desc: "How tightly the output voltage is held under changing load" }
+            ]},
+            { type: "numbered", title: "Inside an SMPS", items: [
+              { title: "1. Switching transistor", desc: "Rapidly switches current through the transformer's primary" },
+              { title: "2. Transformer", desc: "Steps the switched voltage down, and isolates input from output" },
+              { title: "3. Feedback / PWM controller", desc: "Adjusts switching to hold the output voltage steady" },
+              { title: "4. Output rectifier & filter", desc: "Converts the switched output back into smooth DC" }
+            ]},
+            { type: "tip", text: "A healthy SMPS shows a steady output voltage under varying load, consistent quiet switching with no audible ticking, and a switching transistor and diodes that run only mildly warm." },
+            { type: "warning", title: "SMPS fault signs", items: [
+              "Repeated clicking as the supply restarts itself",
+              "Output voltage far outside its rated tolerance",
+              "Switching transistor or output diode runs very hot"
+            ]},
+            { type: "definition",
+              plain: "A power supply clicks every few seconds, briefly starts up, then shuts down again in a loop.",
+              picture: "Like a circuit breaker that keeps tripping the instant you reset it — it's not broken, it's refusing to stay on for a reason.",
+              facts: "Checking the output for a short circuit before suspecting the switching stage reveals a shorted output capacitor was tripping the supply's own protection — it was working correctly all along." },
+            { type: "numbered", title: "Diagnosing the clicking supply", items: [
+              { title: "What you do", desc: "Check the output for a short circuit before suspecting the switching stage at all" },
+              { title: "What it tells you", desc: "A shorted output capacitor was tripping the supply's own protection circuit" }
+            ]},
+            { type: "check", questions: [
+              { q: "How does an SMPS regulate voltage, fundamentally differently from a linear regulator?", choices: ["By rapidly switching current, rather than dissipating the excess as heat", "By using a single diode to block reverse current", "By adding a larger filter capacitor", "By running at a fixed, unchanging duty cycle regardless of load"], answer: 0, explain: "The definition states an SMPS regulates by rapidly switching current, rather than a linear regulator's approach of dissipating the excess as heat.", why: ["", "A single diode describes rectification, not SMPS regulation", "A bigger filter cap is a filtering concept, not how an SMPS regulates", "The feedback/PWM controller actively adjusts switching — it isn't fixed"] },
+              { q: "Per the specifications list, what does 'efficiency' specifically measure in an SMPS?", choices: ["How much input power actually reaches the output, versus wasted as heat", "How fast the internal switch operates", "How tightly output voltage is held under changing load", "The maximum current the supply can deliver continuously"], answer: 0, explain: "The specs list defines efficiency as how much input power reaches the output versus being wasted as heat.", why: ["", "That's the switching frequency spec, not efficiency", "That's the regulation accuracy spec, not efficiency", "That's the output voltage & current spec, not efficiency"] },
+              { q: "Per the 'Inside an SMPS' list, what is the role of the feedback / PWM controller?", choices: ["Adjusts switching to hold the output voltage steady", "Rapidly switches current through the transformer's primary", "Steps the switched voltage down and isolates input from output", "Converts the switched output back into smooth DC"], answer: 0, explain: "The list describes the feedback/PWM controller as the stage that adjusts switching to hold the output voltage steady.", why: ["", "That's the switching transistor's role, not the feedback/PWM controller's", "That's the transformer's role, not the feedback/PWM controller's", "That's the output rectifier & filter's role, not the feedback/PWM controller's"] },
+              { q: "Per the healthy/fault signs, what does an SMPS clicking and restarting in a loop typically indicate?", choices: ["It's often the supply protecting itself from a fault, such as a shorted output, not necessarily failing outright", "The switching transistor has definitely failed", "The transformer has lost isolation", "This is always normal, healthy SMPS behavior"], answer: 0, explain: "Repeated clicking and restarting is listed as a fault sign, and the scenario confirms it's frequently the supply's own protection circuit responding to a real short — working exactly as designed.", why: ["", "The scenario shows the transistor wasn't the cause — a shorted output capacitor was", "Transformer isolation loss isn't the cause identified in this scenario", "Clicking/restarting is explicitly listed under FAULT SIGNS, not healthy signs"] },
+              { q: "In the clicking-supply scenario, what should be checked before suspecting the switching stage at all?", choices: ["The output, for a short circuit", "The transformer's turns ratio", "The AC input frequency", "The case temperature of the enclosure"], answer: 0, explain: "The scenario explicitly instructs checking the output for a short circuit first — which revealed a shorted output capacitor was tripping the supply's own protection.", why: ["", "Turns ratio isn't part of this diagnostic scenario", "AC input frequency isn't part of this diagnostic scenario", "Enclosure temperature isn't the specific check this scenario calls for"] }
+            ] }
+          ]
+        },
+        {
+          id: "power-transformers-thermal",
+          title: "Transformers & Thermal Management",
+          tag: "Transformers & Thermal",
+          blocks: [
+            { type: "definition",
+              plain: "A transformer uses two magnetically-linked coils to change voltage level between its primary and secondary sides.",
+              picture: "Like two gears of different sizes, linked without touching — turning one drives the other at a different rate.",
+              facts: "It also provides isolation — no direct electrical connection between the mains side and your circuit." },
+            { type: "numbered", title: "Reading Transformer Specifications", items: [
+              { title: "Turns ratio", desc: "Determines how much the voltage steps up or down" },
+              { title: "VA rating", desc: "The maximum power it can deliver continuously, in volt-amps" },
+              { title: "Primary / secondary voltage", desc: "The input and output voltage the transformer is rated for" },
+              { title: "Isolation rating", desc: "Confirms it's safe for the voltage separation the design requires" }
+            ]},
+            { type: "numbered", title: "Thermal Management in Power Circuits", items: [
+              { title: "Heat sinks", desc: "Increase surface area to move heat away from a hot component" },
+              { title: "Thermal paste", desc: "Fills microscopic gaps for better contact with a heat sink" },
+              { title: "Airflow", desc: "Moving air carries heat away far faster than still air can" },
+              { title: "Derating", desc: "Running a part below its maximum rating extends its working life" }
+            ]},
+            { type: "numbered", title: "PCB Identification: Spotting the Power Section", items: [
+              { title: "Large capacitors", desc: "Bulk filter capacitors are among the biggest parts on the board" },
+              { title: "A transformer or large inductor", desc: "Bulky, heavy components near the incoming supply connector" },
+              { title: "Heat sinks", desc: "Metal fins attached directly to regulators or switching transistors" },
+              { title: "Thicker copper traces", desc: "Power traces are noticeably wider than nearby signal traces" }
+            ]},
+            { type: "check", questions: [
+              { q: "Besides changing voltage level, what other important function does a transformer provide?", choices: ["Isolation — no direct electrical connection between the mains side and your circuit", "Rectification of the AC waveform", "Filtering of ripple on the output", "Regulating the output voltage under changing load"], answer: 0, explain: "The facts line states a transformer also provides isolation, with no direct electrical connection between primary and secondary.", why: ["", "Rectification is a diode's job, not a transformer's", "Filtering is a capacitor's job, not a transformer's", "Regulation is a regulator's job, not a transformer's"] },
+              { q: "Per the transformer specs list, what does the turns ratio determine?", choices: ["How much the voltage steps up or down", "The maximum continuous power rating", "The physical size of the transformer", "The switching frequency of the supply"], answer: 0, explain: "The list states the turns ratio determines how much the voltage steps up or down between primary and secondary.", why: ["", "That's the VA rating, not the turns ratio", "Physical size isn't one of the four listed specs", "Switching frequency is an SMPS spec, not a transformer spec"] },
+              { q: "Per the transformer specs list, what does the VA rating tell you?", choices: ["The maximum power it can deliver continuously, in volt-amps", "How much the voltage steps up or down", "The input and output voltage it's rated for", "Whether it's safe for the required voltage separation"], answer: 0, explain: "The list states the VA rating is the maximum power a transformer can deliver continuously, in volt-amps.", why: ["", "That's the turns ratio, not the VA rating", "That's the primary/secondary voltage spec, not the VA rating", "That's the isolation rating, not the VA rating"] },
+              { q: "Per the thermal management list, what does derating a part accomplish?", choices: ["Running it below its maximum rating extends its working life", "It increases the part's maximum current rating", "It removes the need for a heat sink entirely", "It reduces the part's physical size"], answer: 0, explain: "The list defines derating as running a part below its maximum rating, extending its working life.", why: ["", "Derating doesn't increase a rating — it means operating below it", "The list treats heat sinks and derating as separate, complementary techniques, not one replacing the other", "Derating is an operating practice, not a change to a part's physical size"] },
+              { q: "Per the PCB identification list, what is a strong visual clue that you've found the power section of a board?", choices: ["Thicker copper traces, noticeably wider than nearby signal traces", "Small SMD resistors clustered together", "A single tiny surface-mount IC with fine-pitch legs", "Multiple thin ribbon cables"], answer: 0, explain: "The list names thicker copper traces as a clue, since power traces are noticeably wider than nearby signal traces to carry higher current.", why: ["", "Small SMD resistors and fine-pitch ICs are typically signal/logic-section features, not power-section clues", "The same reasoning applies — fine-pitch parts are signal-section indicators, not power-section ones", "Ribbon cables aren't named in this list as a power-section indicator"] }
+            ] }
+          ]
+        },
+        {
+          id: "power-practical-repair",
+          title: "Practical & Repair Exercises",
+          tag: "Practical",
+          blocks: [
+            { type: "numbered", title: "Practical Exercise: Test a Rectifier & Regulator Stage", items: [
+              { title: "1. Confirm rectifier output", desc: "With a multimeter" },
+              { title: "2. Measure ripple", desc: "On the filtered output with a scope" },
+              { title: "3. Confirm regulator output", desc: "Matches its rated voltage" },
+              { title: "4. Check input-to-output voltage difference", desc: "On a linear regulator specifically" },
+              { title: "5. Check regulator temperature", desc: "Under normal load" },
+              { title: "6. Record all readings", desc: "Against the datasheet's expected values" }
+            ]},
+            { type: "definition",
+              plain: "A repaired supply outputs the correct voltage, but runs far hotter than an identical, healthy unit.",
+              picture: "Like a car engine that runs fine but overheats — something upstream is feeding it more than it needs.",
+              facts: "The input voltage was never actually compared against the regulator's rated dropout voltage — correct output voltage doesn't rule out an overheating fault." },
+            { type: "numbered", title: "What went wrong, and how to prevent it", items: [
+              { title: "What went wrong", desc: "The input voltage was never actually compared against the regulator's rated dropout voltage" },
+              { title: "How to prevent it", desc: "Always check input-to-output voltage difference on a linear regulator, not just its final output" }
+            ]},
+            { type: "check", questions: [
+              { q: "Per the practical exercise, what should be checked on a linear regulator besides just its output voltage?", choices: ["The input-to-output voltage difference", "The switching frequency", "The turns ratio", "The AC input waveform shape"], answer: 0, explain: "Step 4 of the practical exercise specifically calls out checking the input-to-output voltage difference on a linear regulator.", why: ["", "Switching frequency applies to SMPS, not linear regulators", "Turns ratio is a transformer spec, not part of this regulator check", "The exercise checks rectifier and regulator outputs, not the raw AC waveform shape"] },
+              { q: "Per the practical exercise, at what point should regulator temperature be checked?", choices: ["Under normal load", "Only with no load connected", "Only immediately after power-up, before any load", "Temperature isn't part of this exercise"], answer: 0, explain: "Step 5 specifically calls for checking regulator temperature under normal load.", why: ["", "The exercise specifically calls for checking under normal load, not with no load", "The exercise specifies normal operating conditions, not the moment right after power-up", "Temperature check is explicitly step 5 of this exercise"] },
+              { q: "In the overheating-supply repair exercise, what specifically went wrong during the original repair?", choices: ["The input voltage was never actually compared against the regulator's rated dropout voltage", "The wrong regulator part was installed", "The filter capacitor was left disconnected", "The output voltage was set incorrectly"], answer: 0, explain: "The scenario states the input voltage was never compared against the regulator's rated dropout voltage — that omission is exactly what caused the overheating.", why: ["", "The scenario doesn't describe a wrong part being installed", "A disconnected filter cap isn't the described fault in this scenario", "The scenario explicitly states the output voltage was correct"] },
+              { q: "Per the repair exercise, what does 'correct output voltage' NOT guarantee about a power supply repair?", choices: ["That it's free of an overheating fault", "That the rectifier is working", "That the transformer has isolation", "That the fuse is intact"], answer: 0, explain: "The scenario's key lesson is that correct output voltage doesn't rule out an overheating fault — the input-to-output gap can still be excessive.", why: ["", "A working rectifier is generally implied by getting any correct output at all, but that's not this scenario's specific lesson", "Transformer isolation isn't the focus of this particular repair exercise", "Fuse condition isn't the focus of this particular repair exercise"] },
+              { q: "Per the practical exercise, how should the readings taken during testing be recorded?", choices: ["Against the datasheet's expected values", "Only if a fault is actually found", "From memory, at the end of the day", "Compared only to the previous technician's guess"], answer: 0, explain: "Step 6 of the practical exercise specifically calls for recording all readings against the datasheet's expected values.", why: ["", "The exercise calls for recording every reading, not just ones tied to a fault", "The exercise implies recording as you go, not relying on memory afterward", "The exercise specifies datasheet comparison, not comparison to a guess"] }
+            ] }
+          ]
+        },
+        {
+          id: "power-reference",
+          title: "Quick Reference: Power Stage Faults",
+          tag: "Reference",
+          blocks: [
+            { type: "table", title: "One line per stage — the healthy sign, and the fault sign", headers: ["Stage", "Tool", "Healthy Sign", "Fault Sign"], rows: [
+              ["Rectifier", "Multimeter / scope", "Full-wave, low ripple", "Half-wave pattern, heavy hum"],
+              ["Filter capacitor", "Oscilloscope", "Low peak-to-peak ripple", "High ripple under load"],
+              ["Linear regulator", "Multimeter + touch test", "Correct output, mild warmth", "Correct output, very hot"],
+              ["SMPS", "Multimeter / listen", "Steady output, quiet", "Clicking, restarting loop"]
+            ]},
+            { type: "check", questions: [
+              { q: "Per the reference table, what fault sign is listed for the Rectifier stage?", choices: ["Half-wave pattern, heavy hum", "High ripple under load", "Correct output, very hot", "Clicking, restarting loop"], answer: 0, explain: "The table lists the Rectifier's fault sign as a half-wave pattern with heavy hum.", why: ["", "That's the Filter capacitor's fault sign, not the Rectifier's", "That's the Linear regulator's fault sign, not the Rectifier's", "That's the SMPS's fault sign, not the Rectifier's"] },
+              { q: "Per the reference table, what tool is used to check the Filter capacitor stage?", choices: ["Oscilloscope", "Multimeter / scope", "Multimeter + touch test", "Multimeter / listen"], answer: 0, explain: "The table lists 'Oscilloscope' as the tool for checking the Filter capacitor stage.", why: ["", "That's the Rectifier's tool, not the Filter capacitor's", "That's the Linear regulator's tool, not the Filter capacitor's", "That's the SMPS's tool, not the Filter capacitor's"] },
+              { q: "Per the reference table, what's the healthy sign for a Linear regulator?", choices: ["Correct output, mild warmth", "Full-wave, low ripple", "Low peak-to-peak ripple", "Steady output, quiet"], answer: 0, explain: "The table lists the Linear regulator's healthy sign as correct output with only mild warmth.", why: ["", "That's the Rectifier's healthy sign, not the Linear regulator's", "That's the Filter capacitor's healthy sign, not the Linear regulator's", "That's the SMPS's healthy sign, not the Linear regulator's"] },
+              { q: "Per the reference table, what's the fault sign for an SMPS?", choices: ["Clicking, restarting loop", "Half-wave pattern, heavy hum", "High ripple under load", "Correct output, very hot"], answer: 0, explain: "The table lists the SMPS's fault sign as a clicking, restarting loop.", why: ["", "That's the Rectifier's fault sign, not the SMPS's", "That's the Filter capacitor's fault sign, not the SMPS's", "That's the Linear regulator's fault sign, not the SMPS's"] },
+              { q: "Per the reference table, what tool is listed for checking an SMPS?", choices: ["Multimeter / listen", "Oscilloscope", "Multimeter / scope", "Multimeter + touch test"], answer: 0, explain: "The table lists 'Multimeter / listen' as the tool for checking an SMPS — since clicking is an audible fault sign.", why: ["", "That's the Filter capacitor's tool, not the SMPS's", "That's the Rectifier's tool, not the SMPS's", "That's the Linear regulator's tool, not the SMPS's"] }
+            ] }
+          ]
+        },
+        {
+          id: "power-wrapup",
+          title: "Module Wrap-Up",
+          tag: "You Can Now…",
+          blocks: [
+            { type: "checklist", items: [
+              "Explain rectification and identify a bridge rectifier fault",
+              "Measure and interpret ripple on a filtered power supply",
+              "Tell linear and switching regulators apart, and when each is used",
+              "Identify the four stages inside a typical SMPS",
+              "Recognise heat as the leading cause of power component failure"
+            ]},
+            { type: "golden", text: "Most power failures are heat failures in disguise — check temperature as carefully as voltage." },
+            { type: "check", questions: [
+              { q: "What is the golden rule of this module?", choices: ["Most power failures are heat failures in disguise — check temperature as carefully as voltage", "Always replace the transformer first when a supply fails", "Ripple never matters if the output voltage is correct", "SMPS units never need thermal checks"], answer: 0, explain: "The golden rule explicitly states most power failures are heat failures in disguise, so temperature deserves the same attention as voltage.", why: ["", "The transformer isn't singled out as the first part to replace anywhere in this module", "The regulator-running-hot scenario is proof that correct voltage alone can still mask a heat fault", "The SMPS healthy/fault signs explicitly include component temperature as a diagnostic"] },
+              { q: "Per the checklist, what should you be able to identify related to rectification?", choices: ["A bridge rectifier fault", "A stepper motor's step angle", "A PLC's scan cycle", "An RS-485 termination resistor"], answer: 0, explain: "The checklist names identifying a bridge rectifier fault as a core skill from this module.", why: ["", "Stepper motors belong to the Motors & Drives module, not this one", "PLC scan cycles belong to the PLC & Automation module, not this one", "RS-485 termination belongs to the Industrial Communication module, not this one"] },
+              { q: "Per the checklist, what should you be able to measure and interpret on a filtered power supply?", choices: ["Ripple", "Baud rate", "Torque", "Scan time"], answer: 0, explain: "The checklist names measuring and interpreting ripple on a filtered power supply as a core skill.", why: ["", "Baud rate belongs to communication topics, not this power module", "Torque belongs to the Motors & Drives module, not this one", "Scan time belongs to the PLC & Automation module, not this one"] },
+              { q: "Per the checklist, what should you be able to tell apart, and when each is used?", choices: ["Linear and switching regulators", "Sourcing and sinking I/O", "Stepper and servo motors", "RS-232 and RS-485"], answer: 0, explain: "The checklist names telling linear and switching regulators apart, and knowing when each is used, as a core skill.", why: ["", "Sourcing/sinking I/O belongs to the PLC & Automation module, not this one", "Stepper vs servo belongs to the Motors & Drives module, not this one", "RS-232 vs RS-485 belongs to the Industrial Communication module, not this one"] },
+              { q: "Per the checklist, how many stages inside a typical SMPS should you be able to identify?", choices: ["Four", "Two", "Six", "Eight"], answer: 0, explain: "The checklist names identifying the four stages inside a typical SMPS: switching transistor, transformer, feedback/PWM controller, and output rectifier & filter.", why: ["", "The SMPS card lists four stages, not two", "The SMPS card lists four stages, not six", "The SMPS card lists four stages, not eight"] }
+            ] }
+          ]
+        }
+      ]
+    },
   ],
 
   // ================================================================ QUESTIONS
