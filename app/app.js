@@ -12,14 +12,14 @@
   var XP_STREAK_STEP = 5;
   var XP_STREAK_MAX_BONUS = 25;
 
-  var ELECTRONICS_TRACK = ["components", "protection-signal", "safety", "workshop", "test-measurement", "rework", "circuit-building"];
+  var ELECTRONICS_TRACK = ["components", "protection-signal", "safety", "workshop", "test-measurement", "rework", "circuit-building", "power-electronics", "embedded-systems", "sensors-actuators", "motors-drives", "industrial-wiring", "plc-automation", "industrial-communication", "systematic-troubleshooting", "repair-documentation"];
 
   var BADGES = [
     { id: "first-spark", icon: "✨", name: "First Spark", desc: "Answer your first question correctly", check: function (s) { return s.quiz.totalCorrect >= 1; } },
     { id: "streak-5", icon: "🔥", name: "Streak 5", desc: "5 correct answers in a row", check: function (s) { return s.quiz.bestStreak >= 5; } },
     { id: "streak-10", icon: "🔥", name: "Streak 10", desc: "10 correct answers in a row", check: function (s) { return s.quiz.bestStreak >= 10; } },
     { id: "bookworm", icon: "📖", name: "Bookworm", desc: "Finish every topic in one module", check: function (s) { return moduleFullyRead(s) !== null; } },
-    { id: "electronics-track", icon: "🏅", name: "Electronics Fundamentals", desc: "Read every topic across all 7 Electronics Fundamentals modules", check: function (s) { return tracksFullyRead(s, ELECTRONICS_TRACK); } },
+    { id: "electronics-track", icon: "🏅", name: "Electronics Fundamentals", desc: "Read every topic across all 16 Electronics modules", check: function (s) { return tracksFullyRead(s, ELECTRONICS_TRACK); } },
     { id: "rookie", icon: "🥉", name: "Quiz Rookie", desc: "Answer 25 questions total", check: function (s) { return s.quiz.totalAnswered >= 25; } },
     { id: "veteran", icon: "🥈", name: "Quiz Veteran", desc: "Answer 60 questions total", check: function (s) { return s.quiz.totalAnswered >= 60; } },
     { id: "perfectionist", icon: "💯", name: "Perfectionist", desc: "100% on a quiz round of 10+", check: function (s) { return s.quiz.hadPerfectRound; } },
