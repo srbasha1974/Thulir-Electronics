@@ -94,6 +94,18 @@
     }
     state = defaultState();
     saveState();
+    quizState = {
+      mode: "setup",
+      moduleFilter: "all",
+      length: 10,
+      pool: [],
+      index: 0,
+      answered: false,
+      roundCorrect: 0,
+      roundAnswered: 0,
+      roundStreakStart: 0,
+      xpGainedThisRound: 0
+    };
     document.getElementById("trophy-overlay").classList.remove("show");
     renderScoreboard();
     renderSections();
