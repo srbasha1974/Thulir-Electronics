@@ -753,6 +753,19 @@ window.THULIR_DATA = {
           ]
         },
         {
+          id: "safety-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "This module covers both shock/fire hazards and the quieter, invisible one — ESD. These links go deeper on the official standard behind lockout/tagout, and on how ESD actually damages parts." },
+            { type: "references", items: [
+              { title: "OSHA — Lockout/Tagout eTool (official standard, Q&A format)", url: "https://www.osha.gov/etools/lockout-tagout/tutorial", kind: "doc" },
+              { title: "Understanding Electrostatic Discharge (ESD) for Technicians", url: "https://www.youtube.com/watch?v=y5FswkQ4bi0", kind: "video" },
+              { title: "iFixit — Electrostatic Discharge (what it is, how to prevent it)", url: "https://www.ifixit.com/Wiki/ESD", kind: "article" }
+            ] }
+          ]
+        },
+        {
           id: "safety-wrapup",
           title: "Module Wrap-Up",
           tag: "You Can Now…",
@@ -954,6 +967,19 @@ window.THULIR_DATA = {
               { q: "Per the table, what should you watch for when using solder wick?", choices: ["Lifted or torn pads", "Cold, dull joints", "Wrong function selected", "Missed hairline cracks"], answer: 0, explain: "The table lists 'Lifted or torn pads' as what to watch for when using solder wick.", why: ["", "That's the watch-for item for the soldering iron, not solder wick", "That's the watch-for item for the multimeter, not solder wick", "That's the watch-for item for the loupe/microscope, not solder wick"] },
               { q: "Per the table, what should you watch for when using tweezers?", choices: ["Static damage without a strap", "Cold, dull joints", "Lifted or torn pads", "Wrong function selected"], answer: 0, explain: "The table lists 'Static damage without a strap' as what to watch for with tweezers, since they're used on ESD-sensitive SMD parts.", why: ["", "That's the watch-for item for the soldering iron, not tweezers", "That's the watch-for item for solder wick, not tweezers", "That's the watch-for item for the multimeter, not tweezers"] },
               { q: "Per the table, what's the typical setting listed for a loupe / microscope?", choices: ["10–20x", "CAT II+", "300–400°C", "Fine tip"], answer: 0, explain: "The table lists the loupe/microscope's typical setting as 10–20x magnification.", why: ["", "That's the multimeter's typical setting, not the loupe/microscope's", "That's the soldering iron's typical setting, not the loupe/microscope's", "That's the tweezers' typical setting, not the loupe/microscope's"] }
+            ] }
+          ]
+        },
+        {
+          id: "workshop-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "The multimeter is the one tool from this module worth mastering in real depth — these links go deeper on it, plus how to set up a bench that supports the rest of this course's work." },
+            { type: "references", items: [
+              { title: "SparkFun — How to Use a Multimeter (voltage, resistance, continuity, current)", url: "https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter/all", kind: "doc" },
+              { title: "How To Use A Multimeter: The VERY Basics!", url: "https://www.youtube.com/watch?v=EvAq9zqRB5I", kind: "video" },
+              { title: "Distrelec KnowHow — Setting Up Your Home Electronics Lab", url: "https://knowhow.distrelec.com/stem/setting-up-your-home-electronics-lab-a-comprehensive-guide/", kind: "article" }
             ] }
           ]
         },
