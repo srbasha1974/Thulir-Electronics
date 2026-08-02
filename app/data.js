@@ -2209,6 +2209,19 @@ window.THULIR_DATA = {
           ]
         },
         {
+          id: "embedded-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "This module is a bridge to a much bigger topic — these links go deeper on what a microcontroller actually is, and how firmware and hardware faults are told apart in practice." },
+            { type: "references", items: [
+              { title: "TutorialsPoint — Embedded Systems Tutorial", url: "https://www.tutorialspoint.com/embedded_systems/index.htm", kind: "doc" },
+              { title: "Microcontrollers Explained — CPU, Memory, Clock and I/O Basics", url: "https://www.youtube.com/watch?v=tfnYu9ZZd1k", kind: "video" },
+              { title: "freeCodeCamp — Learn Embedded Systems Firmware Basics: A Handbook for Developers", url: "https://www.freecodecamp.org/news/learn-embedded-systems-firmware-basics-handbook-for-devs/", kind: "article" }
+            ] }
+          ]
+        },
+        {
           id: "embedded-wrapup",
           title: "Module Wrap-Up",
           tag: "You Can Now…",
@@ -2472,6 +2485,19 @@ window.THULIR_DATA = {
               { q: "Per the reference table, how should a PIR sensor be tested?", choices: ["Oscilloscope / meter", "Multimeter", "Continuity + click test", "It cannot be tested on the bench"], answer: 0, explain: "The table lists 'Oscilloscope / meter' as the test method for a PIR sensor, matching its digital pulse output.", why: ["", "That's the test method for the thermistor and LDR, not the PIR sensor", "That's the test method for a relay, not the PIR sensor", "The table explicitly gives a bench test method for the PIR sensor"] },
               { q: "Per the reference table, what type is a relay categorized as?", choices: ["Actuator", "Analog (resistance)", "Digital pulse", "Signal conditioner"], answer: 0, explain: "The table categorizes the relay as an actuator, since it switches a load rather than sensing something.", why: ["", "Analog (resistance) describes the thermistor and LDR, not the relay", "Digital pulse describes the PIR sensor, not the relay", "Signal conditioner isn't a category used in this reference table"] },
               { q: "Per the reference table, how should a relay be tested?", choices: ["Continuity + click test", "Multimeter alone", "Oscilloscope / meter", "It cannot be tested with hand tools"], answer: 0, explain: "The table lists 'Continuity + click test' as the way to test a relay.", why: ["", "Multimeter alone is listed for the thermistor and LDR, not specifically for the relay's full test", "Oscilloscope / meter is listed for the PIR sensor, not the relay", "The table explicitly gives a hand-tool-based test method for the relay"] }
+            ] }
+          ]
+        },
+        {
+          id: "sensors-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "Beyond the thermistor, LDR, PIR and relay covered here, there's a much wider family of sensors and actuators — these links map the territory and go deeper on how each one is tested." },
+            { type: "references", items: [
+              { title: "Basic Electronics Tutorials — Sensors and Transducers: Introduction", url: "https://www.electronics-tutorials.ws/io/io_1.html", kind: "doc" },
+              { title: "Sensors & Actuators Explained — Basics to Advanced", url: "https://www.youtube.com/watch?v=NjWqTquS4_k", kind: "video" },
+              { title: "Renke — Top 10 IoT Sensors and Actuators", url: "https://www.renkeer.com/iot-sensors-and-actuators/", kind: "article" }
             ] }
           ]
         },
