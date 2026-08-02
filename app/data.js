@@ -3956,6 +3956,19 @@ window.THULIR_DATA = {
           ]
         },
         {
+          id: "troubleshoot-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "This module's Observe/Isolate/Test/Verify method has real names in the field — half-splitting and signal tracing — these links go deeper on both." },
+            { type: "references", items: [
+              { title: "Electronics Notes — Beyond the Obvious: A Professional Approach to Systematic Fault Finding", url: "https://www.electronics-notes.com/articles/test-methods/practical-fault-finding-testing/systematic-fault-finding.php", kind: "doc" },
+              { title: "Electronic Tech Tips — Troubleshooting Process and Fault Diagnosis Made Easy", url: "https://www.youtube.com/watch?v=0AhJdrfzIiw", kind: "video" },
+              { title: "Total Skills UK — Electrical Fault Finding: The 6-Step Systematic Method", url: "https://www.totalskills.co.uk/guides/electrical-fault-finding", kind: "article" }
+            ] }
+          ]
+        },
+        {
           id: "troubleshoot-wrapup",
           title: "Module Wrap-Up",
           tag: "You Can Now…",
@@ -4204,6 +4217,19 @@ window.THULIR_DATA = {
               { q: "Per the reference table, why does the Part Replaced field matter?", choices: ["It enables reordering", "It confirms the starting fault", "It provides independent proof of the work", "It proves the diagnosis"], answer: 0, explain: "The table lists the Part Replaced field's importance as enabling reordering.", why: ["", "That's the Symptom field's importance, not Part Replaced's", "That's the Photos field's importance, not Part Replaced's", "That's the Test Results field's importance, not Part Replaced's"] },
               { q: "Per the reference table, what's often missed for the Photos field?", choices: ["Not linked to the ticket", "Too vague to act on", "Missing expected value", "No value or rating"], answer: 0, explain: "The table lists 'Not linked to the ticket' as what's often missed for Photos.", why: ["", "That's what's often missed for Symptom, not Photos", "That's what's often missed for Test Results, not Photos", "That's what's often missed for Part Replaced, not Photos"] },
               { q: "Per the reference table, what example is given for the Part Replaced field?", choices: ["C14, 470μF 25V", "No output, channel 2", "TP3: 0V, expected 5V", "Before / after shots"], answer: 0, explain: "The table gives 'C14, 470μF 25V' as the example for the Part Replaced field.", why: ["", "That's the Symptom field's example, not Part Replaced's", "That's the Test Results field's example, not Part Replaced's", "That's the Photos field's example, not Part Replaced's"] }
+            ] }
+          ]
+        },
+        {
+          id: "docs-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "This closing module's reference table names the fields a good repair record needs — these links go deeper on writing the report itself, field-service or engineering-technical alike." },
+            { type: "references", items: [
+              { title: "IET — A Guide to Technical Report Writing", url: "https://www.theiet.org/media/5182/technical-report-writing.pdf", kind: "doc" },
+              { title: "Guide to Technical Report Writing for Engineers", url: "https://www.youtube.com/watch?v=dyHh4QghJEg", kind: "video" },
+              { title: "GoAudits — How to Write a Field Service Report (+ Free Template)", url: "https://goaudits.com/blog/field-service-report/", kind: "article" }
             ] }
           ]
         },
