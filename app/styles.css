@@ -1027,6 +1027,13 @@ table.blk-table tr:last-child td { border-bottom: none; }
   cursor: pointer;
 }
 .logout-btn:hover { border-color: var(--accent); color: var(--text); }
+.all-courses-link {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-faint);
+  text-decoration: none;
+}
+.all-courses-link:hover { color: var(--accent); }
 @media (max-width: 560px) {
   .auth-user-info span { display: none; }
 }
