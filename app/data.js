@@ -1640,6 +1640,19 @@ window.THULIR_DATA = {
           ]
         },
         {
+          id: "cb-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "Going from a schematic on paper to a working breadboard circuit is a skill worth practicing beyond this module's cards — these links cover reading the diagram and building it out." },
+            { type: "references", items: [
+              { title: "SparkFun — How to Read a Schematic", url: "https://learn.sparkfun.com/tutorials/how-to-read-a-schematic/all", kind: "doc" },
+              { title: "Breadboard Tutorial", url: "https://www.youtube.com/watch?v=wMqj6D6YZB4", kind: "video" },
+              { title: "SparkFun — How to Use a Breadboard", url: "https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard/all", kind: "article" }
+            ] }
+          ]
+        },
+        {
           id: "cb-wrapup",
           title: "Module Wrap-Up",
           tag: "You Can Now…",
@@ -1900,6 +1913,19 @@ window.THULIR_DATA = {
               { q: "Per the reference table, what's the healthy sign for a Linear regulator?", choices: ["Correct output, mild warmth", "Full-wave, low ripple", "Low peak-to-peak ripple", "Steady output, quiet"], answer: 0, explain: "The table lists the Linear regulator's healthy sign as correct output with only mild warmth.", why: ["", "That's the Rectifier's healthy sign, not the Linear regulator's", "That's the Filter capacitor's healthy sign, not the Linear regulator's", "That's the SMPS's healthy sign, not the Linear regulator's"] },
               { q: "Per the reference table, what's the fault sign for an SMPS?", choices: ["Clicking, restarting loop", "Half-wave pattern, heavy hum", "High ripple under load", "Correct output, very hot"], answer: 0, explain: "The table lists the SMPS's fault sign as a clicking, restarting loop.", why: ["", "That's the Rectifier's fault sign, not the SMPS's", "That's the Filter capacitor's fault sign, not the SMPS's", "That's the Linear regulator's fault sign, not the SMPS's"] },
               { q: "Per the reference table, what tool is listed for checking an SMPS?", choices: ["Multimeter / listen", "Oscilloscope", "Multimeter / scope", "Multimeter + touch test"], answer: 0, explain: "The table lists 'Multimeter / listen' as the tool for checking an SMPS — since clicking is an audible fault sign.", why: ["", "That's the Filter capacitor's tool, not the SMPS's", "That's the Rectifier's tool, not the SMPS's", "That's the Linear regulator's tool, not the SMPS's"] }
+            ] }
+          ]
+        },
+        {
+          id: "power-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "This module walks the full chain from wall AC to clean DC — these links go deeper on each stage, plus the linear-vs-switching regulator trade-off the reference table only summarizes." },
+            { type: "references", items: [
+              { title: "Electronics Club — Power Supplies (transformer, rectifier, smoothing, regulator)", url: "https://electronicsclub.info/powersupplies.htm", kind: "doc" },
+              { title: "Full Wave Bridge Rectifier + Capacitor Filters + Half Wave Rectifier — The Engineering Mindset", url: "https://www.youtube.com/watch?v=RiRyzLl4Y8U", kind: "video" },
+              { title: "Predictable Designs — Linear and Switching Voltage Regulators: An Introduction", url: "https://predictabledesigns.com/linear-and-switching-voltage-regulators-introduction/", kind: "article" }
             ] }
           ]
         },
