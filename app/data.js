@@ -308,6 +308,19 @@ window.THULIR_DATA = {
           ]
         },
         {
+          id: "components-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "These links go deeper on identifying and understanding the five parts covered in this module than a bench card can — good for double-checking a marking or a color code back home." },
+            { type: "references", items: [
+              { title: "SparkFun — Resistors (color codes, series/parallel, applications)", url: "https://learn.sparkfun.com/tutorials/resistors/all", kind: "doc" },
+              { title: "Basic Electronic Components Explained — Resistors, Capacitors, Diodes & Transistors", url: "https://www.youtube.com/watch?v=y1mC41Oz1RA", kind: "video" },
+              { title: "SparkFun — Beginner Parts Kit Identification Guide (capacitors, diodes, transistors, ICs)", url: "https://learn.sparkfun.com/tutorials/beginner-parts-kit-identification-guide/all", kind: "article" }
+            ] }
+          ]
+        },
+        {
           id: "components-wrapup",
           title: "Module Wrap-Up",
           tag: "You Can Now…",
@@ -517,6 +530,19 @@ window.THULIR_DATA = {
               { q: "Per the numbered dimmer card, what is the role of the fuse and MOV in this circuit?", choices: ["Guard the incoming mains before the TRIAC stage", "Set the exact firing angle of the TRIAC", "Amplify the DIAC's trigger pulse", "Convert the dimmer's AC output to DC"], answer: 0, explain: "The card states the fuse and MOV guard the incoming mains before the TRIAC stage handles the switching.", why: ["", "Firing angle is set by the R-C network, not the fuse/MOV protection stage", "Neither a fuse nor an MOV amplifies a signal — that's not their function", "This dimmer circuit switches AC power directly; nothing here converts it to DC"] },
               { q: "Per the LED chaser card, what formula sets the 555's clock (chase) speed?", choices: ["f = 1.44 ÷ ((R1 + 2·R2)·C1)", "fc = 1 ÷ (2πRC)", "Gain = Vout ÷ Vin", "I = V ÷ R"], answer: 0, explain: "The card gives the 555 astable frequency formula f = 1.44 ÷ ((R1 + 2·R2)·C1) as what sets the chase speed.", why: ["", "That's the passive R-C filter's cut-off frequency formula, from a different card entirely", "That's the amplifier's gain formula, from a different card entirely", "That's Ohm's Law, a general current formula, not the 555's specific timing formula"] },
               { q: "Per the LED chaser card, what happens if you use a bigger C1?", choices: ["The chase slows down so you can see each step", "The chase speeds up", "The 4017 stops wrapping around", "The LEDs get brighter"], answer: 0, explain: "The card states a bigger C1 slows the chase, making each step visible.", why: ["", "A bigger C1 slows the chase per this card, the opposite of speeding it up", "The 4017 still wraps around (÷10) regardless of chase speed", "C1 affects timing, not LED brightness — that would be set by the current-limiting resistor instead"] }
+            ] }
+          ]
+        },
+        {
+          id: "ps-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "Fuses, MOVs, and optocouplers protect and isolate a circuit — these links go deeper on how each one actually works than a bench card can." },
+            { type: "references", items: [
+              { title: "SparkFun — How Does a Fuse Work (Fuse Breakout Board Hookup Guide)", url: "https://learn.sparkfun.com/tutorials/fuse-breakout-board-hookup-guide/how-does-a-fuse-work", kind: "doc" },
+              { title: "Every Type of Fuse Explained", url: "https://www.youtube.com/watch?v=5G1eYtQ3y6M", kind: "video" },
+              { title: "CircuitDigest — Everything You Need to Know About Optocouplers", url: "https://circuitdigest.com/tutorial/introduction-to-optocouplers", kind: "article" }
             ] }
           ]
         },
