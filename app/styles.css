@@ -452,6 +452,26 @@ body {
 
 .blk-tip { font-size: 0.82rem; color: var(--text-dim); font-style: italic; border-left: 3px solid var(--accent); padding-left: 10px; }
 
+.blk-references { display: flex; flex-direction: column; gap: 8px; }
+.ref-list { display: flex; flex-direction: column; gap: 6px; }
+.ref-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s, background 0.15s;
+}
+.ref-item:hover { border-color: var(--accent); background: var(--bg-card-hover); }
+.ref-item .ref-icon { font-size: 1rem; flex-shrink: 0; }
+.ref-item .ref-title { font-size: 0.85rem; font-weight: 600; flex: 1; }
+.ref-item .ref-go { font-size: 0.85rem; color: var(--text-faint); flex-shrink: 0; }
+.ref-item:hover .ref-go { color: var(--accent); }
+
 .blk-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); }
 table.blk-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 420px; }
 table.blk-table th {

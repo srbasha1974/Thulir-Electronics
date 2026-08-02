@@ -356,6 +356,20 @@
         '<div class="blk-table-wrap"><table class="blk-table"><thead>' + thead + '</thead><tbody>' + tbody + '</tbody></table></div>'
       );
     }
+    if (b.type === "references") {
+      var refIcons = { doc: "📄", video: "🎥", article: "✍️" };
+      var refItems = b.items.map(function (r) {
+        var icon = refIcons[r.kind] || "🔗";
+        return (
+          '<a class="ref-item" href="' + escapeHtml(r.url) + '" target="_blank" rel="noopener noreferrer">' +
+            '<span class="ref-icon">' + icon + '</span>' +
+            '<span class="ref-title">' + escapeHtml(r.title) + '</span>' +
+            '<span class="ref-go">↗</span>' +
+          '</a>'
+        );
+      }).join("");
+      return '<div class="blk-references"><div class="blk-title">🔗 ' + escapeHtml(b.title || "Further Reading") + '</div><div class="ref-list">' + refItems + '</div></div>';
+    }
     return "";
   }
 
