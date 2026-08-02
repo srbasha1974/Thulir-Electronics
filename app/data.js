@@ -1202,6 +1202,19 @@ window.THULIR_DATA = {
           ]
         },
         {
+          id: "tm-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "The oscilloscope is the instrument in this module worth the deepest dive — these links cover reading a waveform properly, plus a step up to logic analyzers for digital signals." },
+            { type: "references", items: [
+              { title: "Tektronix — Oscilloscope Basics (official primer)", url: "https://www.tek.com/en/documents/primer/oscilloscope-basics", kind: "doc" },
+              { title: "How to ACTUALLY Use an Oscilloscope (Beginner-Friendly Guide) — The Engineering Mindset", url: "https://www.youtube.com/watch?v=LaY47Qrfs0c", kind: "video" },
+              { title: "Logic Analyzer Basics Tutorial", url: "https://www.next.gr/tutorials/oscilloscope-tutorials/logic-analyzer-basics-tutorial", kind: "article" }
+            ] }
+          ]
+        },
+        {
           id: "tm-wrapup",
           title: "Module Wrap-Up",
           tag: "You Can Now…",
@@ -1413,6 +1426,19 @@ window.THULIR_DATA = {
               { q: "Per the table, what's the typical temperature for SMD hot air removal?", choices: ["320–370°C", "300–350°C", "220–245°C peak", "100–120°C"], answer: 0, explain: "The table lists SMD hot air removal's typical temp as 320–370°C, with even airflow and no direct point.", why: ["", "That's through-hole solder's typical temp, not SMD hot air removal's", "That's the BGA reflow's typical temp, not SMD hot air removal's", "No task in this table uses this temperature range"] },
               { q: "Per the table, what note is given for desoldering wick?", choices: ["Fresh braid absorbs better", "Even airflow, no direct point", "Follow the solder profile", "Higher for ground planes"], answer: 0, explain: "The table lists desoldering wick's note as 'Fresh braid absorbs better'.", why: ["", "That note belongs to SMD hot air removal, not desoldering wick", "That note belongs to BGA reflow, not desoldering wick", "That note belongs to through-hole soldering, not desoldering wick"] },
               { q: "Per the table, what note is given for SMD hot air removal?", choices: ["Even airflow, no direct point", "Fresh braid absorbs better", "Higher for ground planes", "Follow the solder profile"], answer: 0, explain: "The table lists SMD hot air removal's note as 'Even airflow, no direct point'.", why: ["", "That note belongs to desoldering wick, not SMD hot air removal", "That note belongs to through-hole soldering, not SMD hot air removal", "That note belongs to BGA reflow, not SMD hot air removal"] }
+            ] }
+          ]
+        },
+        {
+          id: "rework-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "Good joints and clean rework are built on muscle memory the checklist alone can't give you — these links go deeper on both through-hole technique and SMD hot-air removal." },
+            { type: "references", items: [
+              { title: "SparkFun — How to Solder: Through-Hole Soldering", url: "https://learn.sparkfun.com/tutorials/how-to-solder-through-hole-soldering/all", kind: "doc" },
+              { title: "How to Solder properly — Through-hole (THT) & Surface-mount (SMD)", url: "https://www.youtube.com/watch?v=VxMV6wGS3NY", kind: "video" },
+              { title: "SparkFun — How to Use a Hot Air Rework Station", url: "https://learn.sparkfun.com/tutorials/how-to-use-a-hot-air-rework-station/all", kind: "article" }
             ] }
           ]
         },
