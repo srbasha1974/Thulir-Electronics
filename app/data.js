@@ -2774,6 +2774,19 @@ window.THULIR_DATA = {
           ]
         },
         {
+          id: "motors-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "This module's repair exercise showed a good motor stuck behind a bad driver — these links go deeper on the four motor types and the H-bridge that actually drives them." },
+            { type: "references", items: [
+              { title: "Basic Electronics Tutorials — DC Motors and Stepper Motors used as Actuators", url: "https://www.electronics-tutorials.ws/io/io_7.html", kind: "doc" },
+              { title: "H Bridge Motor Control Basics Explained", url: "https://www.youtube.com/watch?v=YYMsS50x1UY", kind: "video" },
+              { title: "Basic Electronics Tutorials — H-bridge Circuit for DC Motor Bidirectional Control", url: "https://www.electronics-tutorials.ws/io/h-bridge-circuit.html", kind: "article" }
+            ] }
+          ]
+        },
+        {
           id: "motors-wrapup",
           title: "Module Wrap-Up",
           tag: "You Can Now…",
@@ -3056,6 +3069,19 @@ window.THULIR_DATA = {
               { q: "Per the reference table, what is 12 AWG's typical rating?", choices: ["~20A", "~10A", "~15A", "~30A"], answer: 0, explain: "The table lists 12 AWG's typical rating as ~20A, used for general power outlets.", why: ["", "That's 18 AWG's typical rating, not 12's", "That's 14 AWG's typical rating, not 12's", "That's 10 AWG's typical rating, not 12's"] },
               { q: "Per the reference table, what is 10 AWG commonly used for?", choices: ["Small motor circuits", "Control wiring", "Lighting circuits", "General power outlets"], answer: 0, explain: "The table lists 10 AWG's common use as small motor circuits, with ~30A typical rating.", why: ["", "That's 18 AWG's common use, not 10's", "That's 14 AWG's common use, not 10's", "That's 12 AWG's common use, not 10's"] },
               { q: "Per the reference table, what typical protection is listed for 10 AWG wire?", choices: ["30A breaker / overload", "1–5A fuse", "15A breaker", "20A breaker"], answer: 0, explain: "The table lists 10 AWG's typical protection as a 30A breaker or overload device.", why: ["", "That's 18 AWG's typical protection, not 10's", "That's 14 AWG's typical protection, not 10's", "That's 12 AWG's typical protection, not 10's"] }
+            ] }
+          ]
+        },
+        {
+          id: "wiring-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "A factory floor's wiring runs on three-phase power and motor starters — these links go deeper on both than the wire-gauge reference table alone can." },
+            { type: "references", items: [
+              { title: "AutomationDirect — How to Wire a Motor Starter", url: "https://library.automationdirect.com/how-to-wire-a-motor-starter/", kind: "doc" },
+              { title: "How Three Phase Electricity Works — The Basics Explained", url: "https://www.youtube.com/watch?v=4oRT7PoXSS0", kind: "video" },
+              { title: "Industrial Monitor Direct — How Motor Starters Work: Contactor and Overload Relay Explained", url: "https://industrialmonitordirect.com/blogs/knowledgebase/motor-starter-operation-contactor-and-overload-relay-basics", kind: "article" }
             ] }
           ]
         },
