@@ -3374,6 +3374,19 @@ window.THULIR_DATA = {
           ]
         },
         {
+          id: "plc-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "Ladder logic is a language of its own — these links go well past the four symbols in this module's reference table, into building and reading real PLC programs." },
+            { type: "references", items: [
+              { title: "PLC Academy — PLC Ladder Logic Programming Tutorial (Basics)", url: "https://www.plcacademy.com/ladder-logic-tutorial/", kind: "doc" },
+              { title: "How Ladder Logic Works in the PLC — PLC Programming Basics", url: "https://www.youtube.com/watch?v=AF3sRde0qhs", kind: "video" },
+              { title: "Industrial Monitor Direct — PLC Ladder Logic Programming: A Beginner's Guide", url: "https://industrialmonitordirect.com/blogs/knowledgebase/plc-ladder-logic-programming-a-beginners-guide", kind: "article" }
+            ] }
+          ]
+        },
+        {
           id: "plc-wrapup",
           title: "Module Wrap-Up",
           tag: "You Can Now…",
@@ -3632,6 +3645,19 @@ window.THULIR_DATA = {
               { q: "Per the reference table, what is EtherNet/IP commonly used in?", choices: ["Allen-Bradley systems", "Siemens-based systems", "General industrial devices", "Modern PLCs and HMIs generically"], answer: 0, explain: "The table lists EtherNet/IP as common in Allen-Bradley systems.", why: ["", "That's Profinet's common use, not EtherNet/IP's", "That's Modbus RTU's common use, not EtherNet/IP's", "That's Modbus TCP's common use, not EtherNet/IP's"] },
               { q: "Per the reference table, what topology can Profinet use?", choices: ["Star or ring", "Multi-drop only", "Star (switched) only", "Point-to-point only"], answer: 0, explain: "The table lists Profinet's topology as star or ring.", why: ["", "That's Modbus RTU's topology, not Profinet's", "That's Modbus TCP's and EtherNet/IP's topology, not Profinet's — they're star-only, Profinet offers star OR ring", "Point-to-point isn't listed as any protocol's topology in this table"] },
               { q: "Per the reference table, which protocol uses RS-485 as its physical layer?", choices: ["Modbus RTU", "Modbus TCP", "EtherNet/IP", "Profinet"], answer: 0, explain: "The table lists Modbus RTU as the only protocol on this table using RS-485 as its physical layer — the other three all run on Ethernet.", why: ["", "Modbus TCP runs on Ethernet, per the table, not RS-485", "EtherNet/IP runs on Ethernet, per the table, not RS-485", "Profinet runs on Ethernet, per the table, not RS-485"] }
+            ] }
+          ]
+        },
+        {
+          id: "comms-references",
+          title: "Further Reading",
+          tag: "References",
+          blocks: [
+            { type: "intro", text: "Modbus is the protocol worth knowing cold from this table — these links go deeper on how it actually talks over the wire, RS-485 included." },
+            { type: "references", items: [
+              { title: "RealPars — How Does Modbus Communication Protocol Work?", url: "https://www.realpars.com/blog/modbus-protocol", kind: "doc" },
+              { title: "How Does Modbus Communication Protocol Work? — RealPars", url: "https://www.youtube.com/watch?v=JBGaInI-TG4", kind: "video" },
+              { title: "Industrial Monitor Direct — Modbus RS-485 Tutorial: Setup Master-Slave Network", url: "https://industrialmonitordirect.com/blogs/knowledgebase/getting-started-with-modbus-rs-485-rtu-communication", kind: "article" }
             ] }
           ]
         },
