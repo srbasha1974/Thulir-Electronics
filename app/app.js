@@ -88,10 +88,37 @@
     });
   }
 
+  // ---------------------------------------------------------- ANALYTICS
+  // Fire-and-forget activity log. Failures never disturb the app —
+  // if the events table doesn't exist yet, everything still works.
+  function logEvent(type, data) {
+    if (!currentUser) return;
+    var payload = data || {};
+    if (state && payload.xp_after === undefined) payload.xp_after = state.xp;
+    sb.from("events").insert({
+      user_id: currentUser.id,
+      course: COURSE,
+      type: type,
+      data: payload
+    }).then(function (res) {
+      if (res.error) console.warn("Event log failed:", res.error.message);
+    });
+  }
+
+  function upsertProfile() {
+    sb.from("profiles").upsert(
+      { user_id: currentUser.id, email: currentUser.email },
+      { onConflict: "user_id" }
+    ).then(function (res) {
+      if (res.error) console.warn("Profile upsert failed:", res.error.message);
+    });
+  }
+
   function resetProgress() {
     if (!confirm("Reset all progress? This clears your XP, badges, streak, and every topic marked learned. This can't be undone.")) {
       return;
     }
+    logEvent("reset", { xp_after: 0, snapshot: state });
     state = defaultState();
     saveState();
     quizState = {
@@ -376,6 +403,7 @@
   function markTopicLearned(moduleId, topicId) {
     if (state.readTopics[topicId]) return;
     state.readTopics[topicId] = true;
+    logEvent("topic_learned", { module: moduleId, topic: topicId });
     addXP(XP_TOPIC);
     toast("+" + XP_TOPIC + " XP — topic learned!", "📘");
 
@@ -732,6 +760,7 @@
     saveState();
     var newBadges = checkBadges();
     saveState();
+    logEvent("quiz_round", { module: quizState.moduleFilter, correct: quizState.roundCorrect, answered: quizState.roundAnswered, xp: quizState.xpGainedThisRound });
     quizState.mode = "result";
     quizState._newBadges = newBadges;
     renderQuiz();
@@ -865,8 +894,10 @@
 
   function bootWithUser(user) {
     currentUser = user;
+    upsertProfile();
     loadStateFromCloud().then(function (loaded) {
       state = loaded;
+      logEvent("session_start");
       showApp();
       renderScoreboard();
       renderSections();
