@@ -978,6 +978,13 @@
       setAuthMode(authMode === "login" ? "signup" : "login");
     });
 
+    document.getElementById("sd-back").addEventListener("click", function () {
+      document.getElementById("signup-done").style.display = "none";
+      document.getElementById("auth-form").style.display = "";
+      document.querySelector(".auth-switch").style.display = "";
+      setAuthMode("login");
+    });
+
     document.getElementById("auth-form").addEventListener("submit", function (e) {
       e.preventDefault();
       var email = document.getElementById("auth-email").value.trim();
@@ -1003,8 +1010,11 @@
           return;
         }
         if (authMode === "signup" && res.data && res.data.user && !res.data.session) {
-          noteEl.textContent = "Check your email to confirm your account, then log in.";
-          setAuthMode("login");
+          document.getElementById("sd-email").textContent = email;
+          document.getElementById("auth-title").textContent = "Almost there!";
+          document.getElementById("auth-form").style.display = "none";
+          document.querySelector(".auth-switch").style.display = "none";
+          document.getElementById("signup-done").style.display = "";
         }
         // If a session came back, onAuthStateChange below boots the app.
       }).catch(function () {

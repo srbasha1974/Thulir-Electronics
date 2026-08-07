@@ -1078,3 +1078,19 @@ table.blk-table tr:last-child td { border-bottom: none; }
 /* -------- Pending approval gate -------- */
 .pending-text { font-size: 0.9rem; color: var(--text-dim); line-height: 1.55; text-align: center; margin: 0; }
 #pending-logout { border: none; background: none; color: var(--accent); font-weight: 800; font: inherit; cursor: pointer; padding: 0; }
+
+/* -------- Post-signup confirmation panel -------- */
+.signup-done { display: flex; flex-direction: column; gap: 12px; text-align: center; }
+.signup-done .sd-icon { font-size: 2.4rem; }
+.signup-done .sd-lead { margin: 0; font-size: 0.95rem; font-weight: 700; }
+.signup-done .sd-lead b { color: var(--accent); word-break: break-all; }
+.sd-steps {
+  margin: 0;
+  padding-left: 22px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

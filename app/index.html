@@ -38,6 +38,16 @@
       <div class="auth-error" id="auth-error"></div>
       <button type="submit" class="auth-submit" id="auth-submit">Log In</button>
     </form>
+    <div id="signup-done" class="signup-done" style="display:none">
+      <div class="sd-icon">📧</div>
+      <p class="sd-lead">We've sent a confirmation link to <b id="sd-email"></b></p>
+      <ol class="sd-steps">
+        <li>Open the email and click the link to verify your address</li>
+        <li>Come back here and log in</li>
+        <li>A trainer will then approve your account — you'll see a waiting screen until that's done</li>
+      </ol>
+      <button type="button" id="sd-back" class="auth-submit">Back to Log In</button>
+    </div>
     <div class="auth-switch">
       <span id="auth-switch-text">Don't have an account?</span>
       <button type="button" id="auth-switch-btn">Sign Up</button>
