@@ -885,12 +885,14 @@
   function showAuthGate() {
     document.getElementById("app-loading").style.display = "none";
     document.getElementById("app-shell").style.display = "none";
+    document.getElementById("pending-gate").style.display = "none";
     document.getElementById("auth-gate").style.display = "flex";
   }
 
   function showApp() {
     document.getElementById("app-loading").style.display = "none";
     document.getElementById("auth-gate").style.display = "none";
+    document.getElementById("pending-gate").style.display = "none";
     document.getElementById("app-shell").style.display = "";
     var meta = currentUser.user_metadata || {};
     document.getElementById("auth-user-email").textContent = meta.first_name ? "Hi, " + meta.first_name + "!" : currentUser.email;
@@ -924,10 +926,40 @@
     });
   }
 
+  // Approval gate: new accounts wait until a trainer approves them.
+  // Fails open if the approval tables aren't set up yet, so the app
+  // keeps working before the SQL migration has run.
+  function checkApproval() {
+    return sb.from("profiles").select("approved").eq("user_id", currentUser.id).maybeSingle()
+      .then(function (res) {
+        if (res.error) { console.warn("Approval check unavailable:", res.error.message); return true; }
+        return !!(res.data && res.data.approved);
+      })
+      .catch(function () { return true; });
+  }
+
+  function showPendingGate() {
+    document.getElementById("app-loading").style.display = "none";
+    document.getElementById("auth-gate").style.display = "none";
+    document.getElementById("app-shell").style.display = "none";
+    document.getElementById("pending-gate").style.display = "flex";
+    var meta = currentUser.user_metadata || {};
+    document.getElementById("pending-name").textContent = meta.first_name ? " " + meta.first_name : "";
+    document.getElementById("pending-email").textContent = currentUser.email;
+    document.getElementById("pending-refresh").onclick = function () {
+      document.getElementById("pending-gate").style.display = "none";
+      document.getElementById("app-loading").style.display = "";
+      bootWithUser(currentUser);
+    };
+    document.getElementById("pending-logout").onclick = function () { sb.auth.signOut(); };
+  }
+
   function bootWithUser(user) {
     currentUser = user;
     upsertProfile();
-    loadStateFromCloud().then(function (loaded) {
+    checkApproval().then(function (ok) {
+      if (!ok) { showPendingGate(); return; }
+      return loadStateFromCloud().then(function (loaded) {
       state = loaded;
       logEvent("session_start");
       showApp();
@@ -937,6 +969,7 @@
     }).catch(function (err) {
       console.error(err);
       alert("Could not load your progress. Please refresh and try again.");
+      });
     });
   }
 

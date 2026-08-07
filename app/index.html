@@ -46,6 +46,16 @@
   </div>
 </div>
 
+<div id="pending-gate" class="auth-gate" style="display:none">
+  <div class="auth-card">
+    <div class="brand"><span class="spark">⏳</span><div>Awaiting approval</div></div>
+    <p class="pending-text">Thanks<span id="pending-name"></span> — your account (<span id="pending-email"></span>) is created and verified.
+    A trainer now needs to approve it before you can start. This usually happens within a day.</p>
+    <button id="pending-refresh" class="auth-submit">Check Again</button>
+    <div class="auth-switch"><button type="button" id="pending-logout">Log Out</button></div>
+  </div>
+</div>
+
 <div class="app-shell" id="app-shell" style="display:none">
 
   <div class="brand-row">

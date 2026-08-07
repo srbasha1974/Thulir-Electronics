@@ -1074,3 +1074,7 @@ table.blk-table tr:last-child td { border-bottom: none; }
   border-radius: 999px;
   cursor: pointer;
 }
+
+/* -------- Pending approval gate -------- */
+.pending-text { font-size: 0.9rem; color: var(--text-dim); line-height: 1.55; text-align: center; margin: 0; }
+#pending-logout { border: none; background: none; color: var(--accent); font-weight: 800; font: inherit; cursor: pointer; padding: 0; }
