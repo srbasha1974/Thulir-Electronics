@@ -1037,3 +1037,40 @@ table.blk-table tr:last-child td { border-bottom: none; }
 @media (max-width: 560px) {
   .auth-user-info span { display: none; }
 }
+
+/* -------- Name capture -------- */
+.auth-names { display: flex; gap: 10px; }
+.auth-names .auth-field { flex: 1; }
+.name-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.name-banner input {
+  font: inherit;
+  font-weight: 500;
+  flex: 1;
+  min-width: 120px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+}
+.name-banner button {
+  border: none;
+  background: var(--accent);
+  color: white;
+  font: inherit;
+  font-weight: 800;
+  padding: 9px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+}

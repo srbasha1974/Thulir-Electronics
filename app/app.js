@@ -106,8 +106,9 @@
   }
 
   function upsertProfile() {
+    var meta = currentUser.user_metadata || {};
     sb.from("profiles").upsert(
-      { user_id: currentUser.id, email: currentUser.email },
+      { user_id: currentUser.id, email: currentUser.email, first_name: meta.first_name || null, last_name: meta.last_name || null },
       { onConflict: "user_id" }
     ).then(function (res) {
       if (res.error) console.warn("Profile upsert failed:", res.error.message);
@@ -877,6 +878,8 @@
     document.getElementById("auth-switch-btn").textContent = mode === "login" ? "Sign Up" : "Log In";
     document.getElementById("auth-error").textContent = "";
     document.getElementById("auth-note").textContent = "";
+    document.getElementById("auth-names").style.display = mode === "signup" ? "" : "none";
+    document.getElementById("auth-first").required = mode === "signup";
   }
 
   function showAuthGate() {
@@ -889,7 +892,36 @@
     document.getElementById("app-loading").style.display = "none";
     document.getElementById("auth-gate").style.display = "none";
     document.getElementById("app-shell").style.display = "";
-    document.getElementById("auth-user-email").textContent = currentUser.email;
+    var meta = currentUser.user_metadata || {};
+    document.getElementById("auth-user-email").textContent = meta.first_name ? "Hi, " + meta.first_name + "!" : currentUser.email;
+    maybePromptName();
+  }
+
+  // Existing accounts signed up before names existed: ask once, inline.
+  function maybePromptName() {
+    var meta = currentUser.user_metadata || {};
+    if (meta.first_name || document.getElementById("name-banner")) return;
+    var bar = document.createElement("div");
+    bar.id = "name-banner";
+    bar.className = "name-banner";
+    bar.innerHTML = "<span>\ud83d\udc4b What should we call you?</span>" +
+      '<input id="nb-first" placeholder="First name" autocomplete="given-name">' +
+      '<input id="nb-last" placeholder="Last name" autocomplete="family-name">' +
+      '<button id="nb-save">Save</button>';
+    var shell = document.getElementById("app-shell");
+    shell.insertBefore(bar, shell.firstChild);
+    document.getElementById("nb-save").addEventListener("click", function () {
+      var f = document.getElementById("nb-first").value.trim();
+      var l = document.getElementById("nb-last").value.trim();
+      if (!f) { document.getElementById("nb-first").focus(); return; }
+      sb.auth.updateUser({ data: { first_name: f, last_name: l } }).then(function (res) {
+        if (res.error) { console.warn(res.error.message); return; }
+        currentUser = res.data.user;
+        upsertProfile();
+        document.getElementById("auth-user-email").textContent = "Hi, " + f + "!";
+        bar.remove();
+      });
+    });
   }
 
   function bootWithUser(user) {
@@ -926,7 +958,10 @@
 
       var action = authMode === "login"
         ? sb.auth.signInWithPassword({ email: email, password: password })
-        : sb.auth.signUp({ email: email, password: password });
+        : sb.auth.signUp({ email: email, password: password, options: { data: {
+            first_name: document.getElementById("auth-first").value.trim(),
+            last_name: document.getElementById("auth-last").value.trim()
+          } } });
 
       action.then(function (res) {
         btn.disabled = false;
